@@ -3,7 +3,6 @@ import java.util.Scanner;
 
 public class Terminal {
     Partie p;
-    // Scanner scanner = new Scanner(System.in);
 
     private static void affichePiece(Piece p) {
         System.out.println("Votre pièce est :\n");

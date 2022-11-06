@@ -60,19 +60,4 @@ public class Plateau {
         return true;
     }
 
-    /*
-     * public static void main(String[] args){
-     * int tab[][]={{1,2,3},{4,5,6},{7,8,9},{10,11,12}};
-     * int tab2[][]={{1,2,3},{4,5,6},{1,2,3},{10,11,12}};
-     * Piece premiere=new Piece(tab);
-     * Piece deuxieme=new Piece(tab2);
-     * System.out.println(premiere.sidesMatch(deuxieme, 0));
-     * int coord[]={0,1};
-     * Piece[][] pieces1={{null, null, null, null},{null, null, null, null},{null,
-     * null, null, null},{null, null, null, null}};
-     * Plateau plateau = new Plateau(pieces1);
-     * System.out.println(plateau.placer(premiere,coord));
-     * System.out.println(plateau.pieces[1][1]==null);
-     * }
-     */
 }
