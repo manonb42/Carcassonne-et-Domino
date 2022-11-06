@@ -22,14 +22,6 @@ public class Terminal {
     // a changer
     private Coordonnees lectureCoordonnee(String coordonnee) {
         Coordonnees c = new Coordonnees();
-        /*
-         * String x,y;
-         * for(int i=0; i<coordonnee.length(); i++){
-         * while(Character.isDigit(coordonnee.charAt(i))){
-         * 
-         * }
-         * }
-         */
         c.setX(coordonnee.charAt(1));
         c.setY(coordonnee.charAt(3));
         return c;
