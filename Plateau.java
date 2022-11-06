@@ -6,6 +6,14 @@ public class Plateau {
         this.pieces = pieces;
     }
 
+    public Piece[][] getPieces() {
+        return pieces;
+    }
+
+    public void setPieces(Piece[][] pieces) {
+        this.pieces = pieces;
+    }
+
     public boolean placer(Piece p, Coordonnees coordonnee) {
         if (validPlacement(p, coordonnee)) {
             pieces[coordonnee.getY()][coordonnee.getX()] = p;
