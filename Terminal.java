@@ -21,9 +21,7 @@ public class Terminal {
 
     // a changer
     private Coordonnees lectureCoordonnee(String coordonnee) {
-        Coordonnees c = new Coordonnees();
-        c.setX(coordonnee.charAt(1));
-        c.setY(coordonnee.charAt(3));
+        Coordonnees c = new Coordonnees(1, 3);
         return c;
     }
 
