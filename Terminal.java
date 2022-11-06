@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class Terminal {
     Partie p;
-    Scanner scanner = new Scanner(System.in);
+    // Scanner scanner = new Scanner(System.in);
 
     private static void affichePiece(Piece p) {
         System.out.println("Votre pièce est :\n");
@@ -19,18 +19,29 @@ public class Terminal {
         return joueur.getPiece();
     }
 
+    // a changer
     private Coordonnees lectureCoordonnee(String coordonnee) {
         Coordonnees c = new Coordonnees();
+        /*
+         * String x,y;
+         * for(int i=0; i<coordonnee.length(); i++){
+         * while(Character.isDigit(coordonnee.charAt(i))){
+         * 
+         * }
+         * }
+         */
         c.setX(coordonnee.charAt(1));
         c.setY(coordonnee.charAt(3));
         return c;
     }
 
     private void tournerPiece(Joueur joueur) {
+        Scanner droitegauche = new Scanner(System.in);
+        Scanner tour = new Scanner(System.in);
         System.out.println("Voulez vous tourner votre pièce vers la droite ou vers la gauche ?");
-        String sens = scanner.nextLine();
+        String sens = droitegauche.nextLine();
         System.out.println("Combien de quart de tour voulez vous effectuer ?");
-        int nbTours = scanner.nextInt();
+        int nbTours = tour.nextInt();
         if (sens.equals("droite")) {
             joueur.getPiece().tourner(nbTours);
         } else if (sens.equals("gauche")) {
@@ -40,8 +51,9 @@ public class Terminal {
     }
 
     private void placement(Joueur j) {
+        Scanner coord = new Scanner(System.in);
         System.out.println("Où voulez vous placer votre pièce ? Sous la forme (1,1) ");
-        if (p.getPlateau().placer(j.getPiece(), lectureCoordonnee(scanner.nextLine()))) {
+        if (p.getPlateau().placer(j.getPiece(), lectureCoordonnee(coord.nextLine()))) {
             System.out.println("Succès ! La pièce a bien été placée");
         } else {
             System.out.println("Vous ne pouvez pas placer la pièce à cet endroit");
@@ -50,9 +62,10 @@ public class Terminal {
     }
 
     private void quelleAction(Joueur joueur) {
+        Scanner action = new Scanner(System.in);
         System.out.println(
                 "Quelle action voulez vous effectuer ?\n1 - Placer votre pièce\n2 - Tourner votre pièce\n3 - Passer votre tour");
-        int actionAEffectuer = scanner.nextInt();
+        int actionAEffectuer = action.nextInt();
         if (actionAEffectuer == 1) {
             placement(joueur);
         } else if (actionAEffectuer == 2) {
@@ -66,14 +79,16 @@ public class Terminal {
 
     public Partie configurer() {
         // nombre de joueurs
+        Scanner nbj = new Scanner(System.in);
         System.out.println("Combien y'a t'il de joueurs ? ");
-        int nombreJoueursTmp = scanner.nextInt();
+        int nombreJoueursTmp = nbj.nextInt();
         Joueur joueurs[] = new Joueur[nombreJoueursTmp];
 
         // création des joueurs
         for (int i = 0; i < nombreJoueursTmp; i++) {
+            Scanner nom = new Scanner(System.in);
             System.out.println("Entrer le nom du joueur n" + (i + 1) + " :");
-            joueurs[i] = new Joueur(scanner.nextLine());
+            joueurs[i] = new Joueur(nom.nextLine());
         }
 
         // création des classes necessaires pour jouer
@@ -107,4 +122,6 @@ public class Terminal {
 
     // faire fonction qui compte les points
     // changer array en arraylist pour le plateau
+    // afficher le tableau
+    // changer fonction qui lis les coord
 }
