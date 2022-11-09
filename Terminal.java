@@ -18,10 +18,9 @@ public class Terminal {
         return joueur.getPiece();
     }
 
-    // a changer
     private Coordonnees lectureCoordonnee(String coordonnee) {
-        Coordonnees c = new Coordonnees(1, 3);
-        return c;
+        String chaine[] = coordonnee.split(",");
+        return new Coordonnees(Integer.parseInt(chaine[0]), Integer.parseInt(chaine[1]));
     }
 
     private void tournerPiece(Joueur joueur) {
@@ -41,7 +40,7 @@ public class Terminal {
 
     private void placement(Joueur j) {
         Scanner coord = new Scanner(System.in);
-        System.out.println("Où voulez vous placer votre pièce ? Sous la forme (1,1) ");
+        System.out.println("Où voulez vous placer votre pièce ? Sous la forme \"1,1\" ");
         if (p.getPlateau().placer(j.getPiece(), lectureCoordonnee(coord.nextLine()))) {
             System.out.println("Succès ! La pièce a bien été placée");
         } else {
@@ -87,12 +86,6 @@ public class Terminal {
         return new Partie(joueurs, plateau, sac);
     }
 
-    public static void main(String[] args) {
-        Terminal t = new Terminal();
-        t.p = t.configurer();
-        t.jouer();
-    }
-
     public void jouer() {
 
         // déroulement de la partie
@@ -109,8 +102,13 @@ public class Terminal {
         System.out.println("Il n'y a plus de pièces dans le sac. Fin de la partie.");
     }
 
+    public static void main(String[] args) {
+        Terminal t = new Terminal();
+        t.p = t.configurer();
+        t.jouer();
+    }
+
     // faire fonction qui compte les points
     // changer array en arraylist pour le plateau
     // afficher le tableau
-    // changer fonction qui lis les coord
 }
