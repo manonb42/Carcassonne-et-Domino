@@ -4,6 +4,7 @@ import java.util.Scanner;
 public class Terminal {
     Partie p;
 
+    // affichage de la piece
     private static void affichePiece(Piece p) {
         System.out.println("Votre pièce est :\n");
         System.out.println(Arrays.toString(p.getNumeros()[0]));
@@ -13,16 +14,19 @@ public class Terminal {
         System.out.println(Arrays.toString(p.getNumeros()[2]) + "\n\n\n");
     }
 
+    // piocher une piece
     private Piece piocherPiece(Joueur joueur) {
         joueur.setPiece(p.getSac().piocher());
         return joueur.getPiece();
     }
 
+    // lire les coordonnees
     private Coordonnees lectureCoordonnee(String coordonnee) {
         String chaine[] = coordonnee.split(",");
         return new Coordonnees(Integer.parseInt(chaine[0]), Integer.parseInt(chaine[1]));
     }
 
+    // tourner une piece
     private void tournerPiece(Joueur joueur) {
         Scanner droitegauche = new Scanner(System.in);
         Scanner tour = new Scanner(System.in);
@@ -38,6 +42,7 @@ public class Terminal {
             throw new Error("mauvais sens der rotation: droite ou gauche attendu");
     }
 
+    // placer une piece sur le plateau
     private void placement(Joueur j) {
         Scanner coord = new Scanner(System.in);
         System.out.println("Où voulez vous placer votre pièce ? Sous la forme \"1,1\" ");
@@ -49,6 +54,7 @@ public class Terminal {
         }
     }
 
+    // choisir l'action a effectuer
     private void quelleAction(Joueur joueur) {
         Scanner action = new Scanner(System.in);
         System.out.println(
@@ -65,7 +71,9 @@ public class Terminal {
         }
     }
 
+    // creation de la partie
     public Partie configurer() {
+
         // nombre de joueurs
         Scanner nbj = new Scanner(System.in);
         System.out.println("Combien y'a t'il de joueurs ? ");
@@ -86,9 +94,8 @@ public class Terminal {
         return new Partie(joueurs, plateau, sac);
     }
 
+    // déroulement de la partie
     public void jouer() {
-
-        // déroulement de la partie
         int i = 0;
         while (p.getSac().getPiecesRestantes() != 0) {
             int tourDe = i % p.getJoueurs().length;
@@ -111,4 +118,5 @@ public class Terminal {
     // faire fonction qui compte les points
     // changer array en arraylist pour le plateau
     // afficher le tableau
+    // pas pressé : gerer les mauvaises entrees
 }

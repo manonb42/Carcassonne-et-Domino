@@ -22,22 +22,6 @@ public class Plateau {
         return false;
     }
 
-    /*
-     * public int score(Joueur j, Piece p, Coordonnees coordonnee){
-     * int[][] deltas={{0,1},{1,0},{0,-1},{-1,0}};
-     * int score=0;
-     * if(placer(p, coordonnee)){
-     * for(int delta=0; delta<deltas.length; delta++){
-     * int coordX=coordonnee.getX()+deltas[delta][0];
-     * int coordY=coordonnee.getY()+deltas[delta][1];
-     * if(pieces[coordX][coordY]!=null){
-     * score+=pieces[coordX][coordY][delta][0];
-     * }
-     * }
-     * }
-     * }
-     */
-
     private boolean validPlacement(Piece p, Coordonnees coordonnee) {
         int[][] deltas = { { 0, 1 }, { 1, 0 }, { 0, -1 }, { -1, 0 } };
         for (int delta = 0; delta < deltas.length; delta++) {
