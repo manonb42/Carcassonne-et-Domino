@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch Plateau",
+            "request": "launch",
+            "mainClass": "Plateau",
+            "projectName": "projet_java_2022_18437b94"
+        },
+        {
+            "type": "java",
             "name": "Launch Piece",
             "request": "launch",
             "mainClass": "Piece",

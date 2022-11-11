@@ -1,17 +1,24 @@
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Terminal {
     Partie p;
 
     // affichage de la piece
-    private static void affichePiece(Piece p) {
+    private static void affichePiece(Piece piece) {
+
         System.out.println("Votre pièce est :\n");
-        System.out.println(Arrays.toString(p.getNumeros()[0]));
-        for (int i = 0; i < 3; i++) {
-            System.out.println(p.getNumeros()[3][i] + "       " + p.getNumeros()[0][1]);
+        System.out.print(" ");
+        for (int z = 0; z < 3; z++) {
+            System.out.print(piece.getNumeros()[0][z] + " ");
         }
-        System.out.println(Arrays.toString(p.getNumeros()[2]) + "\n\n\n");
+        System.out.print("\n");
+        for (int i = 2, j = 0; i >= 0; i--, j++) {
+            System.out.println(piece.getNumeros()[3][i] + "     " + piece.getNumeros()[1][j]);
+        }
+        System.out.print(" ");
+        for (int z = 2; z >= 0; z--) {
+            System.out.print(piece.getNumeros()[2][z] + " ");
+        }
     }
 
     // piocher une piece
@@ -45,13 +52,31 @@ public class Terminal {
     // placer une piece sur le plateau
     private void placement(Joueur j) {
         Scanner coord = new Scanner(System.in);
-        System.out.println("Où voulez vous placer votre pièce ? Sous la forme \"1,1\" ");
-        if (p.getPlateau().placer(j.getPiece(), lectureCoordonnee(coord.nextLine()))) {
-            System.out.println("Succès ! La pièce a bien été placée");
-        } else {
-            System.out.println("Vous ne pouvez pas placer la pièce à cet endroit");
-            quelleAction(j);
+        boolean plateauvide = true;
+        for (int i = 0; i < p.getPlateau().getPieces().size(); i++) {
+            for (int z = 0; z < p.getPlateau().getPieces().get(i).size(); z++) {
+                if (p.getPlateau().getPieces().get(i).get(z) != null) {
+                    plateauvide = false;
+                }
+            }
         }
+        if (plateauvide) {
+            if (p.getPlateau().placer(j.getPiece(), new Coordonnees(0, 0))) {
+                System.out.println("Succès ! La pièce a bien été placée");
+            } else {
+                System.out.println("Vous ne pouvez pas placer la pièce à cet endroit");
+                quelleAction(j);
+            }
+        } else {
+            System.out.println("Où voulez vous placer votre pièce ? Sous la forme \"1,1\" ");
+            if (p.getPlateau().placer(j.getPiece(), lectureCoordonnee(coord.nextLine()))) {
+                System.out.println("Succès ! La pièce a bien été placée");
+            } else {
+                System.out.println("Vous ne pouvez pas placer la pièce à cet endroit");
+                quelleAction(j);
+            }
+        }
+
     }
 
     // choisir l'action a effectuer
@@ -88,8 +113,10 @@ public class Terminal {
         }
 
         // création des classes necessaires pour jouer
-        Piece[][] piecesSurPlateau = new Piece[128][128];
-        Plateau plateau = new Plateau(piecesSurPlateau);
+        // ArrayList<ArrayList<Piece>> piecesSurPlateau = new
+        // ArrayList<ArrayList<Piece>>(128);
+        // Piece[][] piecesSurPlateau = new Piece[128][128];
+        Plateau plateau = new Plateau();
         Sac sac = new Sac(20);
         return new Partie(joueurs, plateau, sac);
     }
@@ -116,7 +143,9 @@ public class Terminal {
     }
 
     // faire fonction qui compte les points
-    // changer array en arraylist pour le plateau
+    // OK : changer array en arraylist pour le plateau
+    // OK : changer la fonction qui verifie que c'est valide
     // afficher le tableau
+    // nettoyer le code
     // pas pressé : gerer les mauvaises entrees
 }
