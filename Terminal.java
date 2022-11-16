@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Terminal {
@@ -19,6 +20,7 @@ public class Terminal {
         for (int z = 2; z >= 0; z--) {
             System.out.print(piece.getNumeros()[2][z] + " ");
         }
+        System.out.print("\n");
     }
 
     // piocher une piece
@@ -53,9 +55,9 @@ public class Terminal {
     private void placement(Joueur j) {
         Scanner coord = new Scanner(System.in);
         boolean plateauvide = true;
-        for (int i = 0; i < p.getPlateau().getPieces().size(); i++) {
-            for (int z = 0; z < p.getPlateau().getPieces().get(i).size(); z++) {
-                if (p.getPlateau().getPieces().get(i).get(z) != null) {
+        for (int i = 0; i < p.getPlateau().getG().getListPieces().size(); i++) {
+            for (int z = 0; z < p.getPlateau().getG().getListPieces().get(i).size(); z++) {
+                if (p.getPlateau().getG().getListPieces().get(i).get(z) != null) {
                     plateauvide = false;
                 }
             }
@@ -111,12 +113,8 @@ public class Terminal {
             System.out.println("Entrer le nom du joueur n" + (i + 1) + " :");
             joueurs[i] = new Joueur(nom.nextLine());
         }
-
-        // création des classes necessaires pour jouer
-        // ArrayList<ArrayList<Piece>> piecesSurPlateau = new
-        // ArrayList<ArrayList<Piece>>(128);
-        // Piece[][] piecesSurPlateau = new Piece[128][128];
-        Plateau plateau = new Plateau();
+        Grille g = new Grille();
+        Plateau plateau = new Plateau(g);
         Sac sac = new Sac(20);
         return new Partie(joueurs, plateau, sac);
     }
@@ -143,8 +141,7 @@ public class Terminal {
     }
 
     // faire fonction qui compte les points
-    // OK : changer array en arraylist pour le plateau
-    // OK : changer la fonction qui verifie que c'est valide
+    // faire intelligence artificielle
     // afficher le tableau
     // nettoyer le code
     // pas pressé : gerer les mauvaises entrees

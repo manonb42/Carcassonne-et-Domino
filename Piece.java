@@ -34,10 +34,18 @@ public class Piece {
     }
 
     public boolean sidesMatch(Piece p, int side) {
-        for (int i = 0; i < numeros[0].length; i++) {
-            if (this.numeros[side][i] != p.numeros[(side + 2) % 4][i])
-                return false;
-        }
+        /*
+         * for (int i = 0; i < numeros[0].length; i++) {
+         * if (this.numeros[side][i] != p.numeros[(side + 2) % 4][i])
+         * return false;
+         * }
+         */
+        if (this.numeros[side][0] != p.numeros[(side + 2) % 4][2])
+            return false;
+        if (this.numeros[side][1] != p.numeros[(side + 2) % 4][1])
+            return false;
+        if (this.numeros[side][2] != p.numeros[(side + 2) % 4][0])
+            return false;
         return true;
     }
 

@@ -1,31 +1,23 @@
 import java.util.*;
 
 public class Plateau {
-    // changer array en arraylist
-    // private Piece[][] pieces;
-    private List<List<Piece>> pieces = new ArrayList<List<Piece>>();
+    private Grille g;
 
-    Plateau() {
-        for (int i = 0; i < 128; i++) {
-            pieces.add(new ArrayList<>());
-            for (int j = 0; j < 128; j++) {
-                pieces.get(i).add(null);
-            }
-        }
+    Plateau(Grille g) {
+        this.g = g;
     }
 
-    public List<List<Piece>> getPieces() {
-        return pieces;
+    public Grille getG() {
+        return g;
     }
 
-    public void setPieces(List<List<Piece>> pieces) {
-        this.pieces = pieces;
+    public void setG(Grille g) {
+        this.g = g;
     }
 
     public boolean placer(Piece p, Coordonnees coordonnee) {
         if (validPlacement(p, coordonnee)) {
-            // pieces[coordonnee.getY()][coordonnee.getX()] = p;
-            pieces.get(coordonnee.getY()).add(coordonnee.getX(), p);
+            g.setPiece(coordonnee.getX(), coordonnee.getY(), p);
             return true;
         }
         return false;
@@ -39,18 +31,16 @@ public class Plateau {
         for (int delta = 0; delta < deltas.length; delta++) {
             int coordX = coordonnee.getX() + deltas[delta][0];
             int coordY = coordonnee.getY() + deltas[delta][1];
-            if (coordX < 0 || coordY < 0)
-                return false; // non
 
-            if (pieces.get(coordX).get(coordY) != null) {
+            if (g.getPiece(coordX, coordY) != null) {
                 cotevide = false;
-                if (!(p.sidesMatch(pieces.get(coordX).get(coordY), delta)))
+                if (!(p.sidesMatch(g.getPiece(coordX, coordY), delta)))
                     return false;
             }
         }
-        for (int i = 0; i < pieces.size(); i++) {
-            for (int j = 0; j < pieces.get(i).size(); j++) {
-                if (pieces.get(i).get(j) != null) {
+        for (int i = 0; i < g.getListPieces().size(); i++) {
+            for (int j = 0; j < g.getListPieces().get(i).size(); j++) {
+                if (g.getListPieces().get(i).get(j) != null) {
                     plateauvide = false;
                 }
             }
