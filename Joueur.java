@@ -2,6 +2,7 @@ public class Joueur {
     private String nom;
     private int nbPoints = 0;
     private Piece pieceactuelle;
+    private boolean ia = false;
 
     Joueur(String nom) {
         this.nom = nom;
@@ -25,5 +26,13 @@ public class Joueur {
 
     public void setNbPoints(int score) {
         this.nbPoints += score;
+    }
+
+    public boolean getIA() {
+        return this.ia;
+    }
+
+    public void setIA(boolean b) {
+        this.ia = b;
     }
 }
