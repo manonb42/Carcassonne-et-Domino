@@ -21,10 +21,22 @@ public class Plateau {
         return false;
     }
 
+    private boolean plateauvide() {
+        boolean plateauvide = true;
+        for (int i = 0; i < g.getListPieces().size(); i++) {
+            for (int j = 0; j < g.getListPieces().get(i).size(); j++) {
+                if (g.getListPieces().get(i).get(j) != null) {
+                    plateauvide = false;
+                }
+            }
+        }
+        return plateauvide;
+    }
+
     // a changer
     private boolean validPlacement(Piece p, Coordonnees coordonnee) {
         boolean cotevide = true;
-        boolean plateauvide = true;
+        boolean plateauvide = plateauvide();
         int[][] deltas = { { 0, 1 }, { 1, 0 }, { 0, -1 }, { -1, 0 } };
         for (int delta = 0; delta < deltas.length; delta++) {
             int coordX = coordonnee.getX() + deltas[delta][0];
@@ -34,13 +46,6 @@ public class Plateau {
                 cotevide = false;
                 if (!(p.sidesMatch(g.getPiece(coordX, coordY), delta)))
                     return false;
-            }
-        }
-        for (int i = 0; i < g.getListPieces().size(); i++) {
-            for (int j = 0; j < g.getListPieces().get(i).size(); j++) {
-                if (g.getListPieces().get(i).get(j) != null) {
-                    plateauvide = false;
-                }
             }
         }
         if (plateauvide)
