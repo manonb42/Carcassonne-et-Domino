@@ -1,5 +1,3 @@
-// import java.util.Arrays;
-
 public class Sac {
     private int nbPiecesRestantes;
     private Piece[] pieces;

@@ -33,7 +33,6 @@ public class Plateau {
         return plateauvide;
     }
 
-    // a changer
     private boolean validPlacement(Piece p, Coordonnees coordonnee) {
         boolean cotevide = true;
         boolean plateauvide = plateauvide();

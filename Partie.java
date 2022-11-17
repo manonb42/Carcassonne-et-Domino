@@ -3,14 +3,11 @@ public class Partie {
     private Plateau plateau;
     private Sac sac;
 
-
-
-    Partie(Joueur[] listeJoueurs, Plateau plateau, Sac sac){
-        this.joueurs=listeJoueurs;
-        this.plateau=plateau;
-        this.sac=sac;
+    Partie(Joueur[] listeJoueurs, Plateau plateau, Sac sac) {
+        this.joueurs = listeJoueurs;
+        this.plateau = plateau;
+        this.sac = sac;
     }
-
 
     public Joueur[] getJoueurs() {
         return this.joueurs;
@@ -35,6 +32,4 @@ public class Partie {
     public void setSac(Sac sac) {
         this.sac = sac;
     }
-
-
 }
