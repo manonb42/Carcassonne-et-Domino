@@ -89,15 +89,4 @@ public class Grille {
         }
         return null;
     }
-
-    public static void main(String[] args) {
-        Grille g = new Grille();
-        int[][] tab = { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 }, { 10, 11, 12 } };
-        Piece p = new Piece(tab);
-        g.setPiece(1787, -1077, p);
-        g.setPiece(1, 2, p);
-        System.out.println(g.getPiece(1787, -1077));
-        System.out.println(g.getPiece(1, 2));
-
-    }
 }

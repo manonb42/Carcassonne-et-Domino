@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Terminal {
@@ -51,9 +50,7 @@ public class Terminal {
             throw new Error("mauvais sens der rotation: droite ou gauche attendu");
     }
 
-    // placer une piece sur le plateau
-    private void placement(Joueur j) {
-        Scanner coord = new Scanner(System.in);
+    private boolean plateauvide() {
         boolean plateauvide = true;
         for (int i = 0; i < p.getPlateau().getG().getListPieces().size(); i++) {
             for (int z = 0; z < p.getPlateau().getG().getListPieces().get(i).size(); z++) {
@@ -62,6 +59,13 @@ public class Terminal {
                 }
             }
         }
+        return plateauvide;
+    }
+
+    // placer une piece sur le plateau
+    private void placement(Joueur j) {
+        Scanner coord = new Scanner(System.in);
+        boolean plateauvide = plateauvide();
         if (plateauvide) {
             if (p.getPlateau().placer(j.getPiece(), new Coordonnees(0, 0))) {
                 System.out.println("Succès ! La pièce a bien été placée");
@@ -78,7 +82,6 @@ public class Terminal {
                 quelleAction(j);
             }
         }
-
     }
 
     // choisir l'action a effectuer
