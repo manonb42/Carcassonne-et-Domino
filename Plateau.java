@@ -32,24 +32,23 @@ public class Plateau {
         }
         return plateauvide;
     }
-    
-    public int newPoints(Piece p, Coordonnees coordonnee){
+
+    public int newPoints(Piece p, Coordonnees coordonnee) {
         int points = 0;
         int[][] deltas = { { 0, 1 }, { 1, 0 }, { 0, -1 }, { -1, 0 } };
         for (int delta = 0; delta < deltas.length; delta++) {
             int coordX = coordonnee.getX() + deltas[delta][0];
             int coordY = coordonnee.getY() + deltas[delta][1];
-
             if (g.getPiece(coordX, coordY) != null) {
                 if ((p.sidesMatch(g.getPiece(coordX, coordY), delta)))
-                for(int b = 0 ; b<p.getNumeros()[delta].length; b++){
-                    points += p.getNumeros()[delta][b] ;
-                    
-                }
+                    for (int b = 0; b < p.getNumeros()[delta].length; b++) {
+                        points += p.getNumeros()[delta][b];
+
+                    }
             }
         }
         return points;
-        
+
     }
 
     private boolean validPlacement(Piece p, Coordonnees coordonnee) {
@@ -66,6 +65,8 @@ public class Plateau {
                     return false;
             }
         }
+        if (g.getPiece(coordonnee.getX(), coordonnee.getY()) != null)
+            return false;
         if (plateauvide)
             return true;
         if (cotevide)
