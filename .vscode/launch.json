@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch Terminal",
+            "request": "launch",
+            "mainClass": "Terminal",
+            "projectName": "projetFac_e3386baf"
+        },
+        {
+            "type": "java",
             "name": "Launch Grille",
             "request": "launch",
             "mainClass": "Grille",

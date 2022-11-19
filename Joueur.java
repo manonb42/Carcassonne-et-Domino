@@ -25,7 +25,7 @@ public class Joueur {
     }
 
     public void setNbPoints(int score) {
-        this.nbPoints += score;
+        this.nbPoints = score;
     }
 
     public boolean getIA() {

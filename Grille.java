@@ -10,7 +10,7 @@ public class Grille {
     Grille() {
         for (int i = 0; i < 128; i++) {
             pieces.add(new ArrayList<>());
-            for (int j = 0; j < 128; j++) {
+            for (int j = 0; j < 30; j++) {
                 pieces.get(i).add(null);
             }
         }
@@ -27,6 +27,7 @@ public class Grille {
     public List<List<Piece>> getListPieces() {
         return this.pieces;
     }
+
 
     public void setPiece(int x, int y, Piece p) {
         if (y + dy >= 0) {

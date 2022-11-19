@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Terminal {
@@ -22,8 +23,95 @@ public class Terminal {
         System.out.print("\n");
     }
 
+    public void afficheLigne1(Piece p){
+        if(p!=null){
+            System.out.print(" ");
+            for(int i=0 ;i<3; i++){
+                System.out.print(p.getNumeros()[0][i] + " ");
+            }
+        }else{
+            System.out.print("       ");
+        }  
+    }
+
+
+    public void afficheLigne2(Piece p){
+        if(p!=null){
+            System.out.print(p.getNumeros()[3][2] + "     " + p.getNumeros()[1][0]);
+        }else{
+            System.out.print("       ");
+        }  
+    }
+    public void afficheLigne3(Piece p){
+        if(p!=null){
+                System.out.print(p.getNumeros()[3][1] + "     " + p.getNumeros()[1][1]);
+        }else{
+            System.out.print("       ");
+        }  
+    }
+    public void afficheLigne4(Piece p){
+        if(p!=null){
+                System.out.print(p.getNumeros()[3][0] + "     " + p.getNumeros()[1][1]);
+        }else{
+            System.out.print("       ");
+        }  
+    }
+    public void afficheLigne5(Piece p){
+
+        if(p!=null){
+            System.out.print(" ");
+            for(int i=2 ;i>=0; i--){
+                System.out.print(p.getNumeros()[2][i] + " ");
+            }
+        }else{
+            System.out.print("       ");
+        }  
+    }
+
+    public void afficheGrille(){
+        for(int i = p.getPlateau().getG().getListPieces().size()-1; i>=0; i--){
+            if(!estVide((ArrayList) p.getPlateau().getG().getListPieces().get(i))){
+                for(int j =0; j< p.getPlateau().getG().getListPieces().get(i).size(); j++){
+                    afficheLigne1(p.getPlateau().getG().getListPieces().get(i).get(j));
+                }
+                System.out.println("");
+                for(int j =0; j< p.getPlateau().getG().getListPieces().get(i).size(); j++){
+                    afficheLigne2(p.getPlateau().getG().getListPieces().get(i).get(j));
+                }
+                System.out.println("");
+                for(int j =0; j< p.getPlateau().getG().getListPieces().get(i).size(); j++){
+                    afficheLigne3(p.getPlateau().getG().getListPieces().get(i).get(j));
+                }
+                System.out.println("");
+                for(int j =0; j< p.getPlateau().getG().getListPieces().get(i).size(); j++){
+                    afficheLigne4(p.getPlateau().getG().getListPieces().get(i).get(j));
+                } 
+                System.out.println("");
+                for(int j =0; j< p.getPlateau().getG().getListPieces().get(i).size(); j++){
+                    afficheLigne5(p.getPlateau().getG().getListPieces().get(i).get(j));
+                }
+                System.out.println("");
+            }
+        }
+    }
+
+
+    public boolean estVide(ArrayList<Piece> l){
+        for(Piece p : l){
+            if(p != null){
+                return false;
+            }
+        }
+        return true;
+
+    }
+
+
     // piocher une piece
     private Piece piocherPiece(Joueur joueur) {
+        /*int [][] n = {{1,1,1},{1,1,1},{1,1,1},{1,1,1}};   //pour les test
+        Piece pi = new Piece(n);
+        joueur.setPiece(pi);*/ 
         joueur.setPiece(p.getSac().piocher());
         return joueur.getPiece();
     }
@@ -75,7 +163,10 @@ public class Terminal {
             }
         } else {
             System.out.println("Où voulez vous placer votre pièce ? Sous la forme \"1,1\" ");
-            if (p.getPlateau().placer(j.getPiece(), lectureCoordonnee(coord.nextLine()))) {
+            String st = coord.nextLine();
+            if (p.getPlateau().placer(j.getPiece(), lectureCoordonnee(st))) {
+                int m = p.getPlateau().newPoints(j.getPiece(),  lectureCoordonnee(st));
+                j.setNbPoints(j.getNbPoints()+m);
                 System.out.println("Succès ! La pièce a bien été placée");
             } else {
                 System.out.println("Vous ne pouvez pas placer la pièce à cet endroit");
@@ -129,8 +220,10 @@ public class Terminal {
             int tourDe = i % p.getJoueurs().length;
             System.out.println("--------------------------\n"
                     + "C'est au tour de " + p.getJoueurs()[tourDe].getName() + " !");
+            System.out.println("Vous avez : "+p.getJoueurs()[tourDe].getNbPoints()+" Points !" );
             affichePiece(piocherPiece(p.getJoueurs()[tourDe]));
             quelleAction(p.getJoueurs()[tourDe]);
+            afficheGrille();
             i++;
         }
 
