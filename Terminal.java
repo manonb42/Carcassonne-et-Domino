@@ -227,7 +227,7 @@ public class Terminal {
         }
     }
 
-    public Joueur gagnant() {
+    private Joueur gagnant() {
         Joueur gagnant = null;
         for (int i = p.getJoueurs().length - 1; i > 0; i--) {
             if (p.getJoueurs()[i].getNbPoints() > p.getJoueurs()[i - 1].getNbPoints()) {
@@ -237,8 +237,7 @@ public class Terminal {
         return gagnant;
     }
 
-    public int nbJoueurs() {
-        int nbjoueurs = 0;
+    private int nbJoueurs() {
         Scanner nbj = new Scanner(System.in);
         System.out.println("Combien y'a t'il de joueurs ? ");
         try {
@@ -249,7 +248,16 @@ public class Terminal {
         }
     }
 
-    public Joueur nomJoueur(int pos) {
+    private int nbJoueurspositif() {
+        int n = nbJoueurs();
+        if (n <= 0) {
+            System.out.println("Mauvaise entrée. Veuillez entrer un chiffre superieur à 0.");
+            return nbJoueurspositif();
+        }
+        return n;
+    }
+
+    private Joueur nomJoueur(int pos) {
         Scanner nom = new Scanner(System.in);
         System.out.println("Entrer le nom du joueur n" + (pos + 1) + " :");
         try {
@@ -264,7 +272,7 @@ public class Terminal {
     public Partie configurer() {
 
         // liste des joueurs
-        Joueur joueurs[] = new Joueur[nbJoueurs()];
+        Joueur joueurs[] = new Joueur[nbJoueurspositif()];
 
         // création des joueurs
         for (int i = 0; i < joueurs.length; i++) {
@@ -301,7 +309,8 @@ public class Terminal {
     }
 
     // faire intelligence artificielle
-    // afficher le tableau a corriger : beugs + mettre static
+    // afficher le tableau a corriger : beugs + mettre static + afficher les
+    // coordonnees
 
     // pb fin de partie trop tot : même quand on passe son tour ça pioche, a priori
     // c'est le comportement normal pcq on doit defausser la piece des qu'elle est
