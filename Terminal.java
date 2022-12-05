@@ -175,7 +175,7 @@ public class Terminal {
     }
 
     // placer une piece sur le plateau
-    private void placement(Joueur j) throws Exception {
+    private void placement(Joueur j) {
         boolean plateauvide = plateauvide();
         if (plateauvide) {
             if (p.getPlateau().placer(j.getPiece(), new Coordonnees(0, 0))) {
@@ -211,7 +211,7 @@ public class Terminal {
     }
 
     // choisir l'action a effectuer
-    private void quelleAction(Joueur joueur) throws Exception {
+    private void quelleAction(Joueur joueur) {
         int actionAEffectuer = demanderAction();
         if (actionAEffectuer == 1) {
             placement(joueur);
@@ -277,7 +277,7 @@ public class Terminal {
     }
 
     // déroulement de la partie
-    public void jouer() throws Exception {
+    public void jouer() {
         int i = 0;
         while (p.getSac().getPiecesRestantes() != 0) {
             int tourDe = i % p.getJoueurs().length;
@@ -294,7 +294,7 @@ public class Terminal {
         System.out.println("Le gagnant est " + gagnant());
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         Terminal t = new Terminal();
         t.p = t.configurer();
         t.jouer();
@@ -302,7 +302,6 @@ public class Terminal {
 
     // faire intelligence artificielle
     // afficher le tableau a corriger : beugs + mettre static
-    // gerer les mauvaises entrees
 
     // pb fin de partie trop tot : même quand on passe son tour ça pioche, a priori
     // c'est le comportement normal pcq on doit defausser la piece des qu'elle est
