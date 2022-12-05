@@ -1,7 +1,10 @@
-public class Partie {
+import java.io.Serializable;
+
+public class Partie implements Serializable {
     private Joueur[] joueurs;
     private Plateau plateau;
     private Sac sac;
+    // Joueur gagnant = null;
 
     Partie(Joueur[] listeJoueurs, Plateau plateau, Sac sac) {
         this.joueurs = listeJoueurs;

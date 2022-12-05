@@ -48,7 +48,6 @@ public class Plateau {
             }
         }
         return points;
-
     }
 
     private boolean validPlacement(Piece p, Coordonnees coordonnee) {
