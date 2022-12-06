@@ -52,7 +52,7 @@ public class Terminal {
 
     public void afficheLigne4(TuileDomino p) {
         if (p != null) {
-            System.out.print(p.getNumeros()[3][0] + "     " + p.getNumeros()[1][1]);
+            System.out.print(p.getNumeros()[3][0] + "     " + p.getNumeros()[1][2]);
         } else {
             System.out.print("       ");
         }
