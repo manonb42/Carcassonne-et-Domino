@@ -1,6 +1,6 @@
 public class SacCarcassonne extends Sac {
     private int nbPiecesRestantes;
-    private Tuile[] pieces;
+    private TuileCarcassonne[] pieces;
 
     @Override
     public Piece genererPiece() {

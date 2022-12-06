@@ -1,10 +1,10 @@
 public class SacDomino extends Sac {
     private int nbPiecesRestantes;
-    private Domino[] pieces;
+    private TuileDomino[] pieces;
 
     public SacDomino(int nbPieces) {
         this.nbPiecesRestantes = nbPieces;
-        this.pieces = new Domino[nbPieces];
+        this.pieces = new TuileDomino[nbPieces];
         for (int i = 0; i < nbPieces; i++) {
             this.pieces[i] = genererPiece();
         }
@@ -15,9 +15,9 @@ public class SacDomino extends Sac {
     }
 
     @Override
-    public Domino genererPiece() {
+    public TuileDomino genererPiece() {
         int tab[][] = new int[4][3];
-        Domino p = new Domino(tab);
+        TuileDomino p = new TuileDomino(tab);
         for (int i = 0; i < p.getNumeros().length; i++) {
             for (int j = 0; j < p.getNumeros()[i].length; j++) {
                 p.setNumeros(i, j, (int) (Math.random() * 4));
@@ -27,9 +27,9 @@ public class SacDomino extends Sac {
     }
 
     @Override
-    public Domino piocher() {
+    public TuileDomino piocher() {
         nbPiecesRestantes--;
-        Domino p = this.pieces[nbPiecesRestantes];
+        TuileDomino p = this.pieces[nbPiecesRestantes];
         this.pieces[nbPiecesRestantes] = null;
         return p;
     }

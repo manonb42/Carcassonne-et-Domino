@@ -1,7 +1,7 @@
-public class Domino extends Piece {
+public class TuileDomino extends Piece {
     private int numeros[][] = new int[4][3];
 
-    Domino(int numeros[][]) {
+    TuileDomino(int numeros[][]) {
         this.numeros = numeros;
     }
 
@@ -37,11 +37,11 @@ public class Domino extends Piece {
     // verifier le casting
     @Override
     public boolean sidesMatch(Piece p, int side) {
-        if (this.numeros[side][0] != ((Domino) p).numeros[(side + 2) % 4][2])
+        if (this.numeros[side][0] != ((TuileDomino) p).numeros[(side + 2) % 4][2])
             return false;
-        if (this.numeros[side][1] != ((Domino) p).numeros[(side + 2) % 4][1])
+        if (this.numeros[side][1] != ((TuileDomino) p).numeros[(side + 2) % 4][1])
             return false;
-        if (this.numeros[side][2] != ((Domino) p).numeros[(side + 2) % 4][0])
+        if (this.numeros[side][2] != ((TuileDomino) p).numeros[(side + 2) % 4][0])
             return false;
         return true;
     }

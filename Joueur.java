@@ -1,7 +1,7 @@
 public class Joueur {
     private String nom;
     private int nbPoints = 0;
-    private Domino pieceactuelle;
+    private TuileDomino pieceactuelle;
     private boolean ia = false;
 
     Joueur(String nom) {
@@ -12,11 +12,11 @@ public class Joueur {
         return this.nom;
     }
 
-    public Domino getPiece() {
+    public TuileDomino getPiece() {
         return this.pieceactuelle;
     }
 
-    public void setPiece(Domino p) {
+    public void setPiece(TuileDomino p) {
         this.pieceactuelle = p;
     }
 

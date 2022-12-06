@@ -1,4 +1,4 @@
-public class Tuile extends Piece {
+public class TuileCarcassonne extends Piece {
 
     @Override
     void tourner(int nbTours) {

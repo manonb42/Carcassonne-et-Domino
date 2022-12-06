@@ -5,7 +5,7 @@ public class Terminal {
     Partie p;
 
     // affichage de la piece
-    private static void affichePiece(Domino piece) {
+    private static void affichePiece(TuileDomino piece) {
 
         System.out.println("Votre pièce est :\n");
         System.out.print(" ");
@@ -23,7 +23,7 @@ public class Terminal {
         System.out.print("\n");
     }
 
-    public void afficheLigne1(Domino p) {
+    public void afficheLigne1(TuileDomino p) {
         if (p != null) {
             System.out.print(" ");
             for (int i = 0; i < 3; i++) {
@@ -34,7 +34,7 @@ public class Terminal {
         }
     }
 
-    public void afficheLigne2(Domino p) {
+    public void afficheLigne2(TuileDomino p) {
         if (p != null) {
             System.out.print(p.getNumeros()[3][2] + "     " + p.getNumeros()[1][0]);
         } else {
@@ -42,7 +42,7 @@ public class Terminal {
         }
     }
 
-    public void afficheLigne3(Domino p) {
+    public void afficheLigne3(TuileDomino p) {
         if (p != null) {
             System.out.print(p.getNumeros()[3][1] + "     " + p.getNumeros()[1][1]);
         } else {
@@ -50,7 +50,7 @@ public class Terminal {
         }
     }
 
-    public void afficheLigne4(Domino p) {
+    public void afficheLigne4(TuileDomino p) {
         if (p != null) {
             System.out.print(p.getNumeros()[3][0] + "     " + p.getNumeros()[1][1]);
         } else {
@@ -58,7 +58,7 @@ public class Terminal {
         }
     }
 
-    public void afficheLigne5(Domino p) {
+    public void afficheLigne5(TuileDomino p) {
         if (p != null) {
             System.out.print(" ");
             for (int i = 2; i >= 0; i--) {
@@ -97,8 +97,8 @@ public class Terminal {
         }
     }
 
-    public boolean estVide(ArrayList<Domino> l) {
-        for (Domino p : l) {
+    public boolean estVide(ArrayList<TuileDomino> l) {
+        for (TuileDomino p : l) {
             if (p != null) {
                 return false;
             }
@@ -108,7 +108,7 @@ public class Terminal {
     }
 
     // piocher une piece
-    private Domino piocherPiece(Joueur joueur) {
+    private TuileDomino piocherPiece(Joueur joueur) {
         joueur.setPiece(p.getSac().piocher());
         return joueur.getPiece();
     }
