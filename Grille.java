@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Grille {
-    private List<List<Piece>> pieces = new ArrayList<List<Piece>>();
+    private List<List<Domino>> pieces = new ArrayList<List<Domino>>();
 
     private int dx = 0;
     private int dy = 0;
@@ -24,17 +24,16 @@ public class Grille {
         return dy;
     }
 
-    public List<List<Piece>> getListPieces() {
+    public List<List<Domino>> getListPieces() {
         return this.pieces;
     }
 
-
-    public void setPiece(int x, int y, Piece p) {
+    public void setPiece(int x, int y, Domino p) {
         if (y + dy >= 0) {
             int ncols = pieces.get(0).size();
             int ny = y + dy - pieces.size() + 1;
             for (int i = 0; i < ny; i++) {
-                List<Piece> list = new ArrayList<>(ncols);
+                List<Domino> list = new ArrayList<>(ncols);
                 for (int j = 0; j < ncols; j++) {
                     list.add(null);
                 }
@@ -54,7 +53,7 @@ public class Grille {
         if (y + dy < 0) {
             for (int i = 0; i < -(y + dy); i++) {
                 int nbcols = pieces.get(0).size();
-                List<Piece> newlist = new ArrayList<Piece>(nbcols);
+                List<Domino> newlist = new ArrayList<Domino>(nbcols);
                 for (int j = 0; j < nbcols; j++) {
                     newlist.add(null);
                 }
@@ -82,7 +81,7 @@ public class Grille {
         pieces.get(y + dy).add(x + dx, p);
     }
 
-    public Piece getPiece(int x, int y) {
+    public Domino getPiece(int x, int y) {
         if (y + dy >= 0 && y + dy < pieces.size()) {
             if (x + dx >= 0 && x + dx < pieces.get(y + dy).size()) {
                 return pieces.get(y + dy).get(x + dx);

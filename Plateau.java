@@ -13,7 +13,7 @@ public class Plateau {
         this.g = g;
     }
 
-    public boolean placer(Piece p, Coordonnees coordonnee) {
+    public boolean placer(Domino p, Coordonnees coordonnee) {
         if (validPlacement(p, coordonnee)) {
             g.setPiece(coordonnee.getX(), coordonnee.getY(), p);
             return true;
@@ -33,7 +33,7 @@ public class Plateau {
         return plateauvide;
     }
 
-    public int newPoints(Piece p, Coordonnees coordonnee) {
+    public int newPoints(Domino p, Coordonnees coordonnee) {
         int points = 0;
         int[][] deltas = { { 0, 1 }, { 1, 0 }, { 0, -1 }, { -1, 0 } };
         for (int delta = 0; delta < deltas.length; delta++) {
@@ -50,7 +50,7 @@ public class Plateau {
         return points;
     }
 
-    private boolean validPlacement(Piece p, Coordonnees coordonnee) {
+    private boolean validPlacement(Domino p, Coordonnees coordonnee) {
         boolean cotevide = true;
         boolean plateauvide = plateauvide();
         int[][] deltas = { { 0, 1 }, { 1, 0 }, { 0, -1 }, { -1, 0 } };

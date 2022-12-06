@@ -5,7 +5,7 @@ public class Terminal {
     Partie p;
 
     // affichage de la piece
-    private static void affichePiece(Piece piece) {
+    private static void affichePiece(Domino piece) {
 
         System.out.println("Votre pièce est :\n");
         System.out.print(" ");
@@ -23,7 +23,7 @@ public class Terminal {
         System.out.print("\n");
     }
 
-    public void afficheLigne1(Piece p) {
+    public void afficheLigne1(Domino p) {
         if (p != null) {
             System.out.print(" ");
             for (int i = 0; i < 3; i++) {
@@ -34,7 +34,7 @@ public class Terminal {
         }
     }
 
-    public void afficheLigne2(Piece p) {
+    public void afficheLigne2(Domino p) {
         if (p != null) {
             System.out.print(p.getNumeros()[3][2] + "     " + p.getNumeros()[1][0]);
         } else {
@@ -42,7 +42,7 @@ public class Terminal {
         }
     }
 
-    public void afficheLigne3(Piece p) {
+    public void afficheLigne3(Domino p) {
         if (p != null) {
             System.out.print(p.getNumeros()[3][1] + "     " + p.getNumeros()[1][1]);
         } else {
@@ -50,7 +50,7 @@ public class Terminal {
         }
     }
 
-    public void afficheLigne4(Piece p) {
+    public void afficheLigne4(Domino p) {
         if (p != null) {
             System.out.print(p.getNumeros()[3][0] + "     " + p.getNumeros()[1][1]);
         } else {
@@ -58,7 +58,7 @@ public class Terminal {
         }
     }
 
-    public void afficheLigne5(Piece p) {
+    public void afficheLigne5(Domino p) {
         if (p != null) {
             System.out.print(" ");
             for (int i = 2; i >= 0; i--) {
@@ -97,8 +97,8 @@ public class Terminal {
         }
     }
 
-    public boolean estVide(ArrayList<Piece> l) {
-        for (Piece p : l) {
+    public boolean estVide(ArrayList<Domino> l) {
+        for (Domino p : l) {
             if (p != null) {
                 return false;
             }
@@ -108,7 +108,7 @@ public class Terminal {
     }
 
     // piocher une piece
-    private Piece piocherPiece(Joueur joueur) {
+    private Domino piocherPiece(Joueur joueur) {
         joueur.setPiece(p.getSac().piocher());
         return joueur.getPiece();
     }
@@ -234,6 +234,7 @@ public class Terminal {
                 gagnant = p.getJoueurs()[i];
             }
         }
+        p.setGagnant(gagnant);
         return gagnant;
     }
 
@@ -308,7 +309,8 @@ public class Terminal {
         t.jouer();
     }
 
-    // faire intelligence artificielle
+    // faire intelligence artificielle : où ?
+
     // afficher le tableau a corriger : beugs + mettre static + afficher les
     // coordonnees
 

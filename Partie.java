@@ -4,7 +4,7 @@ public class Partie implements Serializable {
     private Joueur[] joueurs;
     private Plateau plateau;
     private Sac sac;
-    // Joueur gagnant = null;
+    Joueur gagnant = null;
 
     Partie(Joueur[] listeJoueurs, Plateau plateau, Sac sac) {
         this.joueurs = listeJoueurs;
@@ -34,5 +34,9 @@ public class Partie implements Serializable {
 
     public void setSac(Sac sac) {
         this.sac = sac;
+    }
+
+    public void setGagnant(Joueur g) {
+        this.gagnant = g;
     }
 }
