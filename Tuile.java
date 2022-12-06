@@ -6,4 +6,10 @@ public class Tuile extends Piece {
 
     }
 
+    @Override
+    boolean sidesMatch(Piece p, int side) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
 }

@@ -281,7 +281,7 @@ public class Terminal {
         }
         Grille g = new Grille();
         Plateau plateau = new Plateau(g);
-        Sac sac = new Sac(20);
+        SacDomino sac = new SacDomino(20);
         return new Partie(joueurs, plateau, sac);
     }
 

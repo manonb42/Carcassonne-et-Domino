@@ -3,10 +3,10 @@ import java.io.Serializable;
 public class Partie implements Serializable {
     private Joueur[] joueurs;
     private Plateau plateau;
-    private Sac sac;
+    private SacDomino sac;
     Joueur gagnant = null;
 
-    Partie(Joueur[] listeJoueurs, Plateau plateau, Sac sac) {
+    Partie(Joueur[] listeJoueurs, Plateau plateau, SacDomino sac) {
         this.joueurs = listeJoueurs;
         this.plateau = plateau;
         this.sac = sac;
@@ -28,11 +28,11 @@ public class Partie implements Serializable {
         this.plateau = plateau;
     }
 
-    public Sac getSac() {
+    public SacDomino getSac() {
         return this.sac;
     }
 
-    public void setSac(Sac sac) {
+    public void setSac(SacDomino sac) {
         this.sac = sac;
     }
 

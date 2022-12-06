@@ -28,11 +28,11 @@ public class Joueur {
         this.nbPoints = score;
     }
 
-    public boolean getIA() {
+    public boolean getisIA() {
         return this.ia;
     }
 
-    public void setIA(boolean b) {
+    public void setisIA(boolean b) {
         this.ia = b;
     }
 }
