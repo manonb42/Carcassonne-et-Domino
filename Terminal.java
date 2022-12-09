@@ -109,11 +109,10 @@ public class Terminal {
 
     // piocher une piece
     private TuileDomino piocherPiece(Joueur joueur) {
-        // int[][] t = { { 1, 1, 1 }, { 1, 1, 1 }, { 1, 1, 1 }, { 1, 1, 1 } }; // pour
-        // les tests
-        // TuileDomino d = new TuileDomino(t);
-        // joueur.setPiece(d);
-        joueur.setPiece(p.getSac().piocher());
+        int[][] t = { { 1, 1, 1 }, { 1, 1, 1 }, { 1, 1, 1 }, { 1, 1, 1 } }; // pour les tests
+        TuileDomino d = new TuileDomino(t);
+        joueur.setPiece(d);
+        // joueur.setPiece(p.getSac().piocher());
         return (TuileDomino) (joueur.getPiece());
     }
 

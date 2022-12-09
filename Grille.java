@@ -60,8 +60,9 @@ public class Grille {
 
     // Pour placer une Tuile p en (x,y)
     public void setPiece(int x, int y, TuileDomino p) {
-        if (y + dy >= 0) {
-            // dans le cas ou y+dy >0, on ajoute une colonne de Piece null à la fin
+        if (y + dy >= pieces.size()) {
+            // dans le cas ou y+dy > taille du tableau, on ajoute une colonne de Piece null
+            // à la fin
             int ncols = pieces.get(0).size();
             int ny = y + dy - pieces.size() + 1;
             for (int i = 0; i < ny; i++) {
@@ -72,8 +73,8 @@ public class Grille {
                 pieces.add(list);
             }
         }
-        if (x + dx >= 0) {
-            // x + dx > 0 : on ajoute une ligne de Piece null à la fin
+        if (x + dx >= pieces.get(0).size()) {
+            // x + dx > taille du tableau : on ajoute une ligne de Piece null à la fin
             int nligns = pieces.size();
             int nm = x + dx - pieces.get(0).size() + 1;
             for (int i = 0; i < nligns; i++) {

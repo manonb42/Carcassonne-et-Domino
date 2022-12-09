@@ -72,4 +72,17 @@ public class Plateau {
             return false;
         return true;
     }
+
+    // test pour la Grille
+    public static void main(String[] args) {
+        Plateau plateau = new Plateau(new Grille());
+        int[][] tab = { { 1, 1, 1 }, { 1, 1, 1 }, { 1, 1, 1 }, { 1, 1, 1 } };
+        TuileDomino p1 = new TuileDomino(tab);
+        for (int i = 0; i < 133; i++) {
+            plateau.placer(p1, new Coordonnees(0, -i));
+        }
+        // System.out.println(plateau.getG().getPiece(0, -132) != null);
+        System.out.println(plateau.getG().getPiece(0, 132) != null);
+
+    }
 }
