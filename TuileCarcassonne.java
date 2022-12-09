@@ -28,7 +28,7 @@ public class TuileCarcassonne extends Tuile {
 
     @Override
     boolean sidesMatch(Tuile p, int side) {
-        return false;
+        return (this.paysages[side] == ((TuileCarcassonne) p).paysages[(side + 2) % 4]);
     }
 
 }
