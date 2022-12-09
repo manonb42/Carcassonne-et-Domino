@@ -301,12 +301,8 @@ public class Terminal {
     // déroulement de la partie
     public void jouer() {
         int i = 0;
-        while (p.getSac().getPiecesRestantes() != 0) {
+        while (p.getSac().getPiecesRestantes() != 0 && !p.getFin()) {
             int tourDe = i % p.getJoueurs().length;
-            if (p.getFin()) {
-                System.out.println("Fin de la partie");
-                return;
-            } // si la partie est finie, arret de la fonction jouer
             if (!p.getJoueurs()[tourDe].getAbandon()) { // si le joueur a abandonner, on passe son tour et on passe au
                                                         // prochain joueur
                 System.out.println("--------------------------\n"
@@ -321,7 +317,7 @@ public class Terminal {
             i++;
         }
 
-        System.out.println("Il n'y a plus de pièces dans le sac. Fin de la partie.");
+        System.out.println("Fin de la partie.");
         if (gagnant() != null) {
             System.out.println("Le gagnant est " + gagnant());
         } else {
