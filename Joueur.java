@@ -1,7 +1,7 @@
 public class Joueur {
     private String nom;
     private int nbPoints = 0;
-    private TuileDomino pieceactuelle;
+    private Tuile pieceactuelle;
     private boolean ia = false;
     private boolean abandon; // si true, fin de la partie pour le joueur
 
@@ -13,11 +13,11 @@ public class Joueur {
         return this.nom;
     }
 
-    public TuileDomino getPiece() {
+    public Tuile getPiece() {
         return this.pieceactuelle;
     }
 
-    public void setPiece(TuileDomino p) {
+    public void setPiece(Tuile p) {
         this.pieceactuelle = p;
     }
 
@@ -37,7 +37,7 @@ public class Joueur {
         this.ia = b;
     }
 
-    public boolean getAbandon(){
+    public boolean getAbandon() {
         return abandon;
     }
 
