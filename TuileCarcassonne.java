@@ -1,7 +1,7 @@
-public class TuileCarcassonne extends Piece {
-    private Paysage [] paysages = new Paysage[4];
+public class TuileCarcassonne extends Tuile {
+    private Paysage[] paysages = new Paysage[4];
 
-    TuileCarcassonne(Paysage[] p){
+    TuileCarcassonne(Paysage[] p) {
         paysages = p;
     }
 
@@ -24,11 +24,10 @@ public class TuileCarcassonne extends Piece {
                 paysages[3] = tmp;
             }
         }
-
     }
 
     @Override
-    boolean sidesMatch(Piece p, int side) {
+    boolean sidesMatch(Tuile p, int side) {
         return false;
     }
 
