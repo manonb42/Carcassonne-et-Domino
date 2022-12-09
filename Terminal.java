@@ -109,11 +109,12 @@ public class Terminal {
 
     // piocher une piece
     private TuileDomino piocherPiece(Joueur joueur) {
-        int[][] t= {{1,1,1},{1,1,1},{1,1,1},{1,1,1}}; // pour les tests
-        TuileDomino d = new TuileDomino(t);
-        joueur.setPiece(d);
-        //joueur.setPiece(p.getSac().piocher());
-        return joueur.getPiece();
+        // int[][] t = { { 1, 1, 1 }, { 1, 1, 1 }, { 1, 1, 1 }, { 1, 1, 1 } }; // pour
+        // les tests
+        // TuileDomino d = new TuileDomino(t);
+        // joueur.setPiece(d);
+        joueur.setPiece(p.getSac().piocher());
+        return (TuileDomino) (joueur.getPiece());
     }
 
     // lire les coordonnees
@@ -181,7 +182,7 @@ public class Terminal {
     private void placement(Joueur j) {
         boolean plateauvide = plateauvide();
         if (plateauvide) {
-            if (p.getPlateau().placer(j.getPiece(), new Coordonnees(0, 0))) {
+            if (p.getPlateau().placer((TuileDomino) (j.getPiece()), new Coordonnees(0, 0))) {
                 System.out.println("Succès ! La pièce a bien été placée");
             } else {
                 System.out.println("Vous ne pouvez pas placer la pièce à cet endroit");
@@ -189,8 +190,8 @@ public class Terminal {
             }
         } else {
             Coordonnees coord = lectureCoordonnee();
-            if (p.getPlateau().placer(j.getPiece(), coord)) {
-                int m = p.getPlateau().newPoints(j.getPiece(), coord);
+            if (p.getPlateau().placer((TuileDomino) j.getPiece(), coord)) {
+                int m = p.getPlateau().newPoints((TuileDomino) j.getPiece(), coord);
                 j.setNbPoints(j.getNbPoints() + m);
                 System.out.println("Succès ! La pièce a bien été placée");
             } else {
@@ -215,7 +216,7 @@ public class Terminal {
 
     // choisir l'action a effectuer
     private void quelleAction(Joueur joueur) {
-        if(joueur.getAbandon()){                   //Si je joueur abandonne, ses tours son passés
+        if (joueur.getAbandon()) { // Si je joueur abandonne, ses tours son passés
             return;
         }
         int actionAEffectuer = demanderAction();
@@ -223,15 +224,15 @@ public class Terminal {
             placement(joueur);
         } else if (actionAEffectuer == 2) {
             tournerPiece(joueur);
-            affichePiece(joueur.getPiece());
+            affichePiece((TuileDomino) joueur.getPiece());
             quelleAction(joueur);
         } else if (actionAEffectuer == 3) {
             System.out.println("Vous passez votre tour\n");
-        }else if(actionAEffectuer == 4){                //Le joueur peut abandonner
+        } else if (actionAEffectuer == 4) { // Le joueur peut abandonner
             System.out.println("Vous abandonnez");
             joueur.setAbandon(true);
             p.fullAbandon();
-        }else if(actionAEffectuer == 5){  //Le joueur peut mettre fin a la partie
+        } else if (actionAEffectuer == 5) { // Le joueur peut mettre fin a la partie
             p.setFin(true);
         } else {
             System.out.println("Mauvaise entrée. Veuillez saisir un nombre entre 1 et 3.");
@@ -302,22 +303,31 @@ public class Terminal {
         int i = 0;
         while (p.getSac().getPiecesRestantes() != 0) {
             int tourDe = i % p.getJoueurs().length;
-            if(p.getFin()){System.out.println("Fin de la partie"); return;} // si la partie est finie, arret de la fonction jouer
-            if(!p.getJoueurs()[tourDe].getAbandon()){       // si le joueur a abandonner, on passe son tour et on passe au prochain joueur
+            if (p.getFin()) {
+                System.out.println("Fin de la partie");
+                return;
+            } // si la partie est finie, arret de la fonction jouer
+            if (!p.getJoueurs()[tourDe].getAbandon()) { // si le joueur a abandonner, on passe son tour et on passe au
+                                                        // prochain joueur
                 System.out.println("--------------------------\n"
-                + "C'est au tour de " + p.getJoueurs()[tourDe].getName() + " !");
-            System.out.println("Vous avez : " + p.getJoueurs()[tourDe].getNbPoints() + " Points !");
-            affichePiece(piocherPiece(p.getJoueurs()[tourDe]));
-            System.out.println(p.getSac().getPiecesRestantes());  // Pour voir le nombre de Pièces restantes lors des tests
-            quelleAction(p.getJoueurs()[tourDe]);
-            afficheGrille();
+                        + "C'est au tour de " + p.getJoueurs()[tourDe].getName() + " !");
+                System.out.println("Vous avez : " + p.getJoueurs()[tourDe].getNbPoints() + " Points !");
+                affichePiece(piocherPiece(p.getJoueurs()[tourDe]));
+                System.out.println(p.getSac().getPiecesRestantes()); // Pour voir le nombre de Pièces restantes lors des
+                                                                     // tests
+                quelleAction(p.getJoueurs()[tourDe]);
+                afficheGrille();
             }
             i++;
-
         }
 
         System.out.println("Il n'y a plus de pièces dans le sac. Fin de la partie.");
-        System.out.println("Le gagnant est " + gagnant());
+        if (gagnant() != null) {
+            System.out.println("Le gagnant est " + gagnant());
+        } else {
+            System.out.println("Il n'y a pas de gagnant.");
+        }
+
     }
 
     public static void main(String[] args) {
@@ -325,17 +335,4 @@ public class Terminal {
         t.p = t.configurer();
         t.jouer();
     }
-
-    // faire intelligence artificielle : où ?
-
-    // afficher le tableau a corriger : beugs + mettre static + afficher les
-    // coordonnees
-
-    // pb fin de partie trop tot : même quand on passe son tour ça pioche, a priori
-    // c'est le comportement normal pcq on doit defausser la piece des qu'elle est
-    // piochée (pas de remise dans le sac en gros) et les joueurs ne gardent pas les
-    // pieces qu'ils ne jouent pas mais du coup vu que bcp de pieces sautent il peut
-    // y avoir des parties a 4 pieces
-
-    // verifier que la fct gagnant marche
 }
