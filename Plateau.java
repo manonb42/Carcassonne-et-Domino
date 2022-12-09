@@ -5,11 +5,11 @@ public class Plateau {
         this.g = g;
     }
 
-    public Grille getG() {
+    public Grille getGrille() {
         return g;
     }
 
-    public void setG(Grille g) {
+    public void setGrille(Grille g) {
         this.g = g;
     }
 
@@ -82,7 +82,7 @@ public class Plateau {
             plateau.placer(p1, new Coordonnees(0, -i));
         }
         // System.out.println(plateau.getG().getPiece(0, -132) != null);
-        System.out.println(plateau.getG().getPiece(0, 132) != null);
+        System.out.println(plateau.getGrille().getPiece(0, 132) != null);
 
     }
 }

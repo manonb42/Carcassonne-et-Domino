@@ -71,26 +71,26 @@ public class Terminal {
 
     // est beugé
     public void afficheGrille() {
-        for (int i = p.getPlateau().getG().getListPieces().size() - 1; i >= 0; i--) {
-            if (!estVide((ArrayList) p.getPlateau().getG().getListPieces().get(i))) {
-                for (int j = 0; j < p.getPlateau().getG().getListPieces().get(i).size(); j++) {
-                    afficheLigne1(p.getPlateau().getG().getListPieces().get(i).get(j));
+        for (int i = p.getPlateau().getGrille().getListPieces().size() - 1; i >= 0; i--) {
+            if (!estVide((ArrayList) p.getPlateau().getGrille().getListPieces().get(i))) {
+                for (int j = 0; j < p.getPlateau().getGrille().getListPieces().get(i).size(); j++) {
+                    afficheLigne1(p.getPlateau().getGrille().getListPieces().get(i).get(j));
                 }
                 System.out.println("");
-                for (int j = 0; j < p.getPlateau().getG().getListPieces().get(i).size(); j++) {
-                    afficheLigne2(p.getPlateau().getG().getListPieces().get(i).get(j));
+                for (int j = 0; j < p.getPlateau().getGrille().getListPieces().get(i).size(); j++) {
+                    afficheLigne2(p.getPlateau().getGrille().getListPieces().get(i).get(j));
                 }
                 System.out.println("");
-                for (int j = 0; j < p.getPlateau().getG().getListPieces().get(i).size(); j++) {
-                    afficheLigne3(p.getPlateau().getG().getListPieces().get(i).get(j));
+                for (int j = 0; j < p.getPlateau().getGrille().getListPieces().get(i).size(); j++) {
+                    afficheLigne3(p.getPlateau().getGrille().getListPieces().get(i).get(j));
                 }
                 System.out.println("");
-                for (int j = 0; j < p.getPlateau().getG().getListPieces().get(i).size(); j++) {
-                    afficheLigne4(p.getPlateau().getG().getListPieces().get(i).get(j));
+                for (int j = 0; j < p.getPlateau().getGrille().getListPieces().get(i).size(); j++) {
+                    afficheLigne4(p.getPlateau().getGrille().getListPieces().get(i).get(j));
                 }
                 System.out.println("");
-                for (int j = 0; j < p.getPlateau().getG().getListPieces().get(i).size(); j++) {
-                    afficheLigne5(p.getPlateau().getG().getListPieces().get(i).get(j));
+                for (int j = 0; j < p.getPlateau().getGrille().getListPieces().get(i).size(); j++) {
+                    afficheLigne5(p.getPlateau().getGrille().getListPieces().get(i).get(j));
                 }
                 System.out.println("");
             }
@@ -167,9 +167,9 @@ public class Terminal {
 
     private boolean plateauvide() {
         boolean plateauvide = true;
-        for (int i = 0; i < p.getPlateau().getG().getListPieces().size(); i++) {
-            for (int z = 0; z < p.getPlateau().getG().getListPieces().get(i).size(); z++) {
-                if (p.getPlateau().getG().getListPieces().get(i).get(z) != null) {
+        for (int i = 0; i < p.getPlateau().getGrille().getListPieces().size(); i++) {
+            for (int z = 0; z < p.getPlateau().getGrille().getListPieces().get(i).size(); z++) {
+                if (p.getPlateau().getGrille().getListPieces().get(i).get(z) != null) {
                     plateauvide = false;
                 }
             }
