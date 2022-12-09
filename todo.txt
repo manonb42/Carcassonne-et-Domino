@@ -1,0 +1,18 @@
+Carcassonne : 
+
+- faire la classe plateau avec les mêmes méthodes que pour carcassonne (donc aussi faire une classe abstraite plateau que les deux étendent)
+
+- voir pour les pieces comment gerer les abbayes 
+
+-faire la partie sur les partisans (où ?)
+
+Domino : 
+
+- faire intelligence artificielle : où ?
+
+- afficher le tableau a corriger : beugs + mettre static + afficher les coordonnees
+
+- verifier que la fct gagnant marche
+
+- afficher gagnant lors de l'abandon
+
