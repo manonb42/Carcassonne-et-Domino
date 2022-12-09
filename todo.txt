@@ -12,7 +12,5 @@ Domino :
 
 - afficher le tableau a corriger : beugs + mettre static + afficher les coordonnees
 
-- verifier que la fct gagnant marche
-
-- afficher gagnant lors de l'abandon
+-placer une piece au debut ou faire 21 tours 
 
