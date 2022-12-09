@@ -230,6 +230,7 @@ public class Terminal {
         }else if(actionAEffectuer == 4){                //Le joueur peut abandonner
             System.out.println("Vous abandonnez");
             joueur.setAbandon(true);
+            p.fullAbandon();
         }else if(actionAEffectuer == 5){  //Le joueur peut mettre fin a la partie
             p.setFin(true);
         } else {

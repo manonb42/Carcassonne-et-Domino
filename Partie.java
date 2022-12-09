@@ -47,4 +47,13 @@ public class Partie implements Serializable {
     public void setFin(boolean fin) {
         this.fin = fin;
     }
+
+    public void fullAbandon() {
+        for(int i = 0; i<joueurs.length; i++){
+            if(!joueurs[i].getAbandon()){
+                return;
+            }
+        }
+        fin = true;
+    }
 }
