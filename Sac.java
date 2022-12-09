@@ -1,6 +1,6 @@
 public abstract class Sac {
 
-    public abstract Piece genererPiece();
+    public abstract Tuile genererPiece();
 
-    public abstract Piece piocher();
+    public abstract Tuile piocher();
 }

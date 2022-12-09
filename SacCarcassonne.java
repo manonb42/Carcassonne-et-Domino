@@ -3,13 +3,13 @@ public class SacCarcassonne extends Sac {
     private TuileCarcassonne[] pieces;
 
     @Override
-    public Piece genererPiece() {
+    public Tuile genererPiece() {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public Piece piocher() {
+    public Tuile piocher() {
         // TODO Auto-generated method stub
         return null;
     }

@@ -1,4 +1,4 @@
-public class TuileDomino extends Piece {
+public class TuileDomino extends Tuile {
     private int numeros[][] = new int[4][3];
 
     TuileDomino(int numeros[][]) {
@@ -36,7 +36,7 @@ public class TuileDomino extends Piece {
 
     // verifier le casting
     @Override
-    public boolean sidesMatch(Piece p, int side) {
+    public boolean sidesMatch(Tuile p, int side) {
         if (this.numeros[side][0] != ((TuileDomino) p).numeros[(side + 2) % 4][2])
             return false;
         if (this.numeros[side][1] != ((TuileDomino) p).numeros[(side + 2) % 4][1])
