@@ -3,6 +3,7 @@ public class Joueur {
     private int nbPoints = 0;
     private TuileDomino pieceactuelle;
     private boolean ia = false;
+    private boolean abandon; // si true, fin de la partie pour le joueur
 
     Joueur(String nom) {
         this.nom = nom;
@@ -34,5 +35,13 @@ public class Joueur {
 
     public void setisIA(boolean b) {
         this.ia = b;
+    }
+
+    public boolean getAbandon(){
+        return abandon;
+    }
+
+    public void setAbandon(boolean abandon) {
+        this.abandon = abandon;
     }
 }

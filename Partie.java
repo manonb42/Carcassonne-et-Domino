@@ -5,6 +5,7 @@ public class Partie implements Serializable {
     private Plateau plateau;
     private SacDomino sac;
     Joueur gagnant = null;
+    private boolean fin; // si true, fin de la partie
 
     Partie(Joueur[] listeJoueurs, Plateau plateau, SacDomino sac) {
         this.joueurs = listeJoueurs;
@@ -38,5 +39,12 @@ public class Partie implements Serializable {
 
     public void setGagnant(Joueur g) {
         this.gagnant = g;
+    }
+
+    public boolean getFin(){
+        return fin;
+    }
+    public void setFin(boolean fin) {
+        this.fin = fin;
     }
 }

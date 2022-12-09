@@ -109,7 +109,10 @@ public class Terminal {
 
     // piocher une piece
     private TuileDomino piocherPiece(Joueur joueur) {
-        joueur.setPiece(p.getSac().piocher());
+        int[][] t= {{1,1,1},{1,1,1},{1,1,1},{1,1,1}}; // pour les tests
+        TuileDomino d = new TuileDomino(t);
+        joueur.setPiece(d);
+        //joueur.setPiece(p.getSac().piocher());
         return joueur.getPiece();
     }
 
@@ -200,7 +203,7 @@ public class Terminal {
     private int demanderAction() {
         Scanner action = new Scanner(System.in);
         System.out.println(
-                "Quelle action voulez vous effectuer ?\n1 - Placer votre pièce\n2 - Tourner votre pièce\n3 - Passer votre tour");
+                "Quelle action voulez vous effectuer ?\n1 - Placer votre pièce\n2 - Tourner votre pièce\n3 - Passer votre tour\n4 - Abandonner\n5 - Fin de la partie");
         try {
             return action.nextInt();
         } catch (Exception e) {
@@ -212,6 +215,9 @@ public class Terminal {
 
     // choisir l'action a effectuer
     private void quelleAction(Joueur joueur) {
+        if(joueur.getAbandon()){                   //Si je joueur abandonne, ses tours son passés
+            return;
+        }
         int actionAEffectuer = demanderAction();
         if (actionAEffectuer == 1) {
             placement(joueur);
@@ -221,6 +227,11 @@ public class Terminal {
             quelleAction(joueur);
         } else if (actionAEffectuer == 3) {
             System.out.println("Vous passez votre tour\n");
+        }else if(actionAEffectuer == 4){                //Le joueur peut abandonner
+            System.out.println("Vous abandonnez");
+            joueur.setAbandon(true);
+        }else if(actionAEffectuer == 5){  //Le joueur peut mettre fin a la partie
+            p.setFin(true);
         } else {
             System.out.println("Mauvaise entrée. Veuillez saisir un nombre entre 1 et 3.");
             quelleAction(joueur);
@@ -290,13 +301,18 @@ public class Terminal {
         int i = 0;
         while (p.getSac().getPiecesRestantes() != 0) {
             int tourDe = i % p.getJoueurs().length;
-            System.out.println("--------------------------\n"
-                    + "C'est au tour de " + p.getJoueurs()[tourDe].getName() + " !");
+            if(p.getFin()){System.out.println("Fin de la partie"); return;} // si la partie est finie, arret de la fonction jouer
+            if(!p.getJoueurs()[tourDe].getAbandon()){       // si le joueur a abandonner, on passe son tour et on passe au prochain joueur
+                System.out.println("--------------------------\n"
+                + "C'est au tour de " + p.getJoueurs()[tourDe].getName() + " !");
             System.out.println("Vous avez : " + p.getJoueurs()[tourDe].getNbPoints() + " Points !");
             affichePiece(piocherPiece(p.getJoueurs()[tourDe]));
+            System.out.println(p.getSac().getPiecesRestantes());  // Pour voir le nombre de Pièces restantes lors des tests
             quelleAction(p.getJoueurs()[tourDe]);
             afficheGrille();
+            }
             i++;
+
         }
 
         System.out.println("Il n'y a plus de pièces dans le sac. Fin de la partie.");
