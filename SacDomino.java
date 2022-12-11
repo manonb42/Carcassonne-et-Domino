@@ -14,7 +14,7 @@ public class SacDomino extends Sac {
         return this.nbPiecesRestantes;
     }
 
-    @Override
+    
     public TuileDomino genererPiece() {
         int tab[][] = new int[4][3];
         TuileDomino p = new TuileDomino(tab);

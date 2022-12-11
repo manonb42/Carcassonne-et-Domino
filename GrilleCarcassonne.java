@@ -1,40 +1,15 @@
 import java.util.ArrayList;
 import java.util.List;
 
-// Principe de base : 
-// On veut faire un plateau sur lequel on peut placer des pièces à droite et à gauche autant qu'on veut, comme dans la réalité. 
 
-/// Problème : (*pb1)
-// Sauf que peu importe où on place notre 1ere pièce, si on place vers le bas ou vers la gauche un certain nombre de fois, 
-// on arrivera à une position negative dans notre tableau donc erreur 
-
-// Autre problème un peu moins intuitif : (*pb2)
-// Si on veut placer notre pièce au delà de la partie initialisée dans le constructeur, on ne pourra pas directement 
-// placer notre pièce, il faudra initialiser une rangée et/ou une colonne de plus avant de pouvoir placer notre piece, 
-// sinon erreur (outofbounds)
-
-// Comment gérer ça ? 
-// On prend deux vecteurs dx et dy, respectivement un vecteur pour les x et un vecteur pour les y 
-// Et on créer des getters et setters spécifiques à la classe (pas les getters et setter basiques)
-// À chaque fois qu'on veut placer notre pièce à un endroit qui aurait normalement fait une erreur, 
-// On gère le cas particulier dans les getters et setters. 
-// En gros, si on veut placer à une position pas encore initialisée (*pb2), 
-// on va tout simplement initialiser une nouvelle colonne ou ligne (selon les besoins) puis on va pouvoir initialiser notre pièce 
-// Si on veut placer en negatif (ex : on veut placer notre pièce à la gauche d'une pièce en 0,0)  (*pb1), 
-// On déplace tout notre tableau (ici, d'une position à droite, notre piece en 0,0 sera donc en 1,0 et le nouvelle pièce en 0,0)
-// On se sert donc des vecteurs pour garder le compte des décalages (pour les prochaines pieces à placer). 
-// Dans cet exemple, on aura donc dx = 1 et dy = 0
-// A chaque fois que l'utilisateur voudra placer une pièce en un x fixé, il faudra regarder x+dx
-// Voir le code !
-
-public class Grille {
-    // une grille c'est une liste de liste de pieces
-    private List<List<TuileDomino>> pieces = new ArrayList<List<TuileDomino>>();
+public class GrilleCarcassonne {
+        // une grille c'est une liste de liste de pieces
+    private List<List<TuileCarcassonne>> pieces = new ArrayList<List<TuileCarcassonne>>();
 
     private int dx = 0; // vecteur pour x
     private int dy = 0; // vecteur pour y
 
-    Grille() {
+    GrilleCarcassonne() {
         // on initialise la liste avec une quantité initiale de 128 * 128
         // 128 est un nombre arbitraire, il fallait juste deja initialiser une partie
         for (int i = 0; i < 128; i++) {
@@ -54,19 +29,19 @@ public class Grille {
     }
 
     // retourne la liste de liste de pieces
-    public List<List<TuileDomino>> getListPieces() {
+    public List<List<TuileCarcassonne>> getListPieces() {
         return this.pieces;
     }
 
     // Pour placer une Tuile p en (x,y)
-    public void setPiece(int x, int y, TuileDomino p) {
+    public void setPiece(int x, int y, TuileCarcassonne p) {
         if (y + dy >= pieces.size()) {
             // dans le cas ou y+dy > taille du tableau, on ajoute une colonne de Piece null
             // à la fin
             int ncols = pieces.get(0).size();
             int ny = y + dy - pieces.size() + 1;
             for (int i = 0; i < ny; i++) {
-                List<TuileDomino> list = new ArrayList<>(ncols);
+                List<TuileCarcassonne> list = new ArrayList<>(ncols);
                 for (int j = 0; j < ncols; j++) {
                     list.add(null);
                 }
@@ -90,7 +65,7 @@ public class Grille {
             // au debut
             for (int i = 0; i < -(y + dy); i++) {
                 int nbcols = pieces.get(0).size();
-                List<TuileDomino> newlist = new ArrayList<TuileDomino>(nbcols);
+                List<TuileCarcassonne> newlist = new ArrayList<TuileCarcassonne>(nbcols);
                 for (int j = 0; j < nbcols; j++) {
                     newlist.add(null);
                 }
@@ -128,7 +103,7 @@ public class Grille {
     }
 
     // getter d'une piece
-    public TuileDomino getPiece(int x, int y) {
+    public TuileCarcassonne getPiece(int x, int y) {
         // on veut la piece en (x,y) sauf qu'il faut faire attention au vecteur de
         // decalage
 
