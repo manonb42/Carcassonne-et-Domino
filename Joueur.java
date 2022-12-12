@@ -9,6 +9,10 @@ public class Joueur {
     Joueur(String nom) {
         this.nom = nom;
     }
+    Joueur(String nom, boolean ia) {
+        this.nom = nom;
+        this.ia = ia;
+    }
 
     public String getName() {
         return this.nom;
