@@ -1,103 +1,89 @@
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Terminal {
     Partie p;
 
     // affichage de la piece
-    private static void affichePiece(TuileDomino piece) {
-
+    private static void afficheTuile(TuileDomino tuile) {
+        char tab[][] = drawTuile(tuile);
         System.out.println("Votre pièce est :\n");
         System.out.print(" ");
         for (int z = 0; z < 3; z++) {
-            System.out.print(piece.getNumeros()[0][z] + " ");
+            System.out.print(tab[0][z] + " ");
         }
         System.out.print("\n");
         for (int i = 2, j = 0; i >= 0; i--, j++) {
-            System.out.println(piece.getNumeros()[3][i] + "     " + piece.getNumeros()[1][j]);
+            System.out.println(tab[3][i] + "     " + tab[1][j]);
         }
         System.out.print(" ");
         for (int z = 2; z >= 0; z--) {
-            System.out.print(piece.getNumeros()[2][z] + " ");
+            System.out.print(tab[2][z] + " ");
         }
         System.out.print("\n");
     }
 
-    public void afficheLigne1(TuileDomino p) {
-        if (p != null) {
-            System.out.print(" ");
-            for (int i = 0; i < 3; i++) {
-                System.out.print(p.getNumeros()[0][i] + " ");
+    private static char[][] drawTuile(TuileDomino tuile) {
+        char[][] tab = new char[4][3];
+        for (int i = 0; i < tab.length; i++) {
+            for (int j = 0; j < tab[i].length; j++) {
+                if (tuile != null) {
+                    tab[i][j] = (char) (tuile.getNumeros()[i][j] + '0');
+                } else {
+                    tab[i][j] = ' ';
+                }
             }
-        } else {
-            System.out.print("       ");
         }
+        return tab;
     }
 
-    public void afficheLigne2(TuileDomino p) {
-        if (p != null) {
-            System.out.print(p.getNumeros()[3][2] + "     " + p.getNumeros()[1][0]);
-        } else {
-            System.out.print("       ");
+    private void afficheLigneTuiles(List<TuileDomino> tuiles) {
+        char tab[][][] = new char[tuiles.size()][4][3];
+        for (int i = 0; i < tab.length; i++) {
+            tab[i] = drawTuile(tuiles.get(i));
         }
-    }
 
-    public void afficheLigne3(TuileDomino p) {
-        if (p != null) {
-            System.out.print(p.getNumeros()[3][1] + "     " + p.getNumeros()[1][1]);
-        } else {
-            System.out.print("       ");
-        }
-    }
 
-    public void afficheLigne4(TuileDomino p) {
-        if (p != null) {
-            System.out.print(p.getNumeros()[3][0] + "     " + p.getNumeros()[1][2]);
-        } else {
-            System.out.print("       ");
-        }
-    }
-
-    public void afficheLigne5(TuileDomino p) {
-        if (p != null) {
-            System.out.print(" ");
-            for (int i = 2; i >= 0; i--) {
-                System.out.print(p.getNumeros()[2][i] + " ");
-            }
-        } else {
-            System.out.print("       ");
-        }
-    }
-
-    // est beugé
-    public void afficheGrille() {
-        for (int i = p.getPlateau().getGrille().getListPieces().size() - 1; i >= 0; i--) {
-            if (!estVide((ArrayList) p.getPlateau().getGrille().getListPieces().get(i))) {
-                for (int j = 0; j < p.getPlateau().getGrille().getListPieces().get(i).size(); j++) {
-                    afficheLigne1(p.getPlateau().getGrille().getListPieces().get(i).get(j));
+        if (!estVide(tuiles)) {
+            System.out.println();
+            for (int i = 0; i < tab[0].length; i++) {
+                if (i == 0) {
+                    System.out.print(" ");
+                    for (int k = 0; k < tab.length; k++) {
+                        for (int l = 0; l < tab[k][i].length; l++) {
+                                System.out.print(tab[k][i][l]+" ");
+                        }
+                        System.out.print(" ");
+                    } 
+                } 
+                if (i == 1) {
+                    System.out.println();
+                    for (int m = 0, n = 2; m < 3; m++, n--) {
+                        for (int k = 0; k < tab.length; k++) {
+                                System.out.print(tab[k][3][n] + "     " + tab[k][1][m]); 
+                        }System.out.println();
+                    }
                 }
-                System.out.println("");
-                for (int j = 0; j < p.getPlateau().getGrille().getListPieces().get(i).size(); j++) {
-                    afficheLigne2(p.getPlateau().getGrille().getListPieces().get(i).get(j));
-                }
-                System.out.println("");
-                for (int j = 0; j < p.getPlateau().getGrille().getListPieces().get(i).size(); j++) {
-                    afficheLigne3(p.getPlateau().getGrille().getListPieces().get(i).get(j));
-                }
-                System.out.println("");
-                for (int j = 0; j < p.getPlateau().getGrille().getListPieces().get(i).size(); j++) {
-                    afficheLigne4(p.getPlateau().getGrille().getListPieces().get(i).get(j));
-                }
-                System.out.println("");
-                for (int j = 0; j < p.getPlateau().getGrille().getListPieces().get(i).size(); j++) {
-                    afficheLigne5(p.getPlateau().getGrille().getListPieces().get(i).get(j));
-                }
-                System.out.println("");
+                if (i == 2) {
+                    System.out.print(" ");
+                    for (int k = 0; k < tab.length; k++) {
+                        for (int l = tab[k][i].length - 1; l >= 0; l--) {
+                                System.out.print(tab[k][i][l]+ " ");  
+                        }
+                        System.out.print(" ");
+                    } 
+                } 
             }
         }
     }
 
-    public boolean estVide(ArrayList<TuileDomino> l) {
+    private void affichePlateau(List<List<TuileDomino>> plateau) {
+        for (int i = plateau.size() -1; i >= 0; i--) {
+            afficheLigneTuiles(plateau.get(i));
+        }
+    }
+
+    public boolean estVide(List<TuileDomino> l) {
         for (TuileDomino p : l) {
             if (p != null) {
                 return false;
@@ -213,8 +199,7 @@ public class Terminal {
 
     }
 
-    // choisir l'action a effectuer
-    private void quelleAction(Joueur joueur) {
+    public void quelleAction(Joueur joueur) {
         if (joueur.getAbandon()) { // Si je joueur abandonne, ses tours son passés
             return;
         }
@@ -223,7 +208,7 @@ public class Terminal {
             placement(joueur);
         } else if (actionAEffectuer == 2) {
             tournerPiece(joueur);
-            affichePiece((TuileDomino) joueur.getPiece());
+            afficheTuile((TuileDomino) joueur.getPiece());
             quelleAction(joueur);
         } else if (actionAEffectuer == 3) {
             System.out.println("Vous passez votre tour\n");
@@ -238,6 +223,7 @@ public class Terminal {
             quelleAction(joueur);
         }
     }
+
 
     private Joueur gagnant() {
         Joueur gagnant = null;
@@ -302,16 +288,20 @@ public class Terminal {
         int i = 0;
         while (p.getSac().getPiecesRestantes() != 0 && !p.getFin()) {
             int tourDe = i % p.getJoueurs().length;
-            if (!p.getJoueurs()[tourDe].getAbandon()) { // si le joueur a abandonner, on passe son tour et on passe au
+            if (!p.getJoueurs()[tourDe].getAbandon()) { // si le joueur a abandonné, on passe son tour et on passe au
                                                         // prochain joueur
-                System.out.println("--------------------------\n"
+                System.out.println("\n--------------------------\n"
                         + "C'est au tour de " + p.getJoueurs()[tourDe].getName() + " !");
+
                 System.out.println("Vous avez : " + p.getJoueurs()[tourDe].getNbPoints() + " Points !");
-                affichePiece(piocherPiece(p.getJoueurs()[tourDe]));
-                System.out.println(p.getSac().getPiecesRestantes()); // Pour voir le nombre de Pièces restantes lors des
-                                                                     // tests
+
+                afficheTuile(piocherPiece(p.getJoueurs()[tourDe]));
                 quelleAction(p.getJoueurs()[tourDe]);
-                afficheGrille();
+                
+
+                
+                // afficheGrille();
+                affichePlateau(p.getPlateau().getGrille().getListPieces());
             }
             i++;
         }
