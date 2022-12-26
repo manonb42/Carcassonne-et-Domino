@@ -3,11 +3,33 @@ import java.util.Scanner;
 
 public class Terminal {
     Partie p;
+    ControleurJoueurTerminal controleurj;
+    ControleurIATerminal controleuria;
+    ControleurTerminal controleur;
 
-    // affichage de la piece
-    private static void afficheTuile(TuileDomino tuile) {
+    public Partie getPartie(){
+        return this.p;
+    }
+
+    // Dessiner une Tuile 
+    private static char[][] drawTuile(TuileDomino tuile) {
+        char[][] tab = new char[4][3];
+        for (int i = 0; i < tab.length; i++) {
+            for (int j = 0; j < tab[i].length; j++) {
+                if (tuile != null) {
+                    tab[i][j] = (char) (tuile.getNumeros()[i][j] + '0');
+                } else {
+                    tab[i][j] = ' ';
+                }
+            }
+        }
+        return tab;
+    }
+
+    // Afficher une Tuile
+    void printTuile(TuileDomino tuile) {
         char tab[][] = drawTuile(tuile);
-        System.out.println("Votre pièce est :\n");
+        System.out.println("La pièce du joueur est :\n");
         System.out.print(" ");
         for (int z = 0; z < 3; z++) {
             System.out.print(tab[0][z] + " ");
@@ -23,67 +45,69 @@ public class Terminal {
         System.out.print("\n");
     }
 
-    private static char[][] drawTuile(TuileDomino tuile) {
-        char[][] tab = new char[4][3];
-        for (int i = 0; i < tab.length; i++) {
-            for (int j = 0; j < tab[i].length; j++) {
-                if (tuile != null) {
-                    tab[i][j] = (char) (tuile.getNumeros()[i][j] + '0');
-                } else {
-                    tab[i][j] = ' ';
-                }
-            }
-        }
-        return tab;
-    }
 
-    private void afficheLigneTuiles(List<TuileDomino> tuiles) {
+    // Afficher une ligne de Tuiles
+    private void printLignTuiles(List<TuileDomino> tuiles) {
         char tab[][][] = new char[tuiles.size()][4][3];
         for (int i = 0; i < tab.length; i++) {
             tab[i] = drawTuile(tuiles.get(i));
         }
-
-
-        if (!estVide(tuiles)) {
+        if (!isEmpty(tuiles)) {
             System.out.println();
             for (int i = 0; i < tab[0].length; i++) {
                 if (i == 0) {
-                    System.out.print(" ");
-                    for (int k = 0; k < tab.length; k++) {
-                        for (int l = 0; l < tab[k][i].length; l++) {
-                                System.out.print(tab[k][i][l]+" ");
-                        }
-                        System.out.print(" ");
-                    } 
+                    printFirstLign(tab);
                 } 
                 if (i == 1) {
-                    System.out.println();
-                    for (int m = 0, n = 2; m < 3; m++, n--) {
-                        for (int k = 0; k < tab.length; k++) {
-                                System.out.print(tab[k][3][n] + "     " + tab[k][1][m]); 
-                        }System.out.println();
-                    }
+                    printSides(tab);
                 }
                 if (i == 2) {
-                    System.out.print(" ");
-                    for (int k = 0; k < tab.length; k++) {
-                        for (int l = tab[k][i].length - 1; l >= 0; l--) {
-                                System.out.print(tab[k][i][l]+ " ");  
-                        }
-                        System.out.print(" ");
-                    } 
+                    printLastLign(tab);
                 } 
             }
         }
     }
 
-    private void affichePlateau(List<List<TuileDomino>> plateau) {
-        for (int i = plateau.size() -1; i >= 0; i--) {
-            afficheLigneTuiles(plateau.get(i));
+    // Afficher la première rangée d'une ligne de Tuiles 
+    private void printFirstLign(char tab[][][]){
+        System.out.print(" ");
+                    for (int k = 0; k < tab.length; k++) {
+                        for (int l = 0; l < tab[k][0].length; l++) {
+                                System.out.print(tab[k][0][l]+" ");
+                        }
+                        System.out.print(" ");
+                    } 
+    }
+
+    // Afficher les cotés d'une ligne de Tuiles
+    private void printSides(char tab[][][]){
+        System.out.println();
+        for (int m = 0, n = 2; m < 3; m++, n--) {
+            for (int k = 0; k < tab.length; k++) {
+                System.out.print(tab[k][3][n] + "     " + tab[k][1][m]); 
+            }System.out.println();
         }
     }
 
-    public boolean estVide(List<TuileDomino> l) {
+    // afficher la dernière rangée d'une ligne de Tuiles
+    private void printLastLign(char tab[][][]){
+        System.out.print(" ");
+        for (int k = 0; k < tab.length; k++) {
+            for (int l = tab[k][2].length - 1; l >= 0; l--) {
+                    System.out.print(tab[k][2][l]+ " ");  
+            }System.out.print(" ");
+        }
+    }
+
+    // Afficher le plateau de jeu
+    private void printPlateau(List<List<TuileDomino>> plateau) {
+        for (int i = plateau.size() -1; i >= 0; i--) {
+            printLignTuiles(plateau.get(i));
+        }
+    }
+
+    // Vérifier si une ligne est vide 
+    public boolean isEmpty(List<TuileDomino> l) {
         for (TuileDomino p : l) {
             if (p != null) {
                 return false;
@@ -93,17 +117,8 @@ public class Terminal {
 
     }
 
-    // piocher une piece
-    private TuileDomino piocherPiece(Joueur joueur) {
-        int[][] t = { { 1, 1, 1 }, { 1, 1, 1 }, { 1, 1, 1 }, { 1, 1, 1 } }; // pour les tests
-        TuileDomino d = new TuileDomino(t);
-        joueur.setPiece(d);
-        // joueur.setPiece(p.getSac().piocher());
-        return (TuileDomino) (joueur.getPiece());
-    }
-
-    // lire les coordonnees
-    private Coordonnees lectureCoordonnee() {
+    // Lecture des Coordonnées 
+    Coordonnees lectureCoordonnee() {
         Scanner coord = new Scanner(System.in);
         System.out.println("Où voulez vous placer votre pièce ? Sous la forme \"1,1\" ");
         String st = coord.nextLine();
@@ -117,7 +132,8 @@ public class Terminal {
 
     }
 
-    private int nbTours() {
+    // Lecture du nombre de tours souhaités 
+    int nbTours() {
         Scanner tour = new Scanner(System.in);
         System.out.println("Combien de quart de tour voulez vous effectuer ?");
         try {
@@ -129,7 +145,8 @@ public class Terminal {
 
     }
 
-    private String quelSens() {
+    // Lecture du sens de tour souhaité
+    String quelSens() {
         Scanner droitegauche = new Scanner(System.in);
         System.out.println("Voulez vous tourner votre pièce vers la droite ou vers la gauche ?");
         String sens = droitegauche.nextLine();
@@ -140,56 +157,39 @@ public class Terminal {
         return sens;
     }
 
-    // tourner une piece
-    private void tournerPiece(Joueur joueur) {
-        String sens = quelSens();
-        int nbTours = nbTours();
-        if (sens.equals("droite")) {
-            joueur.getPiece().tourner(nbTours);
-        } else if (sens.equals("gauche")) {
-            joueur.getPiece().tourner(-nbTours);
+    // Affichage 
+    public void passertour(){
+        System.out.println("Le joueur passe son tour\n");
+    }
+
+    public void abandon(){
+        System.out.println("Le joueur abandonne");
+    }
+
+    public void mauvaiseentree(){
+        System.out.println("Mauvaise entrée. Veuillez saisir un nombre entre 1 et 3.");
+    }
+
+    
+
+    // Placer une piece sur le plateau
+    public void placement(int i) {
+        if (i==1) {
+            System.out.println("La pièce a bien été placée");
+        }else if(i==2){
+            System.out.println("Vous ne pouvez pas placer la pièce à cet endroit");
+        } else if(i==3){
+            System.out.println("Succès ! La pièce a bien été placée");
+        } else if(i==4){
+            System.out.println("Vous ne pouvez pas placer la pièce à cet endroit");
+            
         }
     }
 
-    private boolean plateauvide() {
-        boolean plateauvide = true;
-        for (int i = 0; i < p.getPlateau().getGrille().getListPieces().size(); i++) {
-            for (int z = 0; z < p.getPlateau().getGrille().getListPieces().get(i).size(); z++) {
-                if (p.getPlateau().getGrille().getListPieces().get(i).get(z) != null) {
-                    plateauvide = false;
-                }
-            }
-        }
-        return plateauvide;
-    }
-
-    // placer une piece sur le plateau
-    private void placement(Joueur j) {
-        boolean plateauvide = plateauvide();
-        if (plateauvide) {
-            if (p.getPlateau().placer((TuileDomino) (j.getPiece()), new Coordonnees(0, 0))) {
-                System.out.println("Succès ! La pièce a bien été placée");
-            } else {
-                System.out.println("Vous ne pouvez pas placer la pièce à cet endroit");
-                quelleAction(j);
-            }
-        } else {
-            Coordonnees coord = lectureCoordonnee();
-            if (p.getPlateau().placer((TuileDomino) j.getPiece(), coord)) {
-                int m = p.getPlateau().newPoints((TuileDomino) j.getPiece(), coord);
-                j.setNbPoints(j.getNbPoints() + m);
-                System.out.println("Succès ! La pièce a bien été placée");
-            } else {
-                System.out.println("Vous ne pouvez pas placer la pièce à cet endroit");
-                quelleAction(j);
-            }
-        }
-    }
-
-    private int demanderAction() {
+    public int demanderAction() {
         Scanner action = new Scanner(System.in);
         System.out.println(
-                "Quelle action voulez vous effectuer ?\n1 - Placer votre pièce\n2 - Tourner votre pièce\n3 - Passer votre tour\n4 - Abandonner\n5 - Fin de la partie");
+                "\nQuelle action voulez vous effectuer ?\n1 - Placer votre pièce\n2 - Tourner votre pièce\n3 - Passer votre tour\n4 - Abandonner\n");
         try {
             return action.nextInt();
         } catch (Exception e) {
@@ -197,31 +197,6 @@ public class Terminal {
             return demanderAction();
         }
 
-    }
-
-    public void quelleAction(Joueur joueur) {
-        if (joueur.getAbandon()) { // Si je joueur abandonne, ses tours son passés
-            return;
-        }
-        int actionAEffectuer = demanderAction();
-        if (actionAEffectuer == 1) {
-            placement(joueur);
-        } else if (actionAEffectuer == 2) {
-            tournerPiece(joueur);
-            afficheTuile((TuileDomino) joueur.getPiece());
-            quelleAction(joueur);
-        } else if (actionAEffectuer == 3) {
-            System.out.println("Vous passez votre tour\n");
-        } else if (actionAEffectuer == 4) { // Le joueur peut abandonner
-            System.out.println("Vous abandonnez");
-            joueur.setAbandon(true);
-            p.fullAbandon();
-        } else if (actionAEffectuer == 5) { // Le joueur peut mettre fin a la partie
-            p.setFin(true);
-        } else {
-            System.out.println("Mauvaise entrée. Veuillez saisir un nombre entre 1 et 3.");
-            quelleAction(joueur);
-        }
     }
 
 
@@ -260,11 +235,40 @@ public class Terminal {
         Scanner nom = new Scanner(System.in);
         System.out.println("Entrer le nom du joueur n" + (pos + 1) + " :");
         try {
-            return new Joueur(nom.nextLine());
+            return new Joueur(nom.nextLine(), false);
         } catch (Exception e) {
             System.out.println("Mauvaise entrée.");
             return nomJoueur(pos);
         }
+    }
+
+    private boolean isIA(){
+        Scanner ia = new Scanner(System.in);
+        System.out.println("Est-ce une intelligence artificielle ? (oui/non)");
+        String vrai_faux = ia.nextLine();
+        if(vrai_faux.toLowerCase().equals("oui")){
+            
+            return true;
+        } if(vrai_faux.toLowerCase().equals("non")){
+            return false;
+        } else{
+            System.out.println("Mauvaise entrée.");
+            return isIA();
+        }
+    }
+
+    public Joueur creationjoueur( int i){
+        System.out.println("joueur n" + (i + 1) + " :");
+        boolean is_it_IA = isIA();
+        if(is_it_IA){
+            return nomIA(i);
+        }else{
+            return nomJoueur(i);
+        }
+    }
+
+    public Joueur nomIA(int i){
+        return new Joueur("Ordinateur n"+(char)(i+1+'0'), true);
     }
 
     // creation de la partie
@@ -272,10 +276,9 @@ public class Terminal {
 
         // liste des joueurs
         Joueur joueurs[] = new Joueur[nbJoueurspositif()];
-
         // création des joueurs
         for (int i = 0; i < joueurs.length; i++) {
-            joueurs[i] = nomJoueur(i);
+            joueurs[i] = creationjoueur(i);
         }
         Grille g = new Grille();
         Plateau plateau = new Plateau(g);
@@ -284,29 +287,37 @@ public class Terminal {
     }
 
     // déroulement de la partie
-    public void jouer() {
+    public void jouer(){
         int i = 0;
         while (p.getSac().getPiecesRestantes() != 0 && !p.getFin()) {
             int tourDe = i % p.getJoueurs().length;
-            if (!p.getJoueurs()[tourDe].getAbandon()) { // si le joueur a abandonné, on passe son tour et on passe au
-                                                        // prochain joueur
+            if (!p.getJoueurs()[tourDe].getAbandon()) { 
+                /* A VOIR
+                if(p.getJoueurs()[tourDe].getisIA()){
+                    try {
+                    Thread.sleep(3000);
+                    } catch (InterruptedException e) {
+                    }
+                }*/
+                
                 System.out.println("\n--------------------------\n"
                         + "C'est au tour de " + p.getJoueurs()[tourDe].getName() + " !");
 
-                System.out.println("Vous avez : " + p.getJoueurs()[tourDe].getNbPoints() + " Points !");
+                System.out.println("Score du joueur : " + p.getJoueurs()[tourDe].getNbPoints() + " points");
 
-                afficheTuile(piocherPiece(p.getJoueurs()[tourDe]));
-                quelleAction(p.getJoueurs()[tourDe]);
-                
-
-                
-                // afficheGrille();
-                affichePlateau(p.getPlateau().getGrille().getListPieces());
+                if(p.getJoueurs()[tourDe].getisIA()){
+                    printTuile(controleuria.piocherPiece(p.getJoueurs()[tourDe]));
+                    controleuria.quelleAction(p.getJoueurs()[tourDe]);
+                } else{
+                    printTuile(controleurj.piocherPiece(p.getJoueurs()[tourDe]));
+                    controleurj.quelleAction(p.getJoueurs()[tourDe]);
+                }
+                printPlateau(p.getPlateau().getGrille().getListPieces());
             }
             i++;
         }
 
-        System.out.println("Fin de la partie.");
+        System.out.println("\nFin de la partie.");
         if (gagnant() != null) {
             System.out.println("Le gagnant est " + gagnant());
         } else {
@@ -318,6 +329,12 @@ public class Terminal {
     public static void main(String[] args) {
         Terminal t = new Terminal();
         t.p = t.configurer();
+
+        ControleurJoueurTerminal controleur_Terminal = new ControleurJoueurTerminal(t);
+        t.controleurj = controleur_Terminal;
+        ControleurIATerminal controleur_IA = new ControleurIATerminal(t);
+        t.controleuria = controleur_IA;
+
         t.jouer();
     }
 }

@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch Terminalt",
+            "request": "launch",
+            "mainClass": "Terminalt",
+            "projectName": "projet_java_2022_18437b94"
+        },
+        {
+            "type": "java",
             "name": "Launch Terminal",
             "request": "launch",
             "mainClass": "Terminal",

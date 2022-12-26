@@ -5,12 +5,17 @@ public class Joueur {
     private boolean ia = false;
     private boolean abandon; // si true, fin de la partie pour le joueur
 
-    Joueur(String nom) {
+    Joueur(String nom, boolean ia) {
         this.nom = nom;
+        this.ia=ia;
     }
 
     public String getName() {
         return this.nom;
+    }
+
+    public void setName(String name){
+        this.nom=name;
     }
 
     public Tuile getPiece() {
