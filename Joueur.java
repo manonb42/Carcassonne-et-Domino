@@ -4,10 +4,15 @@ public class Joueur {
     private Tuile pieceactuelle;
     private boolean ia = false;
     private boolean abandon; // si true, fin de la partie pour le joueur
+    private int pions = 8;
 
     Joueur(String nom, boolean ia) {
         this.nom = nom;
         this.ia=ia;
+    }
+    Joueur(String nom, boolean ia) {
+        this.nom = nom;
+        this.ia = ia;
     }
 
     public String getName() {
@@ -48,5 +53,9 @@ public class Joueur {
 
     public void setAbandon(boolean abandon) {
         this.abandon = abandon;
+    }
+    
+    public void setPions(int pions) {
+        this.pions = pions;
     }
 }

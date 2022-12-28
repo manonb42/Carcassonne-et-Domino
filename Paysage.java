@@ -4,6 +4,11 @@ public abstract class Paysage {
 
 
 
+    public String getName() {
+        return name;
+    }
+
+
     public void setPion(boolean pion) {
         this.pion = pion;
     }

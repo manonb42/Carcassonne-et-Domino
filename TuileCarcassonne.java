@@ -1,5 +1,5 @@
 public class TuileCarcassonne extends Tuile {
-    private Paysage[] paysages = new Paysage[4];
+    public Paysage[] paysages = new Paysage[4];
 
     TuileCarcassonne(Paysage[] p) {
         paysages = p;
@@ -28,7 +28,16 @@ public class TuileCarcassonne extends Tuile {
 
     @Override
     boolean sidesMatch(Tuile p, int side) {
-        return (this.paysages[side] == ((TuileCarcassonne) p).paysages[(side + 2) % 4]);
+        return (this.paysages[side].getName().equals(((TuileCarcassonne) p).paysages[(side + 2) % 4].getName()));
+    }
+
+    @Override
+    public String toString() {
+        String m = "";
+        for(Paysage e : paysages){
+            m+= e.getName() + " " ;
+        }
+        return m;
     }
 
 }
