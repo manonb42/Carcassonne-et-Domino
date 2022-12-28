@@ -1,5 +1,5 @@
 public class SacCarcassonne extends Sac {
-    private int nbPiecesRestantes = 72;
+    public int nbPiecesRestantes=72;
     TuileCarcassonne[] pieces = new TuileCarcassonne[72];
 
     SacCarcassonne(){
@@ -112,9 +112,11 @@ public class SacCarcassonne extends Sac {
         return true;
     }
 
-    public int getNbPiecesRestantes() {
-        return nbPiecesRestantes;
+    @Override
+    public int getPiecesRestantes() {
+        return this.nbPiecesRestantes;
     }
+
 
 
     @Override

@@ -3,11 +3,11 @@ import java.io.Serializable;
 public class Partie implements Serializable {
     private Joueur[] joueurs;
     private Plateau plateau;
-    private SacDomino sac;
+    private Sac sac;
     Joueur gagnant = null;
     private boolean fin; // si true, fin de la partie
 
-    Partie(Joueur[] listeJoueurs, Plateau plateau, SacDomino sac) {
+    Partie(Joueur[] listeJoueurs, Plateau plateau, Sac sac) {
         this.joueurs = listeJoueurs;
         this.plateau = plateau;
         this.sac = sac;
@@ -29,7 +29,7 @@ public class Partie implements Serializable {
         this.plateau = plateau;
     }
 
-    public SacDomino getSac() {
+    public Sac getSac() {
         return this.sac;
     }
 

@@ -47,10 +47,10 @@ public class Terminal {
 
 
     // Afficher une ligne de Tuiles
-    private void printLignTuiles(List<TuileDomino> tuiles) {
+    private void printLignTuiles(List<Tuile> tuiles) {
         char tab[][][] = new char[tuiles.size()][4][3];
         for (int i = 0; i < tab.length; i++) {
-            tab[i] = drawTuile(tuiles.get(i));
+            tab[i] = drawTuile((TuileDomino)(tuiles.get(i)));
         }
         if (!isEmpty(tuiles)) {
             System.out.println();
@@ -100,15 +100,15 @@ public class Terminal {
     }
 
     // Afficher le plateau de jeu
-    private void printPlateau(List<List<TuileDomino>> plateau) {
+    private void printPlateau(List<List<Tuile>> plateau) {
         for (int i = plateau.size() -1; i >= 0; i--) {
             printLignTuiles(plateau.get(i));
         }
     }
 
     // Vérifier si une ligne est vide 
-    public boolean isEmpty(List<TuileDomino> l) {
-        for (TuileDomino p : l) {
+    public boolean isEmpty(List<Tuile> l) {
+        for (Tuile p : l) {
             if (p != null) {
                 return false;
             }
@@ -282,7 +282,7 @@ public class Terminal {
         }
         Grille g = new Grille();
         Plateau plateau = new Plateau(g);
-        SacDomino sac = new SacDomino(20);
+        SacDomino sac = new SacDomino(5);
         return new Partie(joueurs, plateau, sac);
     }
 
