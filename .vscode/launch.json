@@ -6,6 +6,103 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch Jeu",
+            "request": "launch",
+            "mainClass": "Jeu",
+            "projectName": "projet_java_2022_18437b94"
+        },
+        {
+            "type": "java",
+            "name": "Launch JeuGraphique",
+            "request": "launch",
+            "mainClass": "JeuGraphique",
+            "projectName": "projet_java_2022_18437b94"
+        },
+        {
+            "type": "java",
+            "name": "Launch Jeu",
+            "request": "launch",
+            "mainClass": "Jeu",
+            "projectName": "projetFac_e3386baf"
+        },
+        {
+            "type": "java",
+            "name": "Launch JeuGraphique",
+            "request": "launch",
+            "mainClass": "JeuGraphique",
+            "projectName": "projetFac_e3386baf"
+        },
+        {
+            "type": "java",
+            "name": "Launch Configuration",
+            "request": "launch",
+            "mainClass": "Configuration",
+            "projectName": "projetFac_e3386baf"
+        },
+        {
+            "type": "java",
+            "name": "Launch MenuPrincipal",
+            "request": "launch",
+            "mainClass": "MenuPrincipal",
+            "projectName": "projetFac_e3386baf"
+        },
+        {
+            "type": "java",
+            "name": "Launch PlateauCarcassonne",
+            "request": "launch",
+            "mainClass": "PlateauCarcassonne",
+            "projectName": "projetFac_e3386baf"
+        },
+        {
+            "type": "java",
+            "name": "Launch SacCarcassonne",
+            "request": "launch",
+            "mainClass": "SacCarcassonne",
+            "projectName": "projetFac_e3386baf"
+        },
+        {
+            "type": "java",
+            "name": "Launch Plateau",
+            "request": "launch",
+            "mainClass": "Plateau",
+            "projectName": "projetFac_e3386baf"
+        },
+        {
+            "type": "java",
+            "name": "Launch Terminal",
+            "request": "launch",
+            "mainClass": "Terminal",
+            "projectName": "projetFac_e3386baf"
+        },
+        {
+            "type": "java",
+            "name": "Launch Grille",
+            "request": "launch",
+            "mainClass": "Grille",
+            "projectName": "projet_java_2022_18437b94"
+        },
+        {
+            "type": "java",
+            "name": "Launch Plateau",
+            "request": "launch",
+            "mainClass": "Plateau",
+            "projectName": "projet_java_2022_18437b94"
+        },
+        {
+            "type": "java",
+            "name": "Launch Piece",
+            "request": "launch",
+            "mainClass": "Piece",
+            "projectName": "projet_java_2022_18437b94"
+        },
+        {
+            "type": "java",
+            "name": "Launch Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
             "name": "Launch Terminal",
             "request": "launch",
             "mainClass": "Terminal",
