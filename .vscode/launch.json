@@ -9,6 +9,20 @@
             "name": "Launch Jeu",
             "request": "launch",
             "mainClass": "Jeu",
+            "projectName": "projet_java_2022_18437b94"
+        },
+        {
+            "type": "java",
+            "name": "Launch JeuGraphique",
+            "request": "launch",
+            "mainClass": "JeuGraphique",
+            "projectName": "projet_java_2022_18437b94"
+        },
+        {
+            "type": "java",
+            "name": "Launch Jeu",
+            "request": "launch",
+            "mainClass": "Jeu",
             "projectName": "projetFac_e3386baf"
         },
         {
