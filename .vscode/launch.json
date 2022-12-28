@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch Jeu",
+            "request": "launch",
+            "mainClass": "Jeu",
+            "projectName": "projetFac_e3386baf"
+        },
+        {
+            "type": "java",
             "name": "Launch JeuGraphique",
             "request": "launch",
             "mainClass": "JeuGraphique",

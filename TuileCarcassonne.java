@@ -1,5 +1,5 @@
 public class TuileCarcassonne extends Tuile {
-    private Paysage[] paysages = new Paysage[4];
+    public Paysage[] paysages = new Paysage[4];
 
     TuileCarcassonne(Paysage[] p) {
         paysages = p;

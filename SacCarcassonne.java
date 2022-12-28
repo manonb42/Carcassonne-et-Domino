@@ -1,6 +1,6 @@
 public class SacCarcassonne extends Sac {
     private int nbPiecesRestantes = 72;
-    private TuileCarcassonne[] pieces = new TuileCarcassonne[72];
+    TuileCarcassonne[] pieces = new TuileCarcassonne[72];
 
     SacCarcassonne(){
         for(int i = 0; i<9; i++){
@@ -112,9 +112,14 @@ public class SacCarcassonne extends Sac {
         return true;
     }
 
+    public int getNbPiecesRestantes() {
+        return nbPiecesRestantes;
+    }
+
 
     @Override
     public TuileCarcassonne piocher() {
+        nbPiecesRestantes--;
         int n =(int) (Math.random()*72);
         while(pieces[n] == null){
             n = (int) (Math.random()*72);
