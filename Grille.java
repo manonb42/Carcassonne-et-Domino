@@ -98,7 +98,7 @@ public class Grille {
             }
             // puis on tient le compte de notre vecteur, le tableau a été décalé de -y vers
             // le haut
-            dy += 1;
+            dy = -y;
         }
         if (x + dx < 0) {
             // si x + dx< 0
@@ -120,7 +120,7 @@ public class Grille {
                 }
             }
             // pareil, on tient le compte de notre vecteur dx
-            dx += 1;
+            dx = -x;
         }
         // une fois qu'on a fait tous les changements de decaler le tableau / ajouter
         // les lignes, on peut enfin ajouter notre piece :
