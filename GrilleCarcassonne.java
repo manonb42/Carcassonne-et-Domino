@@ -117,4 +117,6 @@ public class GrilleCarcassonne {
         // sinon :
         return null;
     }
+
+    
 }
