@@ -10,10 +10,6 @@ public class Joueur {
         this.nom = nom;
         this.ia=ia;
     }
-    Joueur(String nom, boolean ia) {
-        this.nom = nom;
-        this.ia = ia;
-    }
 
     public String getName() {
         return this.nom;

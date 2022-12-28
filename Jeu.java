@@ -31,7 +31,7 @@ public class Jeu extends JFrame {
         setLayout(new BorderLayout());
         setLocationRelativeTo(null);
 
-        Joueur[] jou = {new Joueur("Lukas"), new Joueur("Manon"),new Joueur("Ilias")}; //initialisation de la partie
+        Joueur[] jou = {new Joueur("Lukas", false), new Joueur("Manon", false),new Joueur("Ilias", false)}; //initialisation de la partie
         GrilleCarcassonne g = new GrilleCarcassonne();
         PlateauCarcassonne pl = new PlateauCarcassonne(g);
         SacCarcassonne s = new SacCarcassonne();
