@@ -313,6 +313,7 @@ public class Terminal {
                     controleurj.quelleAction(p.getJoueurs()[tourDe]);
                 }
                 printPlateau(p.getPlateau().getGrille().getListPieces());
+                System.out.println(p.getSac().nbPiecesRestantes);
             }
             i++;
         }

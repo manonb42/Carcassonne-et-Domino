@@ -30,6 +30,7 @@ public class MenuPrincipal extends JFrame {
             new Configuration();
         }));
         carcassonne.addActionListener((e -> {
+            hide();
             new Jeu();
         }));
 

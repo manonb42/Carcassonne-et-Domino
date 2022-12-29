@@ -8,9 +8,9 @@ import java.awt.geom.AffineTransform;
 
 
 public class Jeu extends JFrame {
-    Partie p; //partie en cours  
+    PartieCarcassonne p; //partie en cours  
     PieceCGraph c;      //pièce de la main actuelle
-    JLabel texte ;
+    JPanel texte = new JPanel() ;
     JPanel plateau = new JPanel();
     JPanel mainAct = new JPanel(); //main actuelle
     JPanel play = new JPanel();     //actions (a droite)
@@ -22,6 +22,11 @@ public class Jeu extends JFrame {
     JButton finPartie = new JButton("Arreter la partie");
     Joueur jActuel; //joueur actuel
     int iActuel = 0; // pour le compter le joueur actuel
+    JLabel tourAct;
+    JLabel nbPiece;
+    JLabel action;
+    GridBagConstraints gbc = new GridBagConstraints();
+    JScrollPane plat;
 
 
     Jeu(){
@@ -33,25 +38,30 @@ public class Jeu extends JFrame {
 
         Joueur[] jou = {new Joueur("Lukas", false), new Joueur("Manon", false),new Joueur("Ilias", false)}; //initialisation de la partie
         Grille g = new Grille();
-        Plateau pl = new Plateau(g);
+        PlateauCarcassonne pl = new PlateauCarcassonne(g);
         SacCarcassonne s = new SacCarcassonne();
 
-        p = new Partie(jou, pl, s);
+        p = new PartieCarcassonne(jou, pl, s);
 
         jActuel = p.getJoueurs()[0];    //joueur actuel 
+        gbc.ipadx = 100;
+        gbc.ipady = 100;
 
 
 
        
-        plateau.setBackground(Color.GRAY);
-        plateau.setPreferredSize(new Dimension(500,850));
+        plateau.setPreferredSize(new Dimension(3000,3000));
+        plateau.setLayout(new GridBagLayout());
+
+
+        
+
+
         
         
         mainAct.setPreferredSize(new Dimension(500,100));
         mainAct.setLayout(new GridLayout(1,5));
         
-       /* Paysage[] pay = {new Pre(),new Pre(),new Route(),new Route()};
-        TuileCarcassonne tu = new TuileCarcassonne(pay);*/
 
         
         c = new PieceCGraph((TuileCarcassonne)(p.getSac().piocher())); //premiere pièce
@@ -59,12 +69,22 @@ public class Jeu extends JFrame {
         
 
         
-        play.setLayout(new GridLayout(7,1));
+        play.setLayout(new GridLayout(6,1));
         play.setPreferredSize(new Dimension(300,800));
         play.setBackground(Color.LIGHT_GRAY);
 
+        texte.setLayout(new GridLayout(3,1));
+
+        tourAct = new JLabel("C'est le tour de : "+jActuel.getName());
+        nbPiece = new JLabel("Il reste : "+p.getSac().getPiecesRestantes()+" pièces");
+        action = new JLabel("choisissez une action");
+
+
+        texte.add(tourAct);
+        texte.add(nbPiece);
+        texte.add(action);
         
-        texte =  new JLabel("Il reste : " + p.getSac().getPiecesRestantes() + " pièces \nC'est le tour de "+jActuel.getName());
+        
 
         play.add(texte);
         play.add(choix);
@@ -72,15 +92,48 @@ public class Jeu extends JFrame {
         play.add(tourner);
         play.add(passer);
         play.add(abandonner);
-        play.add(finPartie);
+        
+        plat = new JScrollPane(plateau,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         
         
-        
-        mainAct.setBackground(Color.BLACK);
-        add(plateau,BorderLayout.CENTER);
+        add(plat,BorderLayout.CENTER);
         add(mainAct,BorderLayout.SOUTH);
         add(play,BorderLayout.EAST);
         setVisible(true);
+        Paysage[] pay = {new Route(),new Route(),new Route(),new Route()};
+        TuileCarcassonne tu = new TuileCarcassonne(pay);
+
+        PieceCGraph debut = new PieceCGraph(tu);
+        gbc.gridx = 72;
+        gbc.gridy = 72;
+        plateau.add(debut,gbc);
+
+
+        
+
+        placer.addActionListener((ActionEvent e)->{
+            String st = choix.getText();
+            Coordonnees coord;
+
+            try {
+                String chaine[] = st.split(",");
+                coord = new Coordonnees(Integer.parseInt(chaine[0]), Integer.parseInt(chaine[1]));
+                if(p.plateau.validPlacement(c.t, coord)){
+                    p.plateau.placer(c.t, coord);
+                    action.setText("La pièce a bien été placée");
+                    gbc.gridx = 72 + coord.getX();
+                    gbc.gridy = 72 - coord.getY();
+                    plateau.add(c,gbc);
+                    prochainJoueur();
+                }else{
+                    action.setText("La pièce n'a pas pu être placée");
+                }
+            } catch (Exception err) {
+                action.setText("Mauvaise entrée. Veuillez saisir les coordonnees sous la forme 0,0");
+            }
+
+        });
+
 
         tourner.addActionListener((ActionEvent e)->{
             BufferedImage i = rotateImageByDegrees(c.image, 90);
@@ -97,12 +150,6 @@ public class Jeu extends JFrame {
 
         passer.addActionListener((ActionEvent e)->{
             prochainJoueur();
-            if(p.getSac().getPiecesRestantes()!= 0){
-                piocher();
-                System.out.println(c.t);
-            }else{
-                finDePartie();
-            }
         });
         abandonner.addActionListener((ActionEvent e)->{
             jActuel.setAbandon(true);
@@ -132,13 +179,115 @@ public class Jeu extends JFrame {
                     System.out.println(err);
                 }
 
-            }else{
+            }else if(t.paysages[0] instanceof Village && t.paysages[1] instanceof Route  && t.paysages[2] instanceof Route && t.paysages[3] instanceof Pre ){
                 try{
                     image = ImageIO.read(new File("resources/carte2.png"));
                 }catch(Exception err){
                     System.out.println(err);
                 }
 
+            }else if(t.paysages[0] instanceof Village && t.paysages[1] instanceof Village  && t.paysages[2] instanceof Route && t.paysages[3] instanceof Village ){
+                try{
+                    image = ImageIO.read(new File("resources/carte3.png"));
+                }catch(Exception err){
+                    System.out.println(err);
+                }
+            }else if(t.paysages[0] instanceof Village && t.paysages[1] instanceof Route  && t.paysages[2] instanceof Route && t.paysages[3] instanceof Village){
+                try{
+                    image = ImageIO.read(new File("resources/carte4.png"));
+                }catch(Exception err){
+                    System.out.println(err);
+                }
+            }else if(t.paysages[0] instanceof Village && t.paysages[1] instanceof Route  && t.paysages[2] instanceof Route && t.paysages[3] instanceof Route){
+                try{
+                    image = ImageIO.read(new File("resources/carte5.png"));
+                }catch(Exception err){
+                    System.out.println(err);
+                }
+            }else if(t.paysages[0] instanceof Route && t.paysages[1] instanceof Pre  && t.paysages[2] instanceof Route && t.paysages[3] instanceof Pre){
+                try{
+                    image = ImageIO.read(new File("resources/carte6.png"));
+                }catch(Exception err){
+                    System.out.println(err);
+                }
+            }else if(t.paysages[0] instanceof Pre && t.paysages[1] instanceof Route  && t.paysages[2] instanceof Route && t.paysages[3] instanceof Route){
+                try{
+                    image = ImageIO.read(new File("resources/carte7.png"));
+                }catch(Exception err){
+                    System.out.println(err);
+                }
+            }else if(t.paysages[0] instanceof Village && t.paysages[1] instanceof Pre  && t.paysages[2] instanceof Pre && t.paysages[3] instanceof Pre){
+                try{
+                    image = ImageIO.read(new File("resources/carte8.png"));
+                }catch(Exception err){
+                    System.out.println(err);
+                }
+            }else if(t.paysages[0] instanceof Village && t.paysages[1] instanceof Village  && t.paysages[2] instanceof Pre && t.paysages[3] instanceof Pre){
+                try{
+                    image = ImageIO.read(new File("resources/carte9.png"));
+                }catch(Exception err){
+                    System.out.println(err);
+                }
+            }else if(t.paysages[0] instanceof Village && t.paysages[1] instanceof Village  && t.paysages[2] instanceof Pre && t.paysages[3] instanceof Village){
+                try{
+                    image = ImageIO.read(new File("resources/carte10.png"));
+                }catch(Exception err){
+                    System.out.println(err);
+                }
+            }else if(t.paysages[0] instanceof Pre && t.paysages[1] instanceof Pre  && t.paysages[2] instanceof Pre && t.paysages[3] instanceof Pre){
+                try{
+                    image = ImageIO.read(new File("resources/carte11.png"));
+                }catch(Exception err){
+                    System.out.println(err);
+                }
+            }else if(t.paysages[0] instanceof Pre && t.paysages[1] instanceof Pre  && t.paysages[2] instanceof Route && t.paysages[3] instanceof Pre){
+                try{
+                    image = ImageIO.read(new File("resources/carte12.png"));
+                }catch(Exception err){
+                    System.out.println(err);
+                }
+            }else if(t.paysages[0] instanceof Village && t.paysages[1] instanceof Pre  && t.paysages[2] instanceof Pre && t.paysages[3] instanceof Village){
+                try{
+                    image = ImageIO.read(new File("resources/carte13.png"));
+                }catch(Exception err){
+                    System.out.println(err);
+                }
+            }else if(t.paysages[0] instanceof Village && t.paysages[1] instanceof Route  && t.paysages[2] instanceof Pre && t.paysages[3] instanceof Route){
+                try{
+                    image = ImageIO.read(new File("resources/carte14.png"));
+                }catch(Exception err){
+                    System.out.println(err);
+                }
+            }else if(t.paysages[0] instanceof Village && t.paysages[1] instanceof Pre  && t.paysages[2] instanceof Route && t.paysages[3] instanceof Route){
+                try{
+                    image = ImageIO.read(new File("resources/carte15.png"));
+                }catch(Exception err){
+                    System.out.println(err);
+                }
+            }else if(t.paysages[0] instanceof Pre && t.paysages[1] instanceof Village  && t.paysages[2] instanceof Pre && t.paysages[3] instanceof Village){
+                try{
+                    image = ImageIO.read(new File("resources/carte16.png"));
+                }catch(Exception err){
+                    System.out.println(err);
+                }
+            }else if(t.paysages[0] instanceof Village && t.paysages[1] instanceof Village  && t.paysages[2] instanceof Village && t.paysages[3] instanceof Village){
+                try{
+                    image = ImageIO.read(new File("resources/carte17.png"));
+                }catch(Exception err){
+                    System.out.println(err);
+                }
+            }else if(t.paysages[0] instanceof Route && t.paysages[1] instanceof Route  && t.paysages[2] instanceof Route && t.paysages[3] instanceof Route){
+                try{
+                    image = ImageIO.read(new File("resources/carte18.png"));
+                }catch(Exception err){
+                    System.out.println(err);
+                }
+            }else{
+                try{
+                    image = ImageIO.read(new File("resources/carte19.png"));
+                }catch(Exception err){
+                    System.out.println(err);
+                }
             }
         }
 
@@ -172,7 +321,6 @@ public class Jeu extends JFrame {
         at.rotate(rads, x, y);
         g2d.setTransform(at);
         g2d.drawImage(img, 0, 0, this);
-        g2d.setColor(Color.RED);
         g2d.drawRect(0, 0, newWidth - 1, newHeight - 1);
         g2d.dispose();
     
@@ -185,7 +333,8 @@ public class Jeu extends JFrame {
         PieceCGraph tmp2 = new PieceCGraph(tmp1);
         c = tmp2;
         mainAct.add(c);
-        texte.setText("Il reste : " + p.getSac().getPiecesRestantes() + " pièces \nC'est le tour de "+jActuel.getName());
+        nbPiece.setText("Il reste : " + p.getSac().getPiecesRestantes() + " pièces");
+        tourAct.setText("C'est le tour de "+jActuel.getName());
     }
 
     void finDePartie(){ //quand la partie est finie, affiche une nouvelle fenetre
@@ -214,7 +363,14 @@ public class Jeu extends JFrame {
             break;
         }
         }while(jActuel.getAbandon());
-        texte.setText("Il reste : " + p.getSac().getPiecesRestantes() + " pièces \nC'est le tour de "+jActuel.getName());
+        nbPiece.setText("Il reste : " + p.getSac().getPiecesRestantes() + " pièces");
+        tourAct.setText("C'est le tour de "+jActuel.getName());
+        if(p.getSac().getPiecesRestantes()!= 0){
+            piocher();
+            System.out.println(c.t);
+        }else{
+            finDePartie();
+        }
     }
 
 

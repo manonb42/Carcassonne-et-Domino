@@ -1,6 +1,6 @@
 public class SacCarcassonne extends Sac {
-    public int nbPiecesRestantes=72;
-    TuileCarcassonne[] pieces = new TuileCarcassonne[72];
+    protected int nbPiecesRestantes=72;
+    protected TuileCarcassonne[] pieces = new TuileCarcassonne[72];
 
     SacCarcassonne(){
         for(int i = 0; i<9; i++){

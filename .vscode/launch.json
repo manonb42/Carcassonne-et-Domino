@@ -6,6 +6,41 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch PlateauGraphique",
+            "request": "launch",
+            "mainClass": "PlateauGraphique",
+            "projectName": "finCarcassonne_21ce39aa"
+        },
+        {
+            "type": "java",
+            "name": "Launch PlateauCarcassonne",
+            "request": "launch",
+            "mainClass": "PlateauCarcassonne",
+            "projectName": "finCarcassonne_21ce39aa"
+        },
+        {
+            "type": "java",
+            "name": "Launch Terminal",
+            "request": "launch",
+            "mainClass": "Terminal",
+            "projectName": "finCarcassonne_21ce39aa"
+        },
+        {
+            "type": "java",
+            "name": "Launch Jeu",
+            "request": "launch",
+            "mainClass": "Jeu",
+            "projectName": "finCarcassonne_21ce39aa"
+        },
+        {
+            "type": "java",
+            "name": "Launch JeuGraphique",
+            "request": "launch",
+            "mainClass": "JeuGraphique",
+            "projectName": "finCarcassonne_21ce39aa"
+        },
+        {
+            "type": "java",
             "name": "Launch Jeu",
             "request": "launch",
             "mainClass": "Jeu",
