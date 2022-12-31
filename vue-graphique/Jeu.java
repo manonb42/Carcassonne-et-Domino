@@ -30,16 +30,14 @@ public class Jeu extends JFrame {
     JScrollPane plat;
 
 
-    Jeu(){
+    Jeu(Joueur [] jou){
         setTitle("Jeu de Carcassonne");  //début
         setSize(1500, 1000);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
         setLocationRelativeTo(null);
 
-        Joueur[] jou = {new Joueur("Lukas", false), new Joueur("Manon", false),new Joueur("Ilias", false)}; //initialisation de la partie*
-        jou[0].setPions(0);
-        jou[1].setPions(2);
+
         Grille g = new Grille();
         PlateauCarcassonne pl = new PlateauCarcassonne(g);
         SacCarcassonne s = new SacCarcassonne();
@@ -419,7 +417,8 @@ public class Jeu extends JFrame {
 
 
     public static void main(String[] args) {
-        new Jeu(); 
+        Joueur[] jou = {new Joueur("Lukas", false), new Joueur("Manon", false),new Joueur("Ilias", false)}; //initialisation de la partie*
+        new Jeu(jou); 
     }
     
 }

@@ -27,11 +27,10 @@ public class MenuPrincipal extends JFrame {
         }));
         domino.addActionListener((e -> {
             hide();
-            new Configuration();
         }));
         carcassonne.addActionListener((e -> {
             hide();
-            new Jeu();
+            new Configuration();
         }));
 
     }
