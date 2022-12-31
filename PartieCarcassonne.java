@@ -1,5 +1,5 @@
 public class PartieCarcassonne {
-    private Joueur[] joueurs;
+    protected Joueur[] joueurs;
     protected PlateauCarcassonne plateau;
     private Sac sac;
     Joueur gagnant = null;

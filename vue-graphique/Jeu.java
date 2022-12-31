@@ -20,6 +20,7 @@ public class Jeu extends JFrame {
     JButton passer = new JButton("Passer son tour");
     JButton abandonner = new JButton("Abandonner");
     JButton finPartie = new JButton("Arreter la partie");
+    JButton placerPion = new JButton("Placer un pion");
     Joueur jActuel; //joueur actuel
     int iActuel = 0; // pour le compter le joueur actuel
     JLabel tourAct;
@@ -36,7 +37,9 @@ public class Jeu extends JFrame {
         setLayout(new BorderLayout());
         setLocationRelativeTo(null);
 
-        Joueur[] jou = {new Joueur("Lukas", false), new Joueur("Manon", false),new Joueur("Ilias", false)}; //initialisation de la partie
+        Joueur[] jou = {new Joueur("Lukas", false), new Joueur("Manon", false),new Joueur("Ilias", false)}; //initialisation de la partie*
+        jou[0].setPions(0);
+        jou[1].setPions(2);
         Grille g = new Grille();
         PlateauCarcassonne pl = new PlateauCarcassonne(g);
         SacCarcassonne s = new SacCarcassonne();
@@ -69,13 +72,13 @@ public class Jeu extends JFrame {
         
 
         
-        play.setLayout(new GridLayout(6,1));
+        play.setLayout(new GridLayout(7,1));
         play.setPreferredSize(new Dimension(300,800));
         play.setBackground(Color.LIGHT_GRAY);
 
         texte.setLayout(new GridLayout(3,1));
 
-        tourAct = new JLabel("C'est le tour de : "+jActuel.getName());
+        tourAct = new JLabel("C'est le tour de : "+jActuel.getName()+ " vous avez "+ jActuel.getPions()+ " pions");
         nbPiece = new JLabel("Il reste : "+p.getSac().getPiecesRestantes()+" pièces");
         action = new JLabel("choisissez une action");
 
@@ -84,7 +87,7 @@ public class Jeu extends JFrame {
         texte.add(nbPiece);
         texte.add(action);
         
-        
+        placerPion.setVisible(false);
 
         play.add(texte);
         play.add(choix);
@@ -92,6 +95,7 @@ public class Jeu extends JFrame {
         play.add(tourner);
         play.add(passer);
         play.add(abandonner);
+        play.add(placerPion);
         
         plat = new JScrollPane(plateau,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         
@@ -124,7 +128,11 @@ public class Jeu extends JFrame {
                     gbc.gridx = 72 + coord.getX();
                     gbc.gridy = 72 - coord.getY();
                     plateau.add(c,gbc);
-                    prochainJoueur();
+                    if(jActuel.pions>0){
+                        placerPion();
+                    }else{
+                        prochainJoueur();
+                    }
                 }else{
                     action.setText("La pièce n'a pas pu être placée");
                 }
@@ -158,6 +166,26 @@ public class Jeu extends JFrame {
 
         finPartie.addActionListener((ActionEvent e)->{
             finDePartie();
+        });
+
+        placerPion.addActionListener((ActionEvent e)->{
+            try{
+                String str = choix.getText();
+                int i = Integer.valueOf(str);
+                if(i>=0 && i<=4){
+                    jActuel.setPions(jActuel.getPions()-1);
+                    c.t.paysages[i].setPion(true);
+                    action.setText("Le pion a été placé en "+i);
+                }else{
+                    action.setText("Le pion n'a pas été placé");
+                }
+            }catch(Exception err){
+                action.setText("Le pion n'a pas été placé");
+            }finally{
+                prochainJoueur();
+            }
+
+
         });
 
 
@@ -334,7 +362,7 @@ public class Jeu extends JFrame {
         c = tmp2;
         mainAct.add(c);
         nbPiece.setText("Il reste : " + p.getSac().getPiecesRestantes() + " pièces");
-        tourAct.setText("C'est le tour de "+jActuel.getName());
+        tourAct.setText("C'est le tour de : "+jActuel.getName()+ " vous avez "+ jActuel.getPions()+ " pions");
     }
 
     void finDePartie(){ //quand la partie est finie, affiche une nouvelle fenetre
@@ -355,8 +383,13 @@ public class Jeu extends JFrame {
     }
 
     void prochainJoueur(){ //passer au joueur suivant
+        placer.setVisible(true);
+        tourner.setVisible(true);
+        passer.setVisible(true);
+        abandonner.setVisible(true);
+        placerPion.setVisible(false);
         do{
-        jActuel = p.getJoueurs()[++iActuel % p.getJoueurs().length];
+        jActuel = p.joueurs[++iActuel%p.getJoueurs().length];
         p.fullAbandon();
         if(p.getFin()){
             finDePartie();
@@ -364,13 +397,22 @@ public class Jeu extends JFrame {
         }
         }while(jActuel.getAbandon());
         nbPiece.setText("Il reste : " + p.getSac().getPiecesRestantes() + " pièces");
-        tourAct.setText("C'est le tour de "+jActuel.getName());
+        tourAct.setText("C'est le tour de : "+jActuel.getName()+ " vous avez "+ jActuel.getPions()+ " pions");
         if(p.getSac().getPiecesRestantes()!= 0){
             piocher();
             System.out.println(c.t);
         }else{
             finDePartie();
         }
+    }
+
+    void placerPion(){
+        placerPion.setVisible(true);
+        action.setText("Ou voulez vous placer un pion ?");
+        placer.setVisible(false);
+        tourner.setVisible(false);
+        passer.setVisible(false);
+        abandonner.setVisible(false);
     }
 
 
