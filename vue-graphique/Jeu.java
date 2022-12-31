@@ -96,6 +96,7 @@ public class Jeu extends JFrame {
         play.add(placerPion);
         
         plat = new JScrollPane(plateau,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+
         
         
         add(plat,BorderLayout.CENTER);
@@ -109,6 +110,7 @@ public class Jeu extends JFrame {
         gbc.gridx = 72;
         gbc.gridy = 72;
         plateau.add(debut,gbc);
+        plat.getViewport().setViewPosition(new Point(900,1100));
 
 
         
