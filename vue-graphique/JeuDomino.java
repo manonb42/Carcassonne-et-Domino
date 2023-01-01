@@ -8,7 +8,7 @@ import java.awt.geom.AffineTransform;
 
 public class JeuDomino extends JFrame{
     Partie p; //partie en cours  
-    TestDomino c;      //pièce de la main actuelle
+    TuileDominoGraphique c;      //pièce de la main actuelle
     JPanel texte = new JPanel() ;
     JPanel plateau = new JPanel();
     JPanel mainAct = new JPanel(); //main actuelle
@@ -63,7 +63,7 @@ public class JeuDomino extends JFrame{
         
 
         
-        c = new TestDomino((TuileDomino)(p.getSac().piocher())); //premiere pièce
+        c = new TuileDominoGraphique((TuileDomino)(p.getSac().piocher())); //premiere pièce
         JPanel jp = new JPanel();
         mainAct.add(jp);
         JPanel jp2 = new JPanel();
@@ -104,7 +104,7 @@ public class JeuDomino extends JFrame{
         add(play,BorderLayout.EAST);
         setVisible(true);
 
-        TestDomino debut = new TestDomino((TuileDomino)p.getSac().piocher());
+        TuileDominoGraphique debut = new TuileDominoGraphique((TuileDomino)p.getSac().piocher());
         gbc.gridx = 72;
         gbc.gridy = 72;
         plateau.add(debut,gbc);
@@ -168,35 +168,10 @@ public class JeuDomino extends JFrame{
     }
 
 
-    public BufferedImage rotateImageByDegrees(BufferedImage img, double angle) {  //fonction pour tourner de 90 deg l'image
-        double rads = Math.toRadians(angle);
-        double sin = Math.abs(Math.sin(rads)), cos = Math.abs(Math.cos(rads));
-        int w = img.getWidth();
-        int h = img.getHeight();
-        int newWidth = (int) Math.floor(w * cos + h * sin);
-        int newHeight = (int) Math.floor(h * cos + w * sin);
-    
-        BufferedImage rotated = new BufferedImage(newWidth, newHeight, BufferedImage.TYPE_INT_ARGB);
-        Graphics2D g2d = rotated.createGraphics();
-        AffineTransform at = new AffineTransform();
-        at.translate((newWidth - w) / 2, (newHeight - h) / 2);
-    
-        int x = w / 2;
-        int y = h / 2;
-    
-        at.rotate(rads, x, y);
-        g2d.setTransform(at);
-        g2d.drawImage(img, 0, 0, this);
-        g2d.drawRect(0, 0, newWidth - 1, newHeight - 1);
-        g2d.dispose();
-    
-        return rotated;
-    }
-
     void piocher(){ //fonction pour piocher
         mainAct.remove(c);
         TuileDomino tmp1 = (TuileDomino)(p.getSac().piocher());
-        TestDomino tmp2 = new TestDomino(tmp1);
+        TuileDominoGraphique tmp2 = new TuileDominoGraphique(tmp1);
         c = tmp2;
         mainAct.add(c);
         nbPiece.setText("Il reste : " + p.getSac().getPiecesRestantes() + " pièces");
@@ -210,7 +185,7 @@ public class JeuDomino extends JFrame{
         j.setSize(400,400);
         j.setLayout(new BorderLayout());
         j.setLocationRelativeTo(null);
-        JLabel win = new JLabel("Fin de la partie");
+        JLabel win = new JLabel("Fin de la partie, le gagnant est : "+p.gagnant);
         j.add(win,BorderLayout.CENTER);
         win.setHorizontalAlignment((int)CENTER_ALIGNMENT);
         win.setFont(new Font("Arial",Font.BOLD,20));
@@ -239,8 +214,5 @@ public class JeuDomino extends JFrame{
         }
     }
 
-    public static void main(String[] args) {
-        Joueur[] jou = {new Joueur("Lukas", false), new Joueur("Manon", false),new Joueur("Ilias", false),new Joueur("Nael", false)};
-        new JeuDomino(jou);
-    }
+
 }

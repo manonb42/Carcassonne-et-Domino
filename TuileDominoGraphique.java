@@ -1,7 +1,7 @@
 import java.awt.GridLayout;
 import javax.swing.JPanel;
 
-public class TestDomino extends JPanel {
+public class TuileDominoGraphique extends JPanel {
     TuileDomino t;
     Carrechiffre b00;
     Carrechiffre b01;
@@ -17,7 +17,7 @@ public class TestDomino extends JPanel {
     Carrechiffre b32;
 
 
-    TestDomino(TuileDomino tu){
+    TuileDominoGraphique(TuileDomino tu){
         t = tu;
         setSize(25,25);
         b00 = new Carrechiffre(t.getNumeros()[0][0]);
