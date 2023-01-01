@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch JeuGraphique",
+            "request": "launch",
+            "mainClass": "JeuGraphique",
+            "projectName": "Domino+Carcassonne_39e59692"
+        },
+        {
+            "type": "java",
             "name": "Launch TestDomino",
             "request": "launch",
             "mainClass": "TestDomino",
