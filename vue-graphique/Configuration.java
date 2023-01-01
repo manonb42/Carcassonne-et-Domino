@@ -3,7 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 
 public class Configuration extends JFrame{
-
+    boolean carc;
     JLabel joueur1 = new JLabel("Joueur 1");
     JLabel joueur2 = new JLabel("Joueur 2");
     JLabel joueur3 = new JLabel("Joueur 3");
@@ -24,7 +24,8 @@ public class Configuration extends JFrame{
     GridBagConstraints gbc = new GridBagConstraints();
 
 
-    Configuration(){
+    Configuration(boolean boole){
+        carc = boole;
         setSize(500,500);
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -97,12 +98,16 @@ public class Configuration extends JFrame{
             }
             if(t.length <=0) System.exit(0);
             hide();
-            new Jeu(t);   
+            if(carc){
+                new JeuCarcassonne(t);   
+            }else{
+                new JeuDomino(t);
+            }
+
         });
     }
 
     public static void main(String[] args) {
-        new Configuration();
     }
     
 }

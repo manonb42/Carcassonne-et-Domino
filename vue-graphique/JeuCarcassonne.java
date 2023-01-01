@@ -7,7 +7,7 @@ import java.awt.event.*;
 import java.awt.geom.AffineTransform;
 
 
-public class Jeu extends JFrame {
+public class JeuCarcassonne extends JFrame {
     PartieCarcassonne p; //partie en cours  
     PieceCGraph c;      //pièce de la main actuelle
     JPanel texte = new JPanel() ;
@@ -30,7 +30,7 @@ public class Jeu extends JFrame {
     JScrollPane plat;
 
 
-    Jeu(Joueur [] jou){
+    JeuCarcassonne(Joueur [] jou){
         setTitle("Jeu de Carcassonne");  //début
         setSize(1500, 1000);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -419,8 +419,8 @@ public class Jeu extends JFrame {
 
 
     public static void main(String[] args) {
-        Joueur[] jou = {new Joueur("Lukas", false), new Joueur("Manon", false),new Joueur("Ilias", false)}; //initialisation de la partie*
-        new Jeu(jou); 
+        Joueur[] jou = {new Joueur("Lukas", false), new Joueur("Manon", false),new Joueur("Ilias", false),new Joueur("Nael", false)}; //initialisation de la partie*
+        new JeuCarcassonne(jou); 
     }
     
 }

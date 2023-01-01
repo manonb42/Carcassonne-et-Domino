@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch TestDomino",
+            "request": "launch",
+            "mainClass": "TestDomino",
+            "projectName": "finCarcassonne_21ce39aa"
+        },
+        {
+            "type": "java",
+            "name": "Launch JeuDomino",
+            "request": "launch",
+            "mainClass": "JeuDomino",
+            "projectName": "finCarcassonne_21ce39aa"
+        },
+        {
+            "type": "java",
             "name": "Launch Configuration",
             "request": "launch",
             "mainClass": "Configuration",

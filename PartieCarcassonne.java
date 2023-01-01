@@ -50,12 +50,15 @@ public class PartieCarcassonne {
     }
 
     public void fullAbandon() {
+        int ab = 0;
         for(int i = 0; i<joueurs.length; i++){
-            if(!joueurs[i].getAbandon()){
-                return;
+            if(joueurs[i].getAbandon()){
+                ab++;
             }
         }
-        fin = true;
+        if(ab>=joueurs.length-1){
+            fin = true;
+        }
     }
     
 }

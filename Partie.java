@@ -2,7 +2,7 @@ import java.io.Serializable;
 
 public class Partie implements Serializable {
     private Joueur[] joueurs;
-    private Plateau plateau;
+    protected Plateau plateau;
     private Sac sac;
     Joueur gagnant = null;
     private boolean fin; // si true, fin de la partie
@@ -49,11 +49,16 @@ public class Partie implements Serializable {
     }
 
     public void fullAbandon() {
+        int ab = 0;
         for(int i = 0; i<joueurs.length; i++){
-            if(!joueurs[i].getAbandon()){
-                return;
+            if(joueurs[i].getAbandon()){
+                ab++;
             }
         }
-        fin = true;
+        if(ab>=joueurs.length-1){
+            fin = true;
+        }
     }
+
+
 }
