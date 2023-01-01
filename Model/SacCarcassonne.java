@@ -1,8 +1,10 @@
+package Model;
+
 public class SacCarcassonne extends Sac {
     protected int nbPiecesRestantes=71;
     protected TuileCarcassonne[] pieces = new TuileCarcassonne[71];
 
-    SacCarcassonne(){
+    public SacCarcassonne(){
         for(int i = 0; i<9; i++){
             Paysage[] p = {new Pre(), new Pre(), new Route(), new Route()};
             pieces[i] = new TuileCarcassonne(p);
@@ -118,9 +120,9 @@ public class SacCarcassonne extends Sac {
     @Override
     public TuileCarcassonne piocher() {
         nbPiecesRestantes--;
-        int n =(int) (Math.random()*72);
+        int n =(int) (Math.random()*71);
         while(pieces[n] == null){
-            n = (int) (Math.random()*72);
+            n = (int) (Math.random()*71);
         }
         TuileCarcassonne t = pieces[n];
         pieces[n] = null;

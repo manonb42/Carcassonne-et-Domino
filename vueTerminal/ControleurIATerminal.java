@@ -1,6 +1,13 @@
+package vueTerminal;
+
+import Model.Coordonnees;
+import Model.Grille;
+import Model.Joueur;
+import Model.TuileDomino;
+
 public class ControleurIATerminal extends ControleurTerminal {
 
-    ControleurIATerminal(Terminal t) {
+    public ControleurIATerminal(Terminal t) {
         this.terminal = t;
     }
 

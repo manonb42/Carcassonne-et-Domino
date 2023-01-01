@@ -1,8 +1,11 @@
+package vueGraphique;
+
 import javax.swing.*;
+
 import java.awt.*;
 
 public class MenuPrincipal extends JFrame {
-    MenuPrincipal() {
+    public MenuPrincipal() {
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(400, 400);
@@ -27,11 +30,11 @@ public class MenuPrincipal extends JFrame {
         }));
         domino.addActionListener((e -> {
             hide();
-            new Configuration(false);
+            new ConfigurationJeu(false);
         }));
         carcassonne.addActionListener((e -> {
             hide();
-            new Configuration(true);
+            new ConfigurationJeu(true);
         }));
 
     }

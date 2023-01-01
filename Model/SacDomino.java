@@ -1,3 +1,5 @@
+package Model;
+
 public class SacDomino extends Sac {
     private TuileDomino[] pieces;
 

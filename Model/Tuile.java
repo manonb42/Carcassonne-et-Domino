@@ -1,6 +1,8 @@
+package Model;
+
 public abstract class Tuile {
 
-    abstract void tourner(int nbTours);
+    public abstract void tourner(int nbTours);
 
     abstract boolean sidesMatch(Tuile p, int side);
 }

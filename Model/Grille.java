@@ -1,3 +1,5 @@
+package Model;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +11,7 @@ public class Grille {
     private int dx = 0; // vecteur pour x
     private int dy = 0; // vecteur pour y
 
-    Grille() {
+    public Grille() {
         for (int i = 0; i < 5; i++) {
             pieces.add(new ArrayList<>());
             for (int j = 0; j < 5; j++) {

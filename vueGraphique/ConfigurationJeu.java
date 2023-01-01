@@ -1,8 +1,13 @@
+package vueGraphique;
+
 import javax.swing.*;
+
+import Model.Joueur;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
-public class Configuration extends JFrame{
+public class ConfigurationJeu extends JFrame{
     boolean carc;
     JLabel joueur1 = new JLabel("Joueur 1");
     JLabel joueur2 = new JLabel("Joueur 2");
@@ -24,7 +29,7 @@ public class Configuration extends JFrame{
     GridBagConstraints gbc = new GridBagConstraints();
 
 
-    Configuration(boolean boole){
+    ConfigurationJeu(boolean boole){
         carc = boole;
         setSize(500,500);
         setVisible(true);

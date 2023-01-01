@@ -1,5 +1,20 @@
+package vueGraphique;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
+
+import Model.Coordonnees;
+import Model.Grille;
+import Model.Joueur;
+import Model.PartieCarcassonne;
+import Model.Paysage;
+import Model.PlateauCarcassonne;
+import Model.Pre;
+import Model.Route;
+import Model.SacCarcassonne;
+import Model.TuileCarcassonne;
+import Model.Village;
+
 import java.awt.*;
 import java.io.File;
 import java.awt.image.BufferedImage;
@@ -128,7 +143,7 @@ public class JeuCarcassonne extends JFrame {
                     gbc.gridx = 72 + coord.getX();
                     gbc.gridy = 72 - coord.getY();
                     plateau.add(c,gbc);
-                    if(jActuel.pions>0){
+                    if(jActuel.getPions()>0){
                         placerPion();
                     }else{
                         prochainJoueur();
@@ -389,7 +404,7 @@ public class JeuCarcassonne extends JFrame {
         abandonner.setVisible(true);
         placerPion.setVisible(false);
         do{
-        jActuel = p.joueurs[++iActuel%p.getJoueurs().length];
+        jActuel = p.getJoueurs()[++iActuel%p.getJoueurs().length];
         p.fullAbandon();
         if(p.getFin()){
             finDePartie();

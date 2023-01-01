@@ -1,3 +1,5 @@
+package Model;
+
 public abstract class Paysage {
     private String name;
     private boolean pion;

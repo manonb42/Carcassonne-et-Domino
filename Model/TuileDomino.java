@@ -1,3 +1,5 @@
+package Model;
+
 public class TuileDomino extends Tuile {
     private int numeros[][] = new int[4][3];
 

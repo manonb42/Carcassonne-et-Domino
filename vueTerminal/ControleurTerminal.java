@@ -1,3 +1,8 @@
+package vueTerminal;
+
+import Model.Joueur;
+import Model.TuileDomino;
+
 public abstract class ControleurTerminal {
     Terminal terminal;
 

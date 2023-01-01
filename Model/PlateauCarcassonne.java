@@ -1,7 +1,9 @@
+package Model;
+
 public class PlateauCarcassonne{
     private Grille g;
 
-    PlateauCarcassonne(Grille g) {
+    public PlateauCarcassonne(Grille g) {
         this.g = g;
     }
 
@@ -33,7 +35,7 @@ public class PlateauCarcassonne{
         return plateauvide;
     }
 
-    protected boolean validPlacement(TuileCarcassonne p, Coordonnees coordonnee) {
+    public boolean validPlacement(TuileCarcassonne p, Coordonnees coordonnee) {
         boolean cotevide = true;
         boolean plateauvide = plateauvide();
         int[][] deltas = { { 0, 1 }, { 1, 0 }, { 0, -1 }, { -1, 0 } };

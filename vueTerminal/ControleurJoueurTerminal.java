@@ -1,3 +1,9 @@
+package vueTerminal;
+
+import Model.Coordonnees;
+import Model.Joueur;
+import Model.TuileDomino;
+
 public class ControleurJoueurTerminal extends ControleurTerminal{
 
     public ControleurJoueurTerminal(Terminal t){

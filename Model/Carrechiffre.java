@@ -1,3 +1,5 @@
+package Model;
+
 import java.awt.Color;
 
 import javax.swing.JLabel;

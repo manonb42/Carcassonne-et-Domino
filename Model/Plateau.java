@@ -1,7 +1,9 @@
+package Model;
+
 public class Plateau {
     private Grille g;
 
-    Plateau(Grille g) {
+    public Plateau(Grille g) {
         this.g = g;
     }
 
@@ -50,7 +52,7 @@ public class Plateau {
         return points;
     }
 
-    protected boolean validPlacement(Tuile p, Coordonnees coordonnee) {
+    public boolean validPlacement(Tuile p, Coordonnees coordonnee) {
         boolean cotevide = true;
         boolean plateauvide = plateauvide();
         int[][] deltas = { { 0, 1 }, { 1, 0 }, { 0, -1 }, { -1, 0 } };
