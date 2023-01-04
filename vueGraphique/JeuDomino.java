@@ -222,10 +222,10 @@ public class JeuDomino extends JFrame{
         }while(jActuel.getAbandon());
         nbPiece.setText("Il reste : " + p.getSac().getPiecesRestantes() + " pièces");
         tourAct.setText("C'est le tour de : "+jActuel.getName()+", vous avez "+ jActuel.getNbPoints()+" points !");
-        if(!jActuel.getAbandon() && jActuel.getisIA() && p.getSac().getPiecesRestantes()<=0 ){
+        if(!jActuel.getAbandon() && jActuel.getisIA() && p.getSac().getPiecesRestantes()>0 ){
             piocher();
             placerIA();
-        }else if(p.getSac().getPiecesRestantes()<=0){
+        }else if(p.getSac().getPiecesRestantes()>0){
             piocher();
         }else{
             finDePartie();
