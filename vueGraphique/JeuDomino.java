@@ -172,7 +172,7 @@ public class JeuDomino extends JFrame{
 
 
         if(jActuel.getisIA()){
-            quelleAction(jActuel);
+            placerIA();
         }
 
         
@@ -222,38 +222,26 @@ public class JeuDomino extends JFrame{
         }while(jActuel.getAbandon());
         nbPiece.setText("Il reste : " + p.getSac().getPiecesRestantes() + " pièces");
         tourAct.setText("C'est le tour de : "+jActuel.getName()+", vous avez "+ jActuel.getNbPoints()+" points !");
-        if(p.getSac().getPiecesRestantes()!= 0){
+        if(!jActuel.getAbandon() && jActuel.getisIA()){
             piocher();
-            System.out.println(c.t);
-        }else if(!jActuel.getAbandon() && jActuel.getisIA()){
-            quelleAction(jActuel);
+            placerIA();
+        }else if(p.getSac().getPiecesRestantes()!= 0){
+            piocher();
         }else{
             finDePartie();
         }
     }
 
-    public void quelleAction(Joueur joueur) {
-        if(placement(joueur)){
-            prochainJoueur();
-        } else{
-            prochainJoueur();
-        }
+    void placerIA(){
+        tryPlacerPiece(jActuel);
+        prochainJoueur();
+
+
     }
 
-    public boolean placement(Joueur j) {
-        if (plateauvide()) {
-            if (p.getPlateau().placer((TuileDomino) (j.getPiece()), new Coordonnees(0, 0)))
-                return true;
-        } else if (tryPlacerPiece(j)) {
-            return true;
-        }
-        return false;
-    }
+ 
 
-    public TuileDomino tournerPiece(Joueur joueur, int i){
-        joueur.getPiece().tourner(i);
-        return (TuileDomino)joueur.getPiece();
-    }
+
 
     public boolean tryPlacerPiece(Joueur joueur) {
         Grille plateau = p.getPlateau().getGrille();
@@ -266,7 +254,14 @@ public class JeuDomino extends JFrame{
                         int coordY = i + deltas[delta][1];
                         if (plateau.getPiece(coordX, coordY) == null) {
                             for(int k=0; k<4; k++){
-                                if (p.getPlateau().placer(tournerPiece(joueur, k), new Coordonnees(coordX, coordY))){
+                                c.t.tourner(k);
+                                if (p.getPlateau().placer(c.t, new Coordonnees(coordX, coordY))){
+                                    Coordonnees coord = new Coordonnees(coordX, coordY);
+                                    jActuel.setNbPoints(jActuel.getNbPoints()+p.plateau.newPoints(c.t,coord ));
+                                    action.setText("La pièce a bien été placée");
+                                    gbc.gridx = 72 + coord.getX();
+                                    gbc.gridy = 72 - coord.getY();
+                                    this.plateau.add(c,gbc);
                                     return true;
                                 }   
                             }
