@@ -82,6 +82,7 @@ public class JeuCarcassonne extends JFrame {
         
         c = new PieceCGraph((TuileCarcassonne)(p.getSac().piocher())); //premiere pièce
         mainAct.add(c);
+        jActuel.setPiece(c.t);
         
 
         
@@ -163,7 +164,7 @@ public class JeuCarcassonne extends JFrame {
             c.image = i;
             paint(getGraphics());
             c.t.tourner(1);
-            System.out.println(c.t);
+            System.out.println(jActuel.getPiece());
             
 
         });
@@ -415,7 +416,8 @@ public class JeuCarcassonne extends JFrame {
         tourAct.setText("C'est le tour de : "+jActuel.getName()+ " vous avez "+ jActuel.getPions()+ " pions");
         if(p.getSac().getPiecesRestantes()!= 0){
             piocher();
-            System.out.println(c.t);
+            jActuel.setPiece(c.t);
+            System.out.println(jActuel.getPiece()+ " ici");
         }else{
             finDePartie();
         }

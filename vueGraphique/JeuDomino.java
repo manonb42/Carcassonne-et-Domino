@@ -77,6 +77,7 @@ public class JeuDomino extends JFrame{
         JPanel jp2 = new JPanel();
         mainAct.add(jp2);
         mainAct.add(c);
+        jActuel.setPiece(c.t);
         
 
         
@@ -150,6 +151,7 @@ public class JeuDomino extends JFrame{
         tourner.addActionListener((ActionEvent e)->{
             c.t.tourner(1);
             c.actualiser();
+            System.out.println(jActuel.getPiece());
             
 
         });
@@ -220,7 +222,8 @@ public class JeuDomino extends JFrame{
         tourAct.setText("C'est le tour de : "+jActuel.getName()+", vous avez "+ jActuel.getNbPoints()+" points !");
         if(p.getSac().getPiecesRestantes()!= 0){
             piocher();
-            System.out.println(c.t);
+            jActuel.setPiece(c.t);
+            System.out.println(jActuel.getPiece()+ " ici");
         }else{
             finDePartie();
         }
