@@ -69,6 +69,10 @@ public class TuileDominoGraphique extends JPanel {
         }
     }
 
+    public TuileDomino getTuile(){
+        return this.t;
+    }
+
     public void actualiser(){
         b00.setChiffre(t.getNumeros()[0][0]);
         b01.setChiffre(t.getNumeros()[0][1]);
@@ -84,5 +88,7 @@ public class TuileDominoGraphique extends JPanel {
         b32.setChiffre(t.getNumeros()[3][2]);
 
     }
+
+
     
 }
