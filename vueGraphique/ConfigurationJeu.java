@@ -70,10 +70,10 @@ public class ConfigurationJeu extends JFrame{
 
         valider.addActionListener((ActionEvent e)->{
             Joueur[] tab = new Joueur[4];
-            Joueur p1 = new Joueur(j1.getText(), ia1.isEnabled());
-            Joueur p2 = new Joueur(j2.getText(), ia2.isEnabled());
-            Joueur p3 = new Joueur(j3.getText(), ia3.isEnabled());
-            Joueur p4 = new Joueur(j4.getText(), ia4.isEnabled());
+            Joueur p1 = new Joueur(j1.getText(), ia1.isSelected());
+            Joueur p2 = new Joueur(j2.getText(), ia2.isSelected());
+            Joueur p3 = new Joueur(j3.getText(), ia3.isSelected());
+            Joueur p4 = new Joueur(j4.getText(), ia4.isSelected());
             if(!p1.getName().equals("")){
                 tab[0] = p1;
             }
@@ -101,7 +101,7 @@ public class ConfigurationJeu extends JFrame{
                     b++;
                 }
             }
-            if(t.length <=0) System.exit(0);
+            if(t.length <=1) System.exit(0);
             hide();
             if(carc){
                 new JeuCarcassonne(t);   

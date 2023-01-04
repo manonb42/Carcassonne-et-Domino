@@ -10,6 +10,10 @@ public abstract class Paysage {
         return name;
     }
 
+    public boolean getPion(){
+        return pion;
+    }
+
 
     public void setPion(boolean pion) {
         this.pion = pion;
