@@ -151,7 +151,6 @@ public class JeuDomino extends JFrame{
         tourner.addActionListener((ActionEvent e)->{
             c.t.tourner(1);
             c.actualiser();
-            System.out.println(jActuel.getPiece());
             
 
         });
