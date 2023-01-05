@@ -450,6 +450,9 @@ public class JeuCarcassonne extends JFrame {
                         if (plateau.getPiece(coordX, coordY) == null) {
                             for (int k = 0; k < 4; k++) {
                                 getTuileActuelle().t.tourner(k);
+                                BufferedImage buffer = rotateImageByDegrees(c.image, k*90);
+                                c.image = buffer;
+                                paint(getGraphics());
                                 if (p.getPlateau().placer(getTuileActuelle().t, new Coordonnees(coordX, coordY))) {
                                     Coordonnees coord = new Coordonnees(coordX, coordY);
                                     action.setText("La pièce a bien été placée");
