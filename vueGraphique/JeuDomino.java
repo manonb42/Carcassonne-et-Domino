@@ -171,7 +171,7 @@ public class JeuDomino extends JFrame {
         j.setLayout(new BorderLayout());
         j.setLocationRelativeTo(null);
         JLabel win = new JLabel("Fin de la partie, il n'y a pas de gagnant");
-        if (p.getGagnant() != null) {
+        if (gagnant() != null) {
             win.setText("Fin de la partie, le gagnant est : " + gagnant().getName());
         }
 
