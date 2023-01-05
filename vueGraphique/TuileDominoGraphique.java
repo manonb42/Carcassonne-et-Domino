@@ -1,7 +1,10 @@
-package Model;
+package vueGraphique;
 
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import javax.swing.JPanel;
+
+import Model.TuileDomino;
 
 public class TuileDominoGraphique extends JPanel {
     public TuileDomino t;
@@ -21,6 +24,7 @@ public class TuileDominoGraphique extends JPanel {
     public TuileDominoGraphique(TuileDomino tu) {
         t = tu;
         setSize(25, 25);
+        setPreferredSize(new Dimension(25,25));
         b00 = new Carrechiffre(t.getNumeros()[0][0]);
         b01 = new Carrechiffre(t.getNumeros()[0][1]);
         b02 = new Carrechiffre(t.getNumeros()[0][2]);

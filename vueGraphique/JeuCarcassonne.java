@@ -66,7 +66,7 @@ public class JeuCarcassonne extends JFrame {
 
         texte.setLayout(new GridLayout(3, 1));
 
-        tourAct = new JLabel("C'est le tour de : " + jActuel.getName() + " vous avez " + jActuel.getPions() + " pions");
+        tourAct = new JLabel("C'est au tour de : " + jActuel.getName() + ", vous avez " + jActuel.getPions() + " pions");
         nbPiece = new JLabel("Il reste : " + p.getSac().getPiecesRestantes() + " pièces");
         action = new JLabel("choisissez une action");
 

@@ -4,7 +4,7 @@ import java.awt.image.BufferedImage;
 
 import Model.*;
 
-public class ControleurIACarcassonne extends ControleurCarcassonne{
+public class ControleurIACarcassonne extends ControleurCarcassonne {
     JeuCarcassonne carcassonne;
 
     ControleurIACarcassonne(JeuCarcassonne t) {
@@ -28,15 +28,18 @@ public class ControleurIACarcassonne extends ControleurCarcassonne{
                         if (plateau.getPiece(coordX, coordY) == null) {
                             for (int k = 0; k < 4; k++) {
                                 carcassonne.getTuileActuelle().t.tourner(k);
-                                BufferedImage buffer = carcassonne.rotateImageByDegrees(carcassonne.getTuileActuelle().image, k * 90);
+                                BufferedImage buffer = carcassonne
+                                        .rotateImageByDegrees(carcassonne.getTuileActuelle().image, k * 90);
                                 carcassonne.getTuileActuelle().image = buffer;
                                 carcassonne.paint(carcassonne.getGraphics());
-                                if (carcassonne.getPartie().getPlateau().placer(carcassonne.getTuileActuelle().t, new Coordonnees(coordX, coordY))) {
+                                if (carcassonne.getPartie().getPlateau().placer(carcassonne.getTuileActuelle().t,
+                                        new Coordonnees(coordX, coordY))) {
                                     Coordonnees coord = new Coordonnees(coordX, coordY);
                                     carcassonne.getAction().setText("La pièce a bien été placée");
-                                    carcassonne.getGridBagConstraints().gridx = 72 + coord.getX(); 
+                                    carcassonne.getGridBagConstraints().gridx = 72 + coord.getX();
                                     carcassonne.getGridBagConstraints().gridy = 72 - coord.getY();
-                                    carcassonne.plateau.add(carcassonne.getTuileActuelle(), carcassonne.getGridBagConstraints());
+                                    carcassonne.plateau.add(carcassonne.getTuileActuelle(),
+                                            carcassonne.getGridBagConstraints());
                                     if (joueur.getPions() > 0) {
                                         placerpartisan(coord, joueur);
                                     }

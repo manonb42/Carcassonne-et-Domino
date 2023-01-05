@@ -1,13 +1,13 @@
 package vueGraphique;
-
-import javax.swing.*;
 import Model.*;
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
 public class JeuDomino extends JFrame {
     Partie p; // partie en cours
     ControleurIADomino controleuria;
+    ControleurJoueurDomino controleurj;
     TuileDominoGraphique c; // pièce de la main actuelle
     JPanel texte = new JPanel();
     JPanel plateau = new JPanel();
@@ -39,6 +39,7 @@ public class JeuDomino extends JFrame {
         gbc.ipadx = 100;
         gbc.ipady = 100;
         controleuria = new ControleurIADomino(this);
+        controleurj = new ControleurJoueurDomino(this);
 
         plateau.setPreferredSize(new Dimension(3000, 3000));
         plateau.setLayout(new GridBagLayout());
@@ -60,7 +61,7 @@ public class JeuDomino extends JFrame {
         texte.setLayout(new GridLayout(3, 1));
 
         tourAct = new JLabel(
-                "C'est le tour de : " + jActuel.getName() + ", vous avez " + jActuel.getNbPoints() + " points !");
+                "C'est au tour de : " + jActuel.getName() + ", vous avez " + jActuel.getNbPoints() + " points !");
         nbPiece = new JLabel("Il reste : " + p.getSac().getPiecesRestantes() + " pièces");
         action = new JLabel("choisissez une action");
 
@@ -96,16 +97,13 @@ public class JeuDomino extends JFrame {
             try {
                 String chaine[] = st.split(",");
                 coord = new Coordonnees(Integer.parseInt(chaine[0]), Integer.parseInt(chaine[1]));
-                if (p.plateau.validPlacement(c.t, coord)) {
-                    p.plateau.placer(c.t, coord);
-                    jActuel.setNbPoints(jActuel.getNbPoints() + p.plateau.newPoints(c.t, coord));
+                if (controleurj.placementPiece(coord)){
                     action.setText("La pièce a bien été placée");
                     gbc.gridx = 72 + coord.getX();
                     gbc.gridy = 72 - coord.getY();
                     plateau.add(c, gbc);
-                    jActuel.setPiece(null);
                     prochainJoueur();
-                } else {
+                }else{
                     action.setText("La pièce n'a pas pu être placée");
                 }
             } catch (Exception err) {
@@ -115,16 +113,15 @@ public class JeuDomino extends JFrame {
         });
 
         tourner.addActionListener((ActionEvent e) -> {
-            c.t.tourner(1);
+            c.getTuile().tourner(1);
             c.actualiser();
-
         });
 
         passer.addActionListener((ActionEvent e) -> {
             prochainJoueur();
         });
         abandonner.addActionListener((ActionEvent e) -> {
-            jActuel.setAbandon(true);
+            jActuel.setAbandon(true); /////////////
             prochainJoueur();
         });
 
@@ -136,6 +133,10 @@ public class JeuDomino extends JFrame {
             controleuria.placerIA();
         }
 
+    }
+
+    public JLabel getAction(){
+        return this.action;
     }
 
     public Partie getPartie() {
@@ -154,6 +155,7 @@ public class JeuDomino extends JFrame {
         return this.gbc;
     }
 
+    ///////////////////
     void piocher() { // fonction pour piocher
         mainAct.remove(c);
         TuileDomino tmp1 = (TuileDomino) (p.getSac().piocher());
@@ -165,6 +167,7 @@ public class JeuDomino extends JFrame {
                 "C'est le tour de : " + jActuel.getName() + ", vous avez " + jActuel.getNbPoints() + " points !");
     }
 
+    /////// le gagnant 
     void finDePartie() { // quand la partie est finie, affiche une nouvelle fenetre
         hide();
         JFrame j = new JFrame();
@@ -185,6 +188,8 @@ public class JeuDomino extends JFrame {
 
     }
 
+
+    // tout lol
     void prochainJoueur() { // passer au joueur suivant
         do {
             jActuel = p.getJoueurs()[++iActuel % p.getJoueurs().length];
@@ -211,6 +216,7 @@ public class JeuDomino extends JFrame {
         }
     }
 
+    /// !!!!!
     private Joueur gagnant() {
         Joueur gagnant = null;
         for (int i = getPartie().getJoueurs().length - 1; i > 0; i--) {
