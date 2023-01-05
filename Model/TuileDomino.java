@@ -3,7 +3,7 @@ package Model;
 public class TuileDomino extends Tuile {
     private int numeros[][] = new int[4][3];
 
-    TuileDomino(int numeros[][]) {
+    public TuileDomino(int numeros[][]) {
         this.numeros = numeros;
     }
 
@@ -45,5 +45,18 @@ public class TuileDomino extends Tuile {
         if (this.numeros[side][2] != ((TuileDomino) p).numeros[(side + 2) % 4][0])
             return false;
         return true;
+    }
+
+    @Override
+    public String toString() {
+        String st = "";
+        for(int i = 0; i<numeros.length; i++){
+            st+= "[";
+            for(int j = 0; j<numeros[i].length; j++){
+                st+= numeros[i][j] + " ";
+            }
+            st+="]";
+        }
+        return st;
     }
 }

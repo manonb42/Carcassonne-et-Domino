@@ -1,5 +1,7 @@
 package vueGraphique;
 
+import java.awt.Dimension;
+
 import Model.*;
 
 public class ControleurIADomino extends ControleurDomino{
@@ -20,6 +22,7 @@ public class ControleurIADomino extends ControleurDomino{
                         if (plateau.getPiece(coordX, coordY) == null) {
                             for (int k = 0; k < 4; k++) {
                                 domino.getTuileActuelle().getTuile().tourner(k);
+                                domino.getTuileActuelle().actualiser();
                                 if (domino.getPartie().getPlateau().placer(domino.getTuileActuelle().getTuile(),
                                         new Coordonnees(coordX, coordY))) {
                                     Coordonnees coord = new Coordonnees(coordX, coordY);
@@ -29,6 +32,7 @@ public class ControleurIADomino extends ControleurDomino{
                                     domino.action.setText("La pièce a bien été placée");
                                     domino.getGridBagConstraints().gridx = 72 + coord.getX();
                                     domino.getGridBagConstraints().gridy = 72 - coord.getY();
+                                    domino.getTuileActuelle().setPreferredSize(new Dimension(25,25));
                                     domino.plateau.add(domino.getTuileActuelle(), domino.gbc);
                                     return true;
                                 }

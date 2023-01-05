@@ -47,10 +47,10 @@ public class JeuCarcassonne extends JFrame {
         p = new Partie(jou, pl, s);
 
         jActuel = p.getJoueurs()[0]; // joueur actuel
-        gbc.ipadx = 100;
-        gbc.ipady = 100;
+        gbc.ipadx = 73;
+        gbc.ipady = 73;
 
-        plateau.setPreferredSize(new Dimension(3000, 3000));
+        plateau.setPreferredSize(new Dimension(6000, 6000));
         plateau.setLayout(new GridBagLayout());
 
         mainAct.setPreferredSize(new Dimension(500, 100));
@@ -63,7 +63,7 @@ public class JeuCarcassonne extends JFrame {
         controleurj=new ControleurJoueurCarcassonne(this);
 
         play.setLayout(new GridLayout(7, 1));
-        play.setPreferredSize(new Dimension(300, 800));
+        play.setPreferredSize(new Dimension(300, 900));
         play.setBackground(Color.LIGHT_GRAY);
 
         texte.setLayout(new GridLayout(3, 1));
@@ -101,7 +101,7 @@ public class JeuCarcassonne extends JFrame {
         gbc.gridy = 72;
         plateau.add(debut, gbc);
         p.getPlateau().placer(tu, new Coordonnees(0, 0));
-        plat.getViewport().setViewPosition(new Point(900, 1100));
+        plat.getViewport().setViewPosition(new Point(2450, 2550));
 
         placer.addActionListener((ActionEvent e) -> {
             String st = choix.getText();
@@ -110,7 +110,9 @@ public class JeuCarcassonne extends JFrame {
             try {
                 String chaine[] = st.split(",");
                 coord = new Coordonnees(Integer.parseInt(chaine[0]), Integer.parseInt(chaine[1]));
-                if (controleurj.placementPiece(coord)){
+                if(coord.getX()>36 || coord.getY()>36 || coord.getX()<-36 || coord.getY()<-36){
+                    action.setText("Les coordonnées sont en dehors du plateau");
+                }else if (controleurj.placementPiece(coord)){
                     action.setText("La pièce a bien été placée");
                     gbc.gridx = 72 + coord.getX();
                     gbc.gridy = 72 - coord.getY();
@@ -315,6 +317,13 @@ public class JeuCarcassonne extends JFrame {
                     System.out.println(err);
                 }
             }
+            try{
+                BufferedImage pion = ImageIO.read(new File("resources/pion1.png"));
+
+            }catch(Exception err){
+                System.out.println(err);
+            }
+
         }
 
         public BufferedImage getImage(){

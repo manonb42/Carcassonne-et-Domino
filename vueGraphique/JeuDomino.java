@@ -13,6 +13,7 @@ public class JeuDomino extends JFrame {
     JPanel plateau = new JPanel();
     JPanel mainAct = new JPanel(); // main actuelle
     JPanel play = new JPanel(); // actions (a droite)
+    JPanel piece = new JPanel(); // la ou est la pièce
     JTextField choix = new JTextField(); // la ou on peut écrire les coordonées
     JButton placer = new JButton("Placer la tuile");
     JButton tourner = new JButton("Tourner la pièce");
@@ -41,21 +42,27 @@ public class JeuDomino extends JFrame {
         controleuria = new ControleurIADomino(this);
         controleurj = new ControleurJoueurDomino(this);
 
-        plateau.setPreferredSize(new Dimension(3000, 3000));
+        plateau.setPreferredSize(new Dimension(6000, 6000));
         plateau.setLayout(new GridBagLayout());
-        mainAct.setPreferredSize(new Dimension(500, 100));
-        mainAct.setLayout(new GridLayout(1, 5));
+        mainAct.setPreferredSize(new Dimension(500, 150));
+        mainAct.setLayout(new BorderLayout());
 
         c = new TuileDominoGraphique((TuileDomino) (p.getSac().piocher())); // premiere pièce
-        JPanel jp = new JPanel();
-        mainAct.add(jp);
-        JPanel jp2 = new JPanel();
-        mainAct.add(jp2);
-        mainAct.add(c);
+        c.setPreferredSize(new Dimension(120,120));
+        JPanel bordG = new JPanel();
+        JPanel bordD = new JPanel();
+        bordG.setPreferredSize(new Dimension(100,400));
+        bordD.setPreferredSize(new Dimension(100,400));
+
+        piece.setPreferredSize(new Dimension(300,400));
+        mainAct.add(bordG,BorderLayout.WEST);
+        mainAct.add(bordD,BorderLayout.EAST);
+        mainAct.add(piece,BorderLayout.CENTER);
+        piece.add(c);
         jActuel.setPiece(c.getTuile());
 
         play.setLayout(new GridLayout(7, 1));
-        play.setPreferredSize(new Dimension(300, 800));
+        play.setPreferredSize(new Dimension(300, 850));
         play.setBackground(Color.LIGHT_GRAY);
 
         texte.setLayout(new GridLayout(3, 1));
@@ -88,7 +95,7 @@ public class JeuDomino extends JFrame {
         gbc.gridy = 72;
         plateau.add(debut, gbc);
         p.getPlateau().placer(debut.t, new Coordonnees(0, 0));
-        plat.getViewport().setViewPosition(new Point(900, 1100));
+        plat.getViewport().setViewPosition(new Point(2450, 2550));
 
         placer.addActionListener((ActionEvent e) -> {
             String st = choix.getText();
@@ -97,10 +104,13 @@ public class JeuDomino extends JFrame {
             try {
                 String chaine[] = st.split(",");
                 coord = new Coordonnees(Integer.parseInt(chaine[0]), Integer.parseInt(chaine[1]));
-                if (controleurj.placementPiece(coord)){
+                if(coord.getX()>23 || coord.getY()>23 || coord.getX()<-23 || coord.getY()<-23){
+                    action.setText("Les coordonnées sont en dehors du plateau");
+                }else if (controleurj.placementPiece(coord)){
                     action.setText("La pièce a bien été placée");
                     gbc.gridx = 72 + coord.getX();
                     gbc.gridy = 72 - coord.getY();
+                    c.setPreferredSize(new Dimension(25,25));
                     plateau.add(c, gbc);
                     prochainJoueur();
                 }else{
@@ -157,11 +167,12 @@ public class JeuDomino extends JFrame {
 
     ///////////////////
     void piocher() { // fonction pour piocher
-        mainAct.remove(c);
+        piece.remove(c);
         TuileDomino tmp1 = (TuileDomino) (p.getSac().piocher());
         TuileDominoGraphique tmp2 = new TuileDominoGraphique(tmp1);
         c = tmp2;
-        mainAct.add(c);
+        c.setPreferredSize(new Dimension(120,120));
+        piece.add(c);
         nbPiece.setText("Il reste : " + p.getSac().getPiecesRestantes() + " pièces");
         tourAct.setText(
                 "C'est le tour de : " + jActuel.getName() + ", vous avez " + jActuel.getNbPoints() + " points !");
@@ -169,22 +180,33 @@ public class JeuDomino extends JFrame {
 
     /////// le gagnant 
     void finDePartie() { // quand la partie est finie, affiche une nouvelle fenetre
+        for(int i = 0; i<p.getJoueurs().length; i++){
+            System.out.print(p.getJoueurs()[i].getName()+" : "+p.getJoueurs()[i].getNbPoints()+" |");
+        }
         hide();
         JFrame j = new JFrame();
+        j.setDefaultCloseOperation(EXIT_ON_CLOSE);
         j.setTitle("Jeu de Carcassonne");
         j.setSize(400, 400);
         j.setLayout(new BorderLayout());
         j.setLocationRelativeTo(null);
         JLabel win = new JLabel("Fin de la partie, il n'y a pas de gagnant");
         if (gagnant() != null) {
-            win.setText("Fin de la partie, le gagnant est : " + gagnant().getName());
+            win.setText("Fin de la partie, le(la) gagnant(e) est : " + gagnant().getName());
+            JLabel points = new JLabel("Nombre de Points : "+gagnant().getNbPoints());
+            j.add(win, BorderLayout.CENTER);
+            j.add(points, BorderLayout.SOUTH);
+            points.setHorizontalAlignment((int) CENTER_ALIGNMENT);
+            points.setFont(new Font("Arial", Font.BOLD, 20));
+        }else{
+            j.add(win, BorderLayout.CENTER);
         }
 
-        j.add(win, BorderLayout.CENTER);
+
         win.setHorizontalAlignment((int) CENTER_ALIGNMENT);
-        win.setFont(new Font("Arial", Font.BOLD, 20));
+        win.setFont(new Font("Arial", Font.BOLD, 15));
         j.setVisible(true);
-        j.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        
 
     }
 
@@ -218,20 +240,36 @@ public class JeuDomino extends JFrame {
 
     /// !!!!!
     private Joueur gagnant() {
-        Joueur gagnant = null;
-        for (int i = getPartie().getJoueurs().length - 1; i > 0; i--) {
-            if (getPartie().getJoueurs()[i].getNbPoints() > getPartie().getJoueurs()[i - 1].getNbPoints()) {
-                gagnant = getPartie().getJoueurs()[i];
+        Joueur gagnant = p.getJoueurs()[0];
+        int gagnantPoint = p.getJoueurs()[0].getNbPoints();
+        int nbGagnant = 0;
+        for (int i = 0; i < p.getJoueurs().length; i++) {
+            if (p.getJoueurs()[i].getNbPoints() > gagnantPoint) {
+                gagnant = p.getJoueurs()[i];
+                gagnantPoint = p.getJoueurs()[i].getNbPoints();
+                nbGagnant=0;
+            }else if(p.getJoueurs()[i].getNbPoints() == gagnantPoint){
+                nbGagnant ++;
+            }else{
+
             }
         }
-        getPartie().setGagnant(gagnant);
-        return gagnant;
+        if(nbGagnant!=0){
+            return null;
+        }else{
+            return gagnant;
+        }
     }
 
     private Partie configurer(Joueur[] jou) {
         Grille g = new Grille();
         Plateau pl = new Plateau(g);
-        SacDomino s = new SacDomino(20);
+        SacDomino s = new SacDomino(30);
         return new Partie(jou, pl, s);
+    }
+
+    public static void main(String[] args) {
+        Joueur[] j = {new Joueur("Lukas", false),new Joueur("Ilias", true)};
+        new JeuDomino(j);
     }
 }
