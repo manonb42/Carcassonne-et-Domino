@@ -165,12 +165,11 @@ public class JeuCarcassonne extends JFrame {
             } finally {
                 prochainJoueur();
             }
-
-            if (jActuel.getisIA()) {
-                placerIA();
-            }
-
         });
+
+        if (jActuel.getisIA()) {
+            placerIA();
+        }
 
     }
 
@@ -459,6 +458,9 @@ public class JeuCarcassonne extends JFrame {
                                     gbc.gridx = 72 + coord.getX();
                                     gbc.gridy = 72 - coord.getY();
                                     this.plateau.add(getTuileActuelle(), gbc);
+                                    if(joueur.getPions()>0){
+                                        placerpartisan(coord, joueur);
+                                    }
                                     return true;
                                 }
                             }
@@ -480,6 +482,13 @@ public class JeuCarcassonne extends JFrame {
             }
         }
         return plateauvide;
+    }
+
+    public void placerpartisan(Coordonnees coordonnees, Joueur joueur){
+        int i = (int) (Math.random() * (3));
+        joueur.setPions(joueur.getPions() - 1);
+        c.t.paysages[i].setPion(true);
+        action.setText("Le pion a été placé en " + i);
     }
 
 }
