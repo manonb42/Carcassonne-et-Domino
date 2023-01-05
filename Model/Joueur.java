@@ -5,20 +5,20 @@ public class Joueur {
     private int nbPoints = 0;
     private Tuile pieceactuelle;
     private boolean ia = false;
-    private boolean abandon; // si true, fin de la partie pour le joueur
+    private boolean abandon;
     protected int pions = 8;
 
     public Joueur(String nom, boolean ia) {
         this.nom = nom;
-        this.ia=ia;
+        this.ia = ia;
     }
 
     public String getName() {
         return this.nom;
     }
 
-    public void setName(String name){
-        this.nom=name;
+    public void setName(String name) {
+        this.nom = name;
     }
 
     public Tuile getPiece() {
@@ -52,11 +52,11 @@ public class Joueur {
     public void setAbandon(boolean abandon) {
         this.abandon = abandon;
     }
-    
+
     public void setPions(int pions) {
         this.pions = pions;
     }
-    
+
     public int getPions() {
         return pions;
     }

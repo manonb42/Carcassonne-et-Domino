@@ -2,8 +2,7 @@ package Model;
 
 public class Pre extends Paysage {
 
-    Pre(){
+    Pre() {
         setName("Pré");
     }
-    
 }

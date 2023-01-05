@@ -36,7 +36,6 @@ public class TuileDomino extends Tuile {
         }
     }
 
-    // verifier le casting
     @Override
     public boolean sidesMatch(Tuile p, int side) {
         if (this.numeros[side][0] != ((TuileDomino) p).numeros[(side + 2) % 4][2])

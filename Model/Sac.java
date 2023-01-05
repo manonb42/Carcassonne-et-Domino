@@ -5,5 +5,5 @@ public abstract class Sac {
 
     public abstract Tuile piocher();
 
-    public abstract  int getPiecesRestantes();
+    public abstract int getPiecesRestantes();
 }

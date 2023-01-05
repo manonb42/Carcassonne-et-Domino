@@ -3,13 +3,10 @@ package Model;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class Grille {
-    // une grille c'est une liste de liste de pieces
     private List<List<Tuile>> pieces = new ArrayList<List<Tuile>>();
-
-    private int dx = 0; // vecteur pour x
-    private int dy = 0; // vecteur pour y
+    private int dx = 0; 
+    private int dy = 0; 
 
     public Grille() {
         for (int i = 0; i < 5; i++) {
@@ -31,7 +28,6 @@ public class Grille {
     public List<List<Tuile>> getListPieces() {
         return this.pieces;
     }
-
 
     public void setPiece(int x, int y, Tuile p) {
         if (y + dy >= pieces.size()) {
@@ -56,7 +52,7 @@ public class Grille {
 
         }
         if (y + dy < 0) {
-            for (int i = 0; i < -y-dy ; i++) {
+            for (int i = 0; i < -y - dy; i++) {
                 int nbcols = pieces.get(0).size();
                 List<Tuile> newlist = new ArrayList<Tuile>(nbcols);
                 for (int j = 0; j < nbcols; j++) {
@@ -68,13 +64,13 @@ public class Grille {
         }
         if (x + dx < 0) {
             for (int i = 0; i < pieces.size(); i++) {
-                for (int j = 0; j < -x-dx; j++) {
+                for (int j = 0; j < -x - dx; j++) {
                     pieces.get(i).add(0, null);
                 }
             }
             dx = -x;
         }
-        pieces.get(y + dy).set(x+dx, p);
+        pieces.get(y + dy).set(x + dx, p);
     }
 
     // getter d'une piece

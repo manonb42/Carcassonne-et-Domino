@@ -11,7 +11,6 @@ public class SacDomino extends Sac {
         }
     }
 
-    
     public TuileDomino genererPiece() {
         int tab[][] = new int[4][3];
         TuileDomino p = new TuileDomino(tab);
@@ -35,5 +34,4 @@ public class SacDomino extends Sac {
         this.pieces[nbPiecesRestantes] = null;
         return p;
     }
-
 }

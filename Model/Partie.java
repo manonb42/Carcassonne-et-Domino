@@ -43,21 +43,22 @@ public class Partie implements Serializable {
         this.gagnant = g;
     }
 
-    public boolean getFin(){
+    public boolean getFin() {
         return fin;
     }
+
     public void setFin(boolean fin) {
         this.fin = fin;
     }
 
     public void fullAbandon() {
         int ab = 0;
-        for(int i = 0; i<joueurs.length; i++){
-            if(joueurs[i].getAbandon()){
+        for (int i = 0; i < joueurs.length; i++) {
+            if (joueurs[i].getAbandon()) {
                 ab++;
             }
         }
-        if(ab>=joueurs.length-1){
+        if (ab >= joueurs.length - 1) {
             fin = true;
         }
     }
@@ -65,6 +66,4 @@ public class Partie implements Serializable {
     public Joueur getGagnant() {
         return gagnant;
     }
-
-
 }

@@ -2,8 +2,7 @@ package Model;
 
 public class Route extends Paysage {
 
-    public Route(){
+    public Route() {
         setName("Route");
     }
-    
 }

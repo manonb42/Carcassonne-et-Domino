@@ -8,8 +8,7 @@ public class TuileCarcassonne extends Tuile {
     }
 
     @Override
-    public
-    void tourner(int nbTours) {
+    public void tourner(int nbTours) {
         if (nbTours > 0) {
             for (int i = 0; i < nbTours; i++) {
                 Paysage tmp = paysages[3];
@@ -37,10 +36,9 @@ public class TuileCarcassonne extends Tuile {
     @Override
     public String toString() {
         String m = "";
-        for(Paysage e : paysages){
-            m+= e.getName() + " " ;
+        for (Paysage e : paysages) {
+            m += e.getName() + " ";
         }
         return m;
     }
-
 }
