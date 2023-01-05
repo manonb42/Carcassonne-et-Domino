@@ -158,6 +158,8 @@ public class JeuCarcassonne extends JFrame {
                 int i = Integer.valueOf(str);
                 if (i >= 0 && i <= 4) {
                     jActuel.setPions(jActuel.getPions() - 1);
+                    c.fillzone(jActuel.getColor(),i);
+                    c.paint(c.getGraphics());
                     c.t.paysages[i].setPion(true);
                     action.setText("Le pion a été placé en " + i);
                 } else {
@@ -317,17 +319,53 @@ public class JeuCarcassonne extends JFrame {
                     System.out.println(err);
                 }
             }
-            try{
-                BufferedImage pion = ImageIO.read(new File("resources/pion1.png"));
 
-            }catch(Exception err){
-                System.out.println(err);
-            }
 
         }
 
         public BufferedImage getImage(){
             return this.image;
+        }
+
+        protected void fillzone(Color c,int cote){
+            if(cote == 0){
+                for(int i = 10; i< 20; i++){
+                    for(int j = 40; j<50;j++){
+                        int rgb = c.getRGB();
+                        image.setRGB(j, i, rgb);
+                    }
+                }
+
+
+
+            }else if(cote == 1){
+                for(int i = 40; i< 50; i++){
+                    for(int j = 70; j<80;j++){
+                        int rgb = c.getRGB();
+                        image.setRGB(j, i, rgb);
+                    }
+                }
+
+            }else if(cote == 2){
+                for(int i = 70; i< 80; i++){
+                    for(int j = 40; j<50;j++){
+                        int rgb = c.getRGB();
+                        image.setRGB(j, i, rgb);
+                    }
+                }
+
+            }else{
+                for(int i = 40; i< 50; i++){
+                    for(int j = 10; j<20;j++){
+                        int rgb = c.getRGB();
+                        image.setRGB(j, i, rgb);
+                    }
+                }
+
+            }
+
+
+
         }
 
         @Override

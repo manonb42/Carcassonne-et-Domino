@@ -1,5 +1,7 @@
 package Model;
 
+import java.awt.Color;
+
 public class Joueur {
     private String nom;
     private int nbPoints = 0;
@@ -7,6 +9,7 @@ public class Joueur {
     private boolean ia = false;
     private boolean abandon;
     protected int pions = 8;
+    private Color c;
 
     public Joueur(String nom, boolean ia) {
         this.nom = nom;
@@ -59,5 +62,12 @@ public class Joueur {
 
     public int getPions() {
         return pions;
+    }
+
+    public void setColor(Color c) {
+        this.c = c;
+    }
+    public Color getColor() {
+        return c;
     }
 }

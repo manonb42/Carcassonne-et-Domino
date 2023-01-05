@@ -74,15 +74,19 @@ public class ConfigurationJeu extends JFrame {
             Joueur p3 = new Joueur(j3.getText(), ia3.isSelected());
             Joueur p4 = new Joueur(j4.getText(), ia4.isSelected());
             if (!p1.getName().equals("")) {
+                p1.setColor(Color.BLUE);
                 tab[0] = p1;
             }
             if (!p2.getName().equals("")) {
+                p2.setColor(Color.YELLOW);
                 tab[1] = p2;
             }
             if (!p3.getName().equals("")) {
+                p3.setColor(Color.GREEN);
                 tab[2] = p3;
             }
             if (!p4.getName().equals("")) {
+                p4.setColor(Color.RED);
                 tab[3] = p4;
             }
 
