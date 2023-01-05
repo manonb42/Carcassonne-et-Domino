@@ -12,9 +12,6 @@ public abstract class ControleurTerminal {
 
     // Piocher une Tuile
     public TuileDomino piocherPiece(Joueur joueur) {
-        // int[][] t = { { 1, 1, 1 }, { 1, 1, 1 }, { 1, 1, 1 }, { 1, 1, 1 } }; // pour les tests
-        // TuileDomino d = new TuileDomino(t);
-        // joueur.setPiece(d);
         joueur.setPiece(terminal.getPartie().getSac().piocher());
         return (TuileDomino) (joueur.getPiece());
     }
