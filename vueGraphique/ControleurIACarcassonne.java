@@ -5,7 +5,6 @@ import java.awt.image.BufferedImage;
 import Model.*;
 
 public class ControleurIACarcassonne extends ControleurCarcassonne {
-    JeuCarcassonne carcassonne;
 
     ControleurIACarcassonne(JeuCarcassonne t) {
         this.carcassonne = t;

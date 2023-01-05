@@ -3,7 +3,6 @@ package vueGraphique;
 import Model.*;
 
 public class ControleurIADomino extends ControleurDomino{
-    JeuDomino domino;
 
     ControleurIADomino(JeuDomino t) {
         this.domino = t;

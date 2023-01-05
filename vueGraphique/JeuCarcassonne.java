@@ -12,6 +12,7 @@ import java.awt.geom.AffineTransform;
 public class JeuCarcassonne extends JFrame {
     Partie p; // partie en cours
     ControleurIACarcassonne controleuria;
+    ControleurJoueurCarcassonne controleurj;
     PieceCGraph c; // pièce de la main actuelle
     JPanel texte = new JPanel();
     JPanel plateau = new JPanel();
@@ -59,6 +60,7 @@ public class JeuCarcassonne extends JFrame {
         mainAct.add(c);
         jActuel.setPiece(c.t);
         controleuria=new ControleurIACarcassonne(this);
+        controleurj=new ControleurJoueurCarcassonne(this);
 
         play.setLayout(new GridLayout(7, 1));
         play.setPreferredSize(new Dimension(300, 800));
@@ -108,14 +110,12 @@ public class JeuCarcassonne extends JFrame {
             try {
                 String chaine[] = st.split(",");
                 coord = new Coordonnees(Integer.parseInt(chaine[0]), Integer.parseInt(chaine[1]));
-                if (p.getPlateau().validPlacement(c.t, coord)) {
-                    p.plateau.placer(c.t, coord);
+                if (controleurj.placementPiece(coord)){
                     action.setText("La pièce a bien été placée");
                     gbc.gridx = 72 + coord.getX();
                     gbc.gridy = 72 - coord.getY();
                     plateau.add(c, gbc);
-                    jActuel.setPiece(null);
-                    if (jActuel.getPions() > 0) {
+                    if (controleurj.nbpions(jActuel)) {
                         placerPion();
                     } else {
                         prochainJoueur();
