@@ -3,14 +3,7 @@ package vueTerminal;
 import java.util.List;
 import java.util.Scanner;
 
-import Model.Coordonnees;
-import Model.Grille;
-import Model.Joueur;
-import Model.Partie;
-import Model.Plateau;
-import Model.SacDomino;
-import Model.Tuile;
-import Model.TuileDomino;
+import Model.*;
 
 public class Terminal {
     public Partie p;
@@ -309,14 +302,6 @@ public class Terminal {
         while (p.getSac().getPiecesRestantes() != 0 && !p.getFin()) {
             int tourDe = i % p.getJoueurs().length;
             if (!p.getJoueurs()[tourDe].getAbandon()) { 
-                /* A VOIR
-                if(p.getJoueurs()[tourDe].getisIA()){
-                    try {
-                    Thread.sleep(3000);
-                    } catch (InterruptedException e) {
-                    }
-                }*/
-                
                 System.out.println("\n--------------------------\n"
                         + "C'est au tour de " + p.getJoueurs()[tourDe].getName() + " !");
 

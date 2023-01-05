@@ -15,7 +15,7 @@ public class Plateau {
         this.g = g;
     }
 
-    public boolean placer(TuileDomino p, Coordonnees coordonnee) {
+    public boolean placer(Tuile p, Coordonnees coordonnee) {
         if (validPlacement(p, coordonnee)) {
             g.setPiece(coordonnee.getX(), coordonnee.getY(), p);
             return true;
@@ -73,46 +73,5 @@ public class Plateau {
         if (cotevide)
             return false;
         return true;
-    }
-
-    // test pour la Grille
-    public static void main(String[] args) {
-        Plateau plateau = new Plateau(new Grille());
-        int[][] tab = { { 1, 1, 1 }, { 1, 1, 1 }, { 1, 1, 1 }, { 1, 1, 1 } };
-        TuileDomino p1 = new TuileDomino(tab);
-        TuileDomino p2 = new TuileDomino(tab);
-        TuileDomino p3 = new TuileDomino(tab);
-
-        // System.out.println(plateau.placer(p1, new Coordonnees(0,0)));
-        // System.out.println(plateau.placer(p2, new Coordonnees(-1,0)));
-        // System.out.println(plateau.placer(p3, new Coordonnees(-2,0)));
-        // System.out.println(plateau.getGrille().getPiece(1, 0)); // 922
-        // System.out.println(plateau.getGrille().getPiece(0, 0)); // f
-        // System.out.println(plateau.getGrille().getPiece(-1,0)); // null 
-        // System.out.println(plateau.getGrille().getPiece(-2,0)); // e
-        // System.out.println();
-        // System.out.println(plateau.getGrille().getListPieces().get(0).get(0)); // e
-        // System.out.println(plateau.getGrille().getListPieces().get(0).get(1)); // null 
-        // System.out.println(plateau.getGrille().getListPieces().get(0).get(2)); // f
-
-        System.out.println(plateau.placer(p1, new Coordonnees(0,0)));
-        System.out.println(plateau.placer(p2, new Coordonnees(-1,0)));
-
-        System.out.println(plateau.getGrille().getPiece(0, 0)); // 922
-        System.out.println(plateau.getGrille().getPiece(-1,0)); // f
-        System.out.println(plateau.getGrille().getListPieces().get(0).get(0)); // f
-        System.out.println(plateau.getGrille().getListPieces().get(0).get(1)); // 922
-        System.out.println();
-
-        System.out.println(plateau.placer(p3, new Coordonnees(-2,0)));
-
-        System.out.println(plateau.getGrille().getPiece(1, 0)); // NULL
-        System.out.println(plateau.getGrille().getPiece(0, 0)); // 922
-        System.out.println(plateau.getGrille().getPiece(-1,0)); // f
-        System.out.println(plateau.getGrille().getPiece(-2,0)); // e
-        System.out.println(plateau.getGrille().getListPieces().get(0).get(0)); // e
-        System.out.println(plateau.getGrille().getListPieces().get(0).get(1)); // f
-        System.out.println(plateau.getGrille().getListPieces().get(0).get(2)); // 922
-
     }
 }
