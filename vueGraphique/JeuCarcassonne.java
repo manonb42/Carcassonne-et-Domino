@@ -57,6 +57,7 @@ public class JeuCarcassonne extends JFrame {
 
         c = new PieceCGraph((TuileCarcassonne) (p.getSac().piocher())); // premiere pièce
         mainAct.add(c);
+        jActuel.setPiece(c.t);
 
         play.setLayout(new GridLayout(7, 1));
         play.setPreferredSize(new Dimension(300, 800));
@@ -96,6 +97,7 @@ public class JeuCarcassonne extends JFrame {
         gbc.gridx = 72;
         gbc.gridy = 72;
         plateau.add(debut, gbc);
+        p.getPlateau().placer(tu, new Coordonnees(0, 0));
         plat.getViewport().setViewPosition(new Point(900, 1100));
 
         placer.addActionListener((ActionEvent e) -> {
@@ -111,6 +113,7 @@ public class JeuCarcassonne extends JFrame {
                     gbc.gridx = 72 + coord.getX();
                     gbc.gridy = 72 - coord.getY();
                     plateau.add(c, gbc);
+                    jActuel.setPiece(null);
                     if (jActuel.getPions() > 0) {
                         placerPion();
                     } else {
@@ -130,7 +133,7 @@ public class JeuCarcassonne extends JFrame {
             c.image = i;
             paint(getGraphics());
             c.t.tourner(1);
-            System.out.println(c.t);
+            System.out.println(jActuel.getPiece());
 
         });
 
@@ -408,9 +411,13 @@ public class JeuCarcassonne extends JFrame {
         tourAct.setText("C'est le tour de : " + jActuel.getName() + " vous avez " + jActuel.getPions() + " pions");
         if (!jActuel.getAbandon() && jActuel.getisIA() && p.getSac().getPiecesRestantes() > 0) {
             piocher();
+            jActuel.setPiece(c.t);
+            System.out.println(jActuel.getPiece());
             placerIA();
         } else if (p.getSac().getPiecesRestantes() > 0) {
             piocher();
+            jActuel.setPiece(c.t);
+            System.out.println(jActuel.getPiece());
             System.out.println(c.t);
         } else {
             finDePartie();

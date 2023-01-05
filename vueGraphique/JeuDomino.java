@@ -102,6 +102,7 @@ public class JeuDomino extends JFrame {
                     gbc.gridx = 72 + coord.getX();
                     gbc.gridy = 72 - coord.getY();
                     plateau.add(c, gbc);
+                    jActuel.setPiece(null);
                     prochainJoueur();
                 } else {
                     action.setText("La pièce n'a pas pu être placée");
@@ -197,9 +198,13 @@ public class JeuDomino extends JFrame {
                 "C'est le tour de : " + jActuel.getName() + ", vous avez " + jActuel.getNbPoints() + " points !");
         if (!jActuel.getAbandon() && jActuel.getisIA() && p.getSac().getPiecesRestantes() > 0) {
             piocher();
+            jActuel.setPiece(c.t);
+            System.out.println(jActuel.getPiece());
             controleuria.placerIA();
         } else if (p.getSac().getPiecesRestantes() > 0) {
             piocher();
+            jActuel.setPiece(c.t);
+            System.out.println(jActuel.getPiece());
         } else {
             finDePartie();
         }
