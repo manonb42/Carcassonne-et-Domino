@@ -1,4 +1,5 @@
 package vueGraphique;
+
 import javax.swing.*;
 import Model.*;
 import java.awt.*;
@@ -221,11 +222,10 @@ public class JeuDomino extends JFrame {
         return gagnant;
     }
 
-    private Partie configurer(Joueur[] jou){
+    private Partie configurer(Joueur[] jou) {
         Grille g = new Grille();
         Plateau pl = new Plateau(g);
         SacDomino s = new SacDomino(20);
         return new Partie(jou, pl, s);
     }
-
 }

@@ -1,7 +1,6 @@
 package vueGraphique;
 
 import javax.swing.*;
-
 import java.awt.*;
 
 public class MenuPrincipal extends JFrame {
@@ -38,5 +37,4 @@ public class MenuPrincipal extends JFrame {
         }));
 
     }
-
 }

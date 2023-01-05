@@ -1,13 +1,13 @@
 package vueGraphique;
+
 import Model.*;
 
-public class ControleurIADomino {
+public class ControleurIADomino extends ControleurDomino{
     JeuDomino domino;
 
-    ControleurIADomino(JeuDomino t){
+    ControleurIADomino(JeuDomino t) {
         this.domino = t;
     }
-    
 
     public boolean tryPlacerPiece(Joueur joueur) {
         Grille plateau = domino.getPartie().getPlateau().getGrille();
@@ -19,23 +19,27 @@ public class ControleurIADomino {
                         int coordX = j + deltas[delta][0];
                         int coordY = i + deltas[delta][1];
                         if (plateau.getPiece(coordX, coordY) == null) {
-                            for(int k=0; k<4; k++){
+                            for (int k = 0; k < 4; k++) {
                                 domino.getTuileActuelle().getTuile().tourner(k);
-                                if (domino.getPartie().getPlateau().placer(domino.getTuileActuelle().getTuile(), new Coordonnees(coordX, coordY))){
+                                if (domino.getPartie().getPlateau().placer(domino.getTuileActuelle().getTuile(),
+                                        new Coordonnees(coordX, coordY))) {
                                     Coordonnees coord = new Coordonnees(coordX, coordY);
-                                    domino.getJoueurActuel().setNbPoints(domino.getJoueurActuel().getNbPoints()+domino.getPartie().plateau.newPoints(domino.getTuileActuelle().getTuile(),coord ));
+                                    domino.getJoueurActuel().setNbPoints(
+                                            domino.getJoueurActuel().getNbPoints() + domino.getPartie().plateau
+                                                    .newPoints(domino.getTuileActuelle().getTuile(), coord));
                                     domino.action.setText("La pièce a bien été placée");
                                     domino.getGridBagConstraints().gridx = 72 + coord.getX();
                                     domino.getGridBagConstraints().gridy = 72 - coord.getY();
-                                    domino.plateau.add(domino.getTuileActuelle(),domino.gbc);
+                                    domino.plateau.add(domino.getTuileActuelle(), domino.gbc);
                                     return true;
-                                }   
+                                }
                             }
                         }
                     }
                 }
             }
-        } return false; 
+        }
+        return false;
     }
 
     public boolean plateauvide() {
@@ -50,7 +54,7 @@ public class ControleurIADomino {
         return plateauvide;
     }
 
-    void placerIA(){
+    void placerIA() {
         tryPlacerPiece(domino.getJoueurActuel());
         domino.prochainJoueur();
     }

@@ -11,7 +11,7 @@ import java.awt.geom.AffineTransform;
 
 public class JeuCarcassonne extends JFrame {
     Partie p; // partie en cours
-
+    ControleurIACarcassonne controleuria;
     PieceCGraph c; // pièce de la main actuelle
     JPanel texte = new JPanel();
     JPanel plateau = new JPanel();
@@ -58,6 +58,7 @@ public class JeuCarcassonne extends JFrame {
         c = new PieceCGraph((TuileCarcassonne) (p.getSac().piocher())); // premiere pièce
         mainAct.add(c);
         jActuel.setPiece(c.t);
+        controleuria=new ControleurIACarcassonne(this);
 
         play.setLayout(new GridLayout(7, 1));
         play.setPreferredSize(new Dimension(300, 800));
@@ -168,13 +169,13 @@ public class JeuCarcassonne extends JFrame {
         });
 
         if (jActuel.getisIA()) {
-            placerIA();
+            controleuria.placerIA();
         }
 
     }
 
     class PieceCGraph extends JPanel {
-        private BufferedImage image;
+        public BufferedImage image;
         TuileCarcassonne t;
 
         PieceCGraph(TuileCarcassonne t) {
@@ -316,6 +317,10 @@ public class JeuCarcassonne extends JFrame {
             }
         }
 
+        public BufferedImage getImage(){
+            return this.image;
+        }
+
         @Override
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
@@ -338,6 +343,10 @@ public class JeuCarcassonne extends JFrame {
 
     public GridBagConstraints getGridBagConstraints() {
         return this.gbc;
+    }
+
+    public JLabel getAction(){
+        return this.action;
     }
 
     public BufferedImage rotateImageByDegrees(BufferedImage img, double angle) { // fonction pour tourner de 90 deg
@@ -412,7 +421,7 @@ public class JeuCarcassonne extends JFrame {
             piocher();
             jActuel.setPiece(c.t);
             System.out.println(jActuel.getPiece());
-            placerIA();
+            controleuria.placerIA();
         } else if (p.getSac().getPiecesRestantes() > 0) {
             piocher();
             jActuel.setPiece(c.t);
@@ -430,65 +439,6 @@ public class JeuCarcassonne extends JFrame {
         tourner.setVisible(false);
         passer.setVisible(false);
         abandonner.setVisible(false);
-    }
-
-    void placerIA() {
-        tryPlacerPiece(getJoueurActuel());
-        prochainJoueur();
-    }
-
-    public boolean tryPlacerPiece(Joueur joueur) {
-        Grille plateau = p.getPlateau().getGrille();
-        int[][] deltas = { { 0, 1 }, { 1, 0 }, { 0, -1 }, { -1, 0 } };
-        for (int i = 0; i < plateau.getListPieces().size(); i++) {
-            for (int j = 0; j < plateau.getListPieces().get(i).size(); j++) {
-                if (plateau.getListPieces().get(i).get(j) != null) {
-                    for (int delta = 0; delta < deltas.length; delta++) {
-                        int coordX = j + deltas[delta][0];
-                        int coordY = i + deltas[delta][1];
-                        if (plateau.getPiece(coordX, coordY) == null) {
-                            for (int k = 0; k < 4; k++) {
-                                getTuileActuelle().t.tourner(k);
-                                BufferedImage buffer = rotateImageByDegrees(c.image, k*90);
-                                c.image = buffer;
-                                paint(getGraphics());
-                                if (p.getPlateau().placer(getTuileActuelle().t, new Coordonnees(coordX, coordY))) {
-                                    Coordonnees coord = new Coordonnees(coordX, coordY);
-                                    action.setText("La pièce a bien été placée");
-                                    gbc.gridx = 72 + coord.getX();
-                                    gbc.gridy = 72 - coord.getY();
-                                    this.plateau.add(getTuileActuelle(), gbc);
-                                    if(joueur.getPions()>0){
-                                        placerpartisan(coord, joueur);
-                                    }
-                                    return true;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        return false;
-    }
-
-    public boolean plateauvide() {
-        boolean plateauvide = true;
-        for (int i = 0; i < p.getPlateau().getGrille().getListPieces().size(); i++) {
-            for (int z = 0; z < p.getPlateau().getGrille().getListPieces().get(i).size(); z++) {
-                if (p.getPlateau().getGrille().getListPieces().get(i).get(z) != null) {
-                    plateauvide = false;
-                }
-            }
-        }
-        return plateauvide;
-    }
-
-    public void placerpartisan(Coordonnees coordonnees, Joueur joueur){
-        int i = (int) (Math.random() * (3));
-        joueur.setPions(joueur.getPions() - 1);
-        c.t.paysages[i].setPion(true);
-        action.setText("Le pion a été placé en " + i);
     }
 
 }
