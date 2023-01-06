@@ -45,7 +45,7 @@ public class ControleurIATerminal extends ControleurTerminal {
         int bestScore=0;
         for (int i = 0; i < plateau.getListPieces().size(); i++) {
             for (int j = 0; j < plateau.getListPieces().get(i).size(); j++) {
-                if (plateau.getListPieces().get(i).get(j) != null) {
+                if (plateau.getPiece(j, i) != null) {
                     for (int delta = 0; delta < deltas.length; delta++) {
                         int coordX = j + deltas[delta][0];
                         int coordY = i + deltas[delta][1];
