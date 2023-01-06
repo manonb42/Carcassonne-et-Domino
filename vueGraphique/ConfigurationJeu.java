@@ -106,9 +106,6 @@ public class ConfigurationJeu extends JFrame {
             }
             if (t.length <= 0)
                 System.exit(0);
-            for (int i = 0; i < t.length; i++) {
-                System.out.print(t[i].getName() + " " + t[i].getisIA() + "     ");
-            }
             hide();
             if (carc) {
                 javax.swing.SwingUtilities.invokeLater(new Runnable() {

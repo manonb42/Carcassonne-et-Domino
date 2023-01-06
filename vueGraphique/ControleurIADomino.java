@@ -54,7 +54,6 @@ public class ControleurIADomino extends ControleurDomino {
                 domino.getGridBagConstraints().gridy = 72 - bestCoordinates.getY();
                 domino.getTuileActuelle().setPreferredSize(new Dimension(25, 25));
                 domino.getPlateau().add(domino.getTuileActuelle(), domino.getGridBagConstraints());
-                System.out.println(domino.getJoueurActuel().getNbPoints());
             }
         } return false;
     }

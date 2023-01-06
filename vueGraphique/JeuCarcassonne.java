@@ -136,7 +136,6 @@ public class JeuCarcassonne extends JFrame {
             c.image = i;
             paint(getGraphics());
             c.t.tourner(1);
-            System.out.println(jActuel.getPiece());
 
         });
 
@@ -466,12 +465,10 @@ public class JeuCarcassonne extends JFrame {
         if (!jActuel.getAbandon() && jActuel.getisIA() && p.getSac().getPiecesRestantes() > 0) {
             piocher();
             jActuel.setPiece(c.t);
-            System.out.println(jActuel.getPiece());
             controleuria.placerIA();
         } else if (p.getSac().getPiecesRestantes() > 0) {
             piocher();
             jActuel.setPiece(c.t);
-            System.out.println(jActuel.getPiece());
         } else {
             finDePartie();
         }

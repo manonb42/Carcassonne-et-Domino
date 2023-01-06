@@ -184,9 +184,7 @@ public class JeuDomino extends JFrame {
 
     /////// le gagnant 
     void finDePartie() { // quand la partie est finie, affiche une nouvelle fenetre
-        for(int i = 0; i<p.getJoueurs().length; i++){
-            System.out.print(p.getJoueurs()[i].getName()+" : "+p.getJoueurs()[i].getNbPoints()+" |");
-        }
+
         hide();
         JFrame j = new JFrame();
         j.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -224,12 +222,10 @@ public class JeuDomino extends JFrame {
         if (!jActuel.getAbandon() && jActuel.getisIA() && p.getSac().getPiecesRestantes() > 0) {
             piocher();
             jActuel.setPiece(c.t);
-            System.out.println(jActuel.getPiece());
             controleuria.placerIA();
         } else if (p.getSac().getPiecesRestantes() > 0) {
             piocher();
             jActuel.setPiece(c.t);
-            //System.out.println(jActuel.getPiece());
         } else {
             finDePartie();
         }
