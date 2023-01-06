@@ -1,6 +1,7 @@
 package vueGraphique;
 
 import java.awt.image.BufferedImage;
+import java.security.DrbgParameters.NextBytes;
 
 import Model.*;
 
@@ -26,9 +27,9 @@ public class ControleurIACarcassonne extends ControleurCarcassonne {
                         int coordY = i + deltas[delta][1] -plateau.getDy();
                         if (plateau.getPiece(coordX, coordY) == null && coordX<72 && coordX>=0 && coordY<72 && coordY>=0) {
                             for (int k = 0; k < 4; k++) {
-                                carcassonne.getTuileActuelle().t.tourner(k);
+                                carcassonne.getTuileActuelle().t.tourner(1);
                                 BufferedImage buffer = carcassonne
-                                        .rotateImageByDegrees(carcassonne.getTuileActuelle().image, k * 90);
+                                        .rotateImageByDegrees(carcassonne.getTuileActuelle().image,  90);
                                 carcassonne.getTuileActuelle().image = buffer;
                                 carcassonne.paint(carcassonne.getGraphics());
                                 if (carcassonne.getPartie().getPlateau().placer(carcassonne.getTuileActuelle().t,
@@ -53,6 +54,7 @@ public class ControleurIACarcassonne extends ControleurCarcassonne {
         }
         return false;
     }
+
 
     public boolean plateauvide() {
         boolean plateauvide = true;
