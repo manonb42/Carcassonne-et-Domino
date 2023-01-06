@@ -37,7 +37,7 @@ public class ControleurIACarcassonne extends ControleurCarcassonne {
                                     carcassonne.getAction().setText("La pièce a bien été placée");
                                     carcassonne.getGridBagConstraints().gridx = 72 + coord.getX();
                                     carcassonne.getGridBagConstraints().gridy = 72 - coord.getY();
-                                    carcassonne.plateau.add(carcassonne.getTuileActuelle(),
+                                    carcassonne.getPlateau().add(carcassonne.getTuileActuelle(),
                                             carcassonne.getGridBagConstraints());
                                     if (joueur.getPions() > 0) {
                                         placerpartisan(coord, joueur);

@@ -10,28 +10,28 @@ import java.awt.event.*;
 import java.awt.geom.AffineTransform;
 
 public class JeuCarcassonne extends JFrame {
-    Partie p; // partie en cours
-    ControleurIACarcassonne controleuria;
-    ControleurJoueurCarcassonne controleurj;
-    PieceCGraph c; // pièce de la main actuelle
-    JPanel texte = new JPanel();
-    JPanel plateau = new JPanel();
-    JPanel mainAct = new JPanel(); // main actuelle
-    JPanel play = new JPanel(); // actions (a droite)
-    JTextField choix = new JTextField(); // la ou on peut écrire les coordonées
-    JButton placer = new JButton("Placer la tuile");
-    JButton tourner = new JButton("Tourner la pièce");
-    JButton passer = new JButton("Passer son tour");
-    JButton abandonner = new JButton("Abandonner");
-    JButton finPartie = new JButton("Arreter la partie");
-    JButton placerPion = new JButton("Placer un pion");
-    Joueur jActuel; // joueur actuel
+    private Partie p; // partie en cours
+    private ControleurIACarcassonne controleuria;
+    private ControleurJoueurCarcassonne controleurj;
+    private PieceCGraph c; // pièce de la main actuelle
+    private JPanel texte = new JPanel();
+    private JPanel plateau = new JPanel();
+    private JPanel mainAct = new JPanel(); // main actuelle
+    private JPanel play = new JPanel(); // actions (a droite)
+    private JTextField choix = new JTextField(); // la ou on peut écrire les coordonées
+    private JButton placer = new JButton("Placer la tuile");
+    private JButton tourner = new JButton("Tourner la pièce");
+    private JButton passer = new JButton("Passer son tour");
+    private JButton abandonner = new JButton("Abandonner");
+    private JButton finPartie = new JButton("Arreter la partie");
+    private JButton placerPion = new JButton("Placer un pion");
+    private Joueur jActuel; // joueur actuel
     int iActuel = 0; // pour le compter le joueur actuel
-    JLabel tourAct;
-    JLabel nbPiece;
-    JLabel action;
-    GridBagConstraints gbc = new GridBagConstraints();
-    JScrollPane plat;
+    private JLabel tourAct;
+    private JLabel nbPiece;
+    private JLabel action;
+    private GridBagConstraints gbc = new GridBagConstraints();
+    private JScrollPane plat;
 
     JeuCarcassonne(Joueur[] jou) {
         setTitle("Jeu de Carcassonne"); // début
@@ -394,6 +394,10 @@ public class JeuCarcassonne extends JFrame {
 
     public JLabel getAction(){
         return this.action;
+    }
+
+    public JPanel getPlateau(){
+        return this.plateau;
     }
 
     public BufferedImage rotateImageByDegrees(BufferedImage img, double angle) { // fonction pour tourner de 90 deg

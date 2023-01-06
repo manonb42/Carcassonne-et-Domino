@@ -6,13 +6,32 @@ import java.util.Scanner;
 import Model.*;
 
 public class Terminal {
-    public Partie p;
-    public ControleurJoueurTerminal controleurj;
-    public ControleurIATerminal controleuria;
-    ControleurTerminal controleur;
+    private Partie p;
+    private ControleurJoueurTerminal controleurj;
+    private ControleurIATerminal controleuria;
 
     public Partie getPartie(){
         return this.p;
+    }
+
+    public void setPartie(Partie p){
+        this.p=p;
+    }
+
+    public ControleurIATerminal getControleurIA(){
+        return this.controleuria;
+    }
+
+    public void setControleurIA(ControleurIATerminal c){
+        this.controleuria=c;
+    }
+
+    public ControleurJoueurTerminal getControleurJoueur(){
+        return this.controleurj;
+    }
+
+    public void setControleurJoueur(ControleurJoueurTerminal c){
+        this.controleurj=c;
     }
 
     // Dessiner une Tuile 
