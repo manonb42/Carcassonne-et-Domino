@@ -123,7 +123,6 @@ public class SacCarcassonne extends Sac {
         }
         TuileCarcassonne t = pieces[n];
         pieces[n] = null;
-        System.out.println(n);
         return t;
     }
 

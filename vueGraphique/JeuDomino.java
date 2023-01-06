@@ -169,7 +169,6 @@ public class JeuDomino extends JFrame {
         return this.gbc;
     }
 
-    ///////////////////
     void piocher() { // fonction pour piocher
         piece.remove(c);
         TuileDomino tmp1 = controleurj.piocher();
@@ -182,7 +181,6 @@ public class JeuDomino extends JFrame {
                 "C'est le tour de : " + jActuel.getName() + ", vous avez " + jActuel.getNbPoints() + " points !");
     }
 
-    /////// le gagnant 
     void finDePartie() { // quand la partie est finie, affiche une nouvelle fenetre
 
         hide();
@@ -213,7 +211,6 @@ public class JeuDomino extends JFrame {
     }
 
 
-    // tout lol
     void prochainJoueur() { // passer au joueur suivant
         jActuel = controleurj.prochainJoueur();
         nbPiece.setText("Il reste : " + p.getSac().getPiecesRestantes() + " pièces");
@@ -259,10 +256,5 @@ public class JeuDomino extends JFrame {
         Plateau pl = new Plateau(g);
         SacDomino s = new SacDomino(30);
         return new Partie(jou, pl, s);
-    }
-
-    public static void main(String[] args) {
-        Joueur[] j = {new Joueur("Lukas", false),new Joueur("Ilias", true)};
-        new JeuDomino(j);
     }
 }

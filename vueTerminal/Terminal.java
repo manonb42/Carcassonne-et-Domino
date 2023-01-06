@@ -321,7 +321,7 @@ public class Terminal {
         }
         Grille g = new Grille();
         Plateau plateau = new Plateau(g);
-        SacDomino sac = new SacDomino(20);
+        SacDomino sac = new SacDomino(30);
         plateau.placer(sac.genererPiece(), new Coordonnees(0, 0));
         return new Partie(joueurs, plateau, sac);
     }
