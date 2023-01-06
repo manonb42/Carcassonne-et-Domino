@@ -205,14 +205,25 @@ public class Terminal {
 
 
     private Joueur gagnant() {
-        Joueur gagnant = null;
-        for (int i = p.getJoueurs().length - 1; i > 0; i--) {
-            if (p.getJoueurs()[i].getNbPoints() > p.getJoueurs()[i - 1].getNbPoints()) {
+        Joueur gagnant = p.getJoueurs()[0];
+        int gagnantPoint = p.getJoueurs()[0].getNbPoints();
+        int nbGagnant = 0;
+        for (int i = 0; i < p.getJoueurs().length; i++) {
+            if (p.getJoueurs()[i].getNbPoints() > gagnantPoint) {
                 gagnant = p.getJoueurs()[i];
+                gagnantPoint = p.getJoueurs()[i].getNbPoints();
+                nbGagnant=0;
+            }else if(p.getJoueurs()[i].getNbPoints() == gagnantPoint){
+                nbGagnant ++;
+            }else{
+
             }
         }
-        p.setGagnant(gagnant);
-        return gagnant;
+        if(nbGagnant!=0){
+            return null;
+        }else{
+            return gagnant;
+        }
     }
 
     private int nbJoueurs() {

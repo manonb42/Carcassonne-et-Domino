@@ -27,7 +27,7 @@ public class ControleurIADomino extends ControleurDomino{
                                         new Coordonnees(coordX, coordY))) {
                                     Coordonnees coord = new Coordonnees(coordX, coordY);
                                     domino.getJoueurActuel().setNbPoints(
-                                            domino.getJoueurActuel().getNbPoints() + domino.getPartie().plateau
+                                            domino.getJoueurActuel().getNbPoints() + domino.getPartie().getPlateau()
                                                     .newPoints(domino.getTuileActuelle().getTuile(), coord));
                                     domino.action.setText("La pièce a bien été placée");
                                     domino.getGridBagConstraints().gridx = 72 + coord.getX();

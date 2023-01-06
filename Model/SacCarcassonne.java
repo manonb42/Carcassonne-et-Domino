@@ -1,8 +1,8 @@
 package Model;
 
 public class SacCarcassonne extends Sac {
-    protected int nbPiecesRestantes = 71;
-    protected TuileCarcassonne[] pieces = new TuileCarcassonne[71];
+    private int nbPiecesRestantes = 71;
+    private TuileCarcassonne[] pieces = new TuileCarcassonne[71];
 
     public SacCarcassonne() {
         for (int i = 0; i < 9; i++) {

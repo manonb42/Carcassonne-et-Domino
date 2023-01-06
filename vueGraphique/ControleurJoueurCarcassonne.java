@@ -7,7 +7,7 @@ public class ControleurJoueurCarcassonne extends ControleurCarcassonne {
     }
 
     public boolean placementPiece(Coordonnees coord){
-        if (carcassonne.getPartie().plateau.placer(carcassonne.getTuileActuelle().t,coord)) {
+        if (carcassonne.getPartie().getPlateau().placer(carcassonne.getTuileActuelle().t,coord)) {
             carcassonne.getJoueurActuel().setPiece(null);
             return true;
         } else {

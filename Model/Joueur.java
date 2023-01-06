@@ -8,7 +8,7 @@ public class Joueur {
     private Tuile pieceactuelle;
     private boolean ia = false;
     private boolean abandon;
-    protected int pions = 8;
+    private int pions = 8;
     private Color c;
 
     public Joueur(String nom, boolean ia) {

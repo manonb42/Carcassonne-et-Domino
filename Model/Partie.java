@@ -4,9 +4,9 @@ import java.io.Serializable;
 
 public class Partie implements Serializable {
     private Joueur[] joueurs;
-    public Plateau plateau;
+    private Plateau plateau;
     private Sac sac;
-    Joueur gagnant = null;
+    private Joueur gagnant = null;
     private boolean fin; // si true, fin de la partie
 
     public Partie(Joueur[] listeJoueurs, Plateau plateau, Sac sac) {

@@ -9,7 +9,7 @@ public class ControleurJoueurDomino extends ControleurDomino {
     }
 
     public boolean placementPiece(Coordonnees coord){
-        if (domino.getPartie().plateau.placer(domino.getTuileActuelle().getTuile(), coord)) {
+        if (domino.getPartie().getPlateau().placer(domino.getTuileActuelle().getTuile(), coord)) {
             domino.getJoueurActuel().setNbPoints(domino.getJoueurActuel().getNbPoints() + domino.getPartie().getPlateau().newPoints(domino.getTuileActuelle().getTuile(), coord));
             domino.getJoueurActuel().setPiece(null);
             return true;
