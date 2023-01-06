@@ -1,16 +1,17 @@
-import java.io.Serializable;
-
-public class Partie implements Serializable {
-    private Joueur[] joueurs;
-    protected Plateau plateau;
+public class PartieCarcassonne {
+    protected Joueur[] joueurs;
+    protected PlateauCarcassonne plateau;
     private Sac sac;
     Joueur gagnant = null;
     private boolean fin; // si true, fin de la partie
 
-    Partie(Joueur[] listeJoueurs, Plateau plateau, Sac sac) {
+    PartieCarcassonne(Joueur[] listeJoueurs, PlateauCarcassonne plateau, Sac sac) {
         this.joueurs = listeJoueurs;
         this.plateau = plateau;
         this.sac = sac;
+        Paysage[] p = {new Route(),new Route(),new Route(),new Route()};
+        TuileCarcassonne tu = new TuileCarcassonne(p);
+        plateau.placer(tu, new Coordonnees(0, 0));
     }
 
     public Joueur[] getJoueurs() {
@@ -21,11 +22,11 @@ public class Partie implements Serializable {
         this.joueurs = listeJoueurs;
     }
 
-    public Plateau getPlateau() {
+    public PlateauCarcassonne getPlateau() {
         return this.plateau;
     }
 
-    public void setPlateau(Plateau plateau) {
+    public void setPlateau(PlateauCarcassonne plateau) {
         this.plateau = plateau;
     }
 
@@ -59,6 +60,5 @@ public class Partie implements Serializable {
             fin = true;
         }
     }
-
-
+    
 }

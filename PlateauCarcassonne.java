@@ -33,7 +33,7 @@ public class PlateauCarcassonne{
         return plateauvide;
     }
 
-    private boolean validPlacement(TuileCarcassonne p, Coordonnees coordonnee) {
+    protected boolean validPlacement(TuileCarcassonne p, Coordonnees coordonnee) {
         boolean cotevide = true;
         boolean plateauvide = plateauvide();
         int[][] deltas = { { 0, 1 }, { 1, 0 }, { 0, -1 }, { -1, 0 } };
@@ -63,7 +63,7 @@ public class PlateauCarcassonne{
         Paysage[] p2 = {new Route(),new Pre(),new Route(),new Route()};
         TuileCarcassonne t2 = new TuileCarcassonne(p2);
         plateau.placer(t, new Coordonnees(0, 0));
-        //System.out.println(plateau.validPlacement(t2,new Coordonnees(0, -1)));
+        System.out.println(plateau.validPlacement(t2,new Coordonnees(0, 0)));
         
     }
 

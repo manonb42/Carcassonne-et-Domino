@@ -1,6 +1,6 @@
 public class SacCarcassonne extends Sac {
-    public int nbPiecesRestantes=72;
-    TuileCarcassonne[] pieces = new TuileCarcassonne[72];
+    protected int nbPiecesRestantes=71;
+    protected TuileCarcassonne[] pieces = new TuileCarcassonne[71];
 
     SacCarcassonne(){
         for(int i = 0; i<9; i++){
@@ -87,15 +87,11 @@ public class SacCarcassonne extends Sac {
             Paysage[] p = {new Village(), new Village(), new Village(), new  Village()};
             pieces[i] = new TuileCarcassonne(p);
         }
-        for(int i = 66; i<67; i++){
-            Paysage[] p = {new Route(), new Route(), new Route(), new Route()};
-            pieces[i] = new TuileCarcassonne(p);
-        }
-        for(int i = 67; i<69; i++){
+        for(int i = 66; i<68; i++){
             Paysage[] p = {new Village(), new Pre(), new Pre(), new Village()};
             pieces[i] = new TuileCarcassonne(p);
         }
-        for(int i = 69; i<72; i++){
+        for(int i = 68; i<71; i++){
             Paysage[] p = {new Pre(), new Village(), new Pre(), new Village()};
             pieces[i] = new TuileCarcassonne(p);
         }

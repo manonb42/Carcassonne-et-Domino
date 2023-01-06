@@ -1,65 +1,112 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 
 public class Configuration extends JFrame{
-    Configuration(){
+    boolean carc;
+    JLabel joueur1 = new JLabel("Joueur 1");
+    JLabel joueur2 = new JLabel("Joueur 2");
+    JLabel joueur3 = new JLabel("Joueur 3");
+    JLabel joueur4 = new JLabel("Joueur 4");
+
+    JTextField j1 = new JTextField(20);
+    JTextField j2 = new JTextField(20);
+    JTextField j3 = new JTextField(20);
+    JTextField j4 = new JTextField(20);
+
+    JCheckBox ia1 = new JCheckBox("I.A");
+    JCheckBox ia2 = new JCheckBox("I.A");
+    JCheckBox ia3 = new JCheckBox("I.A");
+    JCheckBox ia4 = new JCheckBox("I.A");
+
+    JButton valider = new JButton("Valider");
+
+    GridBagConstraints gbc = new GridBagConstraints();
+
+
+    Configuration(boolean boole){
+        carc = boole;
+        setSize(500,500);
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setTitle("Configuration");
-        setSize(500,100);
-        setLocationRelativeTo(null);
-        JPanel config = new JPanel();
-        config.setLayout(new BorderLayout());
-        JPanel elements = new JPanel();
-        elements.setLayout(new GridLayout(1,3,50,0));
-        config.add(elements,BorderLayout.NORTH);
-        add(config);
-        JLabel nbJoueur = new JLabel("Nombre de Joueurs :");
-        JTextField test = new JTextField(4);
-        JButton valider = new JButton("Valider");
-        elements.add(nbJoueur);
-        elements.add(test);
-        elements.add(valider);
-        JLabel act = new JLabel("Vous n'avez pas encore choisi");
-        config.add(act);
-        act.setHorizontalAlignment((int)CENTER_ALIGNMENT);
-        valider.addActionListener((e ->{
-            String t = test.getText();
-            try{
-                int i = Integer.valueOf(t);
-                if(i<=0 || i>=5 ){
-                    act.setText("Veuillez choisir un chiffre entre 1 et 4");
-                }else{
-                    hide();
-                    System.exit(0); // pour le moment (a remplacer)
-                }
-            }catch(Exception err){
-                act.setText("Entrée non valide");
-            }
-        } ));
+        setLayout(new GridBagLayout());
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        add(joueur1,gbc);
+        gbc.gridx = 1;
+        add(j1,gbc);
+        gbc.gridx = 2;
+        add(ia1,gbc);
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        add(joueur2,gbc);
+        gbc.gridx = 1;
+        add(j2,gbc);
+        gbc.gridx = 2;
+        add(ia2,gbc);
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        add(joueur3,gbc);
+        gbc.gridx = 1;
+        add(j3,gbc);
+        gbc.gridx = 2;
+        add(ia3,gbc);
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        add(joueur4,gbc);
+        gbc.gridx = 1;
+        add(j4,gbc);
+        gbc.gridx = 2;
+        add(ia4,gbc);
 
+        gbc.gridx = 4;
+        gbc.gridy = 4;
+        add(valider,gbc);
+
+        valider.addActionListener((ActionEvent e)->{
+            Joueur[] tab = new Joueur[4];
+            Joueur p1 = new Joueur(j1.getText(), ia1.isEnabled());
+            Joueur p2 = new Joueur(j2.getText(), ia2.isEnabled());
+            Joueur p3 = new Joueur(j3.getText(), ia3.isEnabled());
+            Joueur p4 = new Joueur(j4.getText(), ia4.isEnabled());
+            if(!p1.getName().equals("")){
+                tab[0] = p1;
+            }
+            if(!p2.getName().equals("")){
+                tab[1] = p2;
+            }
+            if(!p3.getName().equals("")){
+                tab[2] = p3;
+            }
+            if(!p4.getName().equals("")){
+                tab[3] = p4;
+            }
+
+            int a = 0;
+            for(int i = 0; i<tab.length; i++){
+                if(tab[i]!= null){
+                    a++;
+                }
+            }
+            Joueur[] t = new Joueur[a];
+            int b = 0;
+            for(int i = 0; i<tab.length; i++){
+                if(tab[i]!= null){
+                    t[b] = tab[i];
+                    b++;
+                }
+            }
+            if(t.length <=0) System.exit(0);
+            hide();
+            if(carc){
+                new JeuCarcassonne(t);   
+            }else{
+                new JeuDomino(t);
+            }
+
+        });
     }
 
-    /*Joueur fJoueur(){
-        JFrame f = new JFrame();
-        f.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        f.setVisible(true);
-        f.setSize(300,100);
-        f.setLayout(new GridLayout(2,2));
-        JLabel nomJoueur = new JLabel("Nom Joueur");
-        JTextField t = new JTextField(10);
-        JButton valid = new JButton("Valider");
-        JCheckBox ia = new JCheckBox("IA");
-        f.add(nomJoueur);
-        f.add(t);
-        f.add(valid);
-        f.add(ia);
-        valid.addActionListener((e ->{
-            return new Joueur(t.getText());
-        } ));
-        hide();
-        return j;
-        
-    }*/
+
     
 }
