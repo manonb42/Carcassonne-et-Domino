@@ -199,13 +199,10 @@ public class Terminal {
     public void placement(int i) {
         if (i==1) {
             System.out.println("La pièce a bien été placée");
-        }else if(i==2){
-            System.out.println("Vous ne pouvez pas placer la pièce à cet endroit");
         } else if(i==3){
-            System.out.println("Succès ! La pièce a bien été placée");
-        } else if(i==4){
+            System.out.println("Succès ! La pièce a bien été placée");   
+        } else{
             System.out.println("Vous ne pouvez pas placer la pièce à cet endroit");
-            
         }
     }
 
@@ -322,7 +319,7 @@ public class Terminal {
         }
         Grille g = new Grille();
         Plateau plateau = new Plateau(g);
-        SacDomino sac = new SacDomino(5);
+        SacDomino sac = new SacDomino(20);
         return new Partie(joueurs, plateau, sac);
     }
 

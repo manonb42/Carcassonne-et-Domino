@@ -39,6 +39,10 @@ public class ControleurIATerminal extends ControleurTerminal {
     public boolean tryPlacerPiece(Joueur joueur) {
         Grille plateau = terminal.getPartie().getPlateau().getGrille();
         int[][] deltas = { { 0, 1 }, { 1, 0 }, { 0, -1 }, { -1, 0 } };
+        Coordonnees bestCoordinates=new Coordonnees(0, 0);
+        int nbTours=0;
+        boolean isPlaceable=false;
+        int bestScore=0;
         for (int i = 0; i < plateau.getListPieces().size(); i++) {
             for (int j = 0; j < plateau.getListPieces().get(i).size(); j++) {
                 if (plateau.getListPieces().get(i).get(j) != null) {
@@ -47,14 +51,25 @@ public class ControleurIATerminal extends ControleurTerminal {
                         int coordY = i + deltas[delta][1];
                         if (plateau.getPiece(coordX, coordY) == null) {
                             for(int k=0; k<4; k++){
-                                if (terminal.getPartie().getPlateau().placer(tournerPiece(joueur, k), new Coordonnees(coordX, coordY))){
-                                    return true;
+                                if (terminal.getPartie().getPlateau().validPlacement(tournerPiece(joueur, k), new Coordonnees(coordX, coordY))){
+                                    isPlaceable=true;
+                                    Coordonnees newcoord = new Coordonnees(coordX, coordY);
+                                    int score = terminal.getPartie().getPlateau().newPoints((TuileDomino)joueur.getPiece(), newcoord);
+                                    if(bestScore<score){
+                                        bestScore = score;
+                                        bestCoordinates = newcoord;
+                                        nbTours = k;
+                                    }
                                 }   
                             }
                         }
                     }
                 }
             }
-        } return false; 
+        } 
+        if(isPlaceable){
+            terminal.getPartie().getPlateau().placer(tournerPiece(joueur, nbTours), bestCoordinates);
+            return true;
+        } return false;
     }
 }

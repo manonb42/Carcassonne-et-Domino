@@ -54,7 +54,8 @@ public class ControleurJoueurTerminal extends ControleurTerminal{
                 j.setNbPoints(j.getNbPoints() + m);
                 terminal.placement(3);
             } else {
-                terminal.placement(4);
+                terminal.placement(2);
+                quelleAction(j);
             }
         }
     }

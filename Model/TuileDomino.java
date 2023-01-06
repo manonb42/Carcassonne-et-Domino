@@ -17,7 +17,7 @@ public class TuileDomino extends Tuile {
 
     @Override
     public void tourner(int nbTours) {
-        if (nbTours > 0) {
+        if (nbTours >= 0) {
             for (int i = 0; i < nbTours; i++) {
                 int[] tmp = this.numeros[3];
                 this.numeros[3] = this.numeros[2];
