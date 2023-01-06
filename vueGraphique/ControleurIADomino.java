@@ -29,11 +29,11 @@ public class ControleurIADomino extends ControleurDomino{
                                     domino.getJoueurActuel().setNbPoints(
                                             domino.getJoueurActuel().getNbPoints() + domino.getPartie().getPlateau()
                                                     .newPoints(domino.getTuileActuelle().getTuile(), coord));
-                                    domino.action.setText("La pièce a bien été placée");
+                                    domino.getAction().setText("La pièce a bien été placée");
                                     domino.getGridBagConstraints().gridx = 72 + coord.getX();
                                     domino.getGridBagConstraints().gridy = 72 - coord.getY();
                                     domino.getTuileActuelle().setPreferredSize(new Dimension(25,25));
-                                    domino.plateau.add(domino.getTuileActuelle(), domino.gbc);
+                                    domino.getPlateau().add(domino.getTuileActuelle(), domino.getGridBagConstraints());
                                     return true;
                                 }
                             }

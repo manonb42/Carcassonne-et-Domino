@@ -5,28 +5,28 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class JeuDomino extends JFrame {
-    Partie p; // partie en cours
-    ControleurIADomino controleuria;
-    ControleurJoueurDomino controleurj;
-    TuileDominoGraphique c; // pièce de la main actuelle
-    JPanel texte = new JPanel();
-    JPanel plateau = new JPanel();
-    JPanel mainAct = new JPanel(); // main actuelle
-    JPanel play = new JPanel(); // actions (a droite)
-    JPanel piece = new JPanel(); // la ou est la pièce
-    JTextField choix = new JTextField(); // la ou on peut écrire les coordonées
-    JButton placer = new JButton("Placer la tuile");
-    JButton tourner = new JButton("Tourner la pièce");
-    JButton passer = new JButton("Passer son tour");
-    JButton abandonner = new JButton("Abandonner");
-    JButton finPartie = new JButton("Arreter la partie");
-    Joueur jActuel; // joueur actuel
+    private Partie p; // partie en cours
+    private ControleurIADomino controleuria;
+    private ControleurJoueurDomino controleurj;
+    private TuileDominoGraphique c; // pièce de la main actuelle
+    private JPanel texte = new JPanel();
+    private JPanel plateau = new JPanel();
+    private JPanel mainAct = new JPanel(); // main actuelle
+    private JPanel play = new JPanel(); // actions (a droite)
+    private JPanel piece = new JPanel(); // la ou est la pièce
+    private JTextField choix = new JTextField(); // la ou on peut écrire les coordonées
+    private JButton placer = new JButton("Placer la tuile");
+    private JButton tourner = new JButton("Tourner la pièce");
+    private JButton passer = new JButton("Passer son tour");
+    private JButton abandonner = new JButton("Abandonner");
+    private JButton finPartie = new JButton("Arreter la partie");
+    private Joueur jActuel; // joueur actuel
     int iActuel = 0; // pour le compter le joueur actuel
-    JLabel tourAct;
-    JLabel nbPiece;
-    JLabel action;
-    GridBagConstraints gbc = new GridBagConstraints();
-    JScrollPane plat;
+    private JLabel tourAct;
+    private JLabel nbPiece;
+    private JLabel action;
+    private GridBagConstraints gbc = new GridBagConstraints();
+    private JScrollPane plat;
 
     JeuDomino(Joueur[] jou) {
         setTitle("Jeu de Domino"); // début
@@ -143,6 +143,10 @@ public class JeuDomino extends JFrame {
             controleuria.placerIA();
         }
 
+    }
+
+    public JPanel getPlateau(){
+        return this.plateau;
     }
 
     public JLabel getAction(){
