@@ -41,6 +41,7 @@ public class ControleurIACarcassonne extends ControleurCarcassonne {
                                             carcassonne.getGridBagConstraints());
                                     if (joueur.getPions() > 0) {
                                         placerpartisan(coord, joueur);
+                                        
                                     }
                                     return true;
                                 }
