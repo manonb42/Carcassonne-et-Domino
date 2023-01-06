@@ -14,5 +14,4 @@ $ javac JeuTextuel.java puis $ java JeuTextuel
 
 # Règles du jeu
 
-Les 2 jeux se jouent de 2 à 4 joueurs 
-etc...
+Les 2 jeux se jouent de 2 à 4 joueurs, le jeu de domino comporte 30 pieces
