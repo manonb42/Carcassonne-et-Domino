@@ -11,7 +11,7 @@ public class Carrechiffre extends JPanel {
 
     Carrechiffre() {
         setVisible(true);
-        setSize(10, 10);
+        setSize(5, 5);
         setBackground(Color.PINK);
     }
 
