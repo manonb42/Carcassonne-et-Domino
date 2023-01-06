@@ -2,7 +2,7 @@ import vueTerminal.ControleurIATerminal;
 import vueTerminal.ControleurJoueurTerminal;
 import vueTerminal.Terminal;
 
-public class Main {
+public class JeuTextuel {
 
     public static void main(String[] args) {
         Terminal t = new Terminal();
