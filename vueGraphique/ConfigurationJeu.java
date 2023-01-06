@@ -111,9 +111,17 @@ public class ConfigurationJeu extends JFrame {
             }
             hide();
             if (carc) {
-                new JeuCarcassonne(t);
+                javax.swing.SwingUtilities.invokeLater(new Runnable() {
+                    public void run(){
+                        new JeuCarcassonne(t);
+                    }
+                });
             } else {
-                new JeuDomino(t);
+                javax.swing.SwingUtilities.invokeLater(new Runnable() {
+                    public void run(){
+                        new JeuDomino(t);
+                    }
+                });
             }
 
         });

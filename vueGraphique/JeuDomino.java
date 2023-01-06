@@ -168,7 +168,7 @@ public class JeuDomino extends JFrame {
     ///////////////////
     void piocher() { // fonction pour piocher
         piece.remove(c);
-        TuileDomino tmp1 = (TuileDomino) (p.getSac().piocher());
+        TuileDomino tmp1 = controleurj.piocher();
         TuileDominoGraphique tmp2 = new TuileDominoGraphique(tmp1);
         c = tmp2;
         c.setPreferredSize(new Dimension(120,120));
@@ -213,14 +213,7 @@ public class JeuDomino extends JFrame {
 
     // tout lol
     void prochainJoueur() { // passer au joueur suivant
-        do {
-            jActuel = p.getJoueurs()[++iActuel % p.getJoueurs().length];
-            p.fullAbandon();
-            if (p.getFin()) {
-                finDePartie();
-                break;
-            }
-        } while (jActuel.getAbandon());
+        jActuel = controleurj.prochainJoueur();
         nbPiece.setText("Il reste : " + p.getSac().getPiecesRestantes() + " pièces");
         tourAct.setText(
                 "C'est le tour de : " + jActuel.getName() + ", vous avez " + jActuel.getNbPoints() + " points !");

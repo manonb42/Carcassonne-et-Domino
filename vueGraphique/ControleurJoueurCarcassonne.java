@@ -15,6 +15,25 @@ public class ControleurJoueurCarcassonne extends ControleurCarcassonne {
         }
     }
 
+    public TuileCarcassonne piocher(){
+        TuileCarcassonne t = (TuileCarcassonne) carcassonne.getPartie().getSac().piocher();
+        return t;
+    }
+
+    public Joueur prochainJoueur(){
+        Joueur tmp = carcassonne.getJoueurActuel();
+        do{
+            tmp = carcassonne.getPartie().getJoueurs()[++carcassonne.iActuel % carcassonne.getPartie().getJoueurs().length];
+            carcassonne.getPartie().fullAbandon();
+            if (carcassonne.getPartie().getFin()) {
+                carcassonne.finDePartie();
+                break;
+            }
+        }while(tmp.getAbandon());
+        return tmp;
+
+    }
+
     public boolean nbpions(Joueur j){
         return j.getPions()>0;
     }

@@ -29,11 +29,20 @@ public class MenuPrincipal extends JFrame {
         }));
         domino.addActionListener((e -> {
             hide();
-            new ConfigurationJeu(false);
+            javax.swing.SwingUtilities.invokeLater(new Runnable() {
+                public void run(){
+                    new ConfigurationJeu(false);
+                }
+            });
+
         }));
         carcassonne.addActionListener((e -> {
             hide();
-            new ConfigurationJeu(true);
+            javax.swing.SwingUtilities.invokeLater(new Runnable() {
+                public void run(){
+                    new ConfigurationJeu(true);
+                }
+            });
         }));
 
     }

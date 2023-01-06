@@ -160,7 +160,7 @@ public class JeuCarcassonne extends JFrame {
                     jActuel.setPions(jActuel.getPions() - 1);
                     c.fillzone(jActuel.getColor(),i);
                     c.paint(c.getGraphics());
-                    c.t.paysages[i].setPion(true);
+                    c.t.getPaysages()[i].setPion(true);
                     action.setText("Le pion a été placé en " + i);
                 } else {
                     action.setText("Le pion n'a pas été placé");
@@ -184,129 +184,129 @@ public class JeuCarcassonne extends JFrame {
 
         PieceCGraph(TuileCarcassonne t) {
             this.t = t;
-            if (t.paysages[0] instanceof Pre && t.paysages[1] instanceof Pre && t.paysages[2] instanceof Route
-                    && t.paysages[3] instanceof Route) { // associe l'image selon la tuile (pas fini)
+            if (t.getPaysages()[0] instanceof Pre && t.getPaysages()[1] instanceof Pre && t.getPaysages()[2] instanceof Route
+                    && t.getPaysages()[3] instanceof Route) { // associe l'image selon la tuile (pas fini)
                 try {
                     image = ImageIO.read(new File("resources/carte1.png"));
                 } catch (Exception err) {
                     System.out.println(err);
                 }
 
-            } else if (t.paysages[0] instanceof Village && t.paysages[1] instanceof Route
-                    && t.paysages[2] instanceof Route && t.paysages[3] instanceof Pre) {
+            } else if (t.getPaysages()[0] instanceof Village && t.getPaysages()[1] instanceof Route
+                    && t.getPaysages()[2] instanceof Route && t.getPaysages()[3] instanceof Pre) {
                 try {
                     image = ImageIO.read(new File("resources/carte2.png"));
                 } catch (Exception err) {
                     System.out.println(err);
                 }
 
-            } else if (t.paysages[0] instanceof Village && t.paysages[1] instanceof Village
-                    && t.paysages[2] instanceof Route && t.paysages[3] instanceof Village) {
+            } else if (t.getPaysages()[0] instanceof Village && t.getPaysages()[1] instanceof Village
+                    && t.getPaysages()[2] instanceof Route && t.getPaysages()[3] instanceof Village) {
                 try {
                     image = ImageIO.read(new File("resources/carte3.png"));
                 } catch (Exception err) {
                     System.out.println(err);
                 }
-            } else if (t.paysages[0] instanceof Village && t.paysages[1] instanceof Route
-                    && t.paysages[2] instanceof Route && t.paysages[3] instanceof Village) {
+            } else if (t.getPaysages()[0] instanceof Village && t.getPaysages()[1] instanceof Route
+                    && t.getPaysages()[2] instanceof Route && t.getPaysages()[3] instanceof Village) {
                 try {
                     image = ImageIO.read(new File("resources/carte4.png"));
                 } catch (Exception err) {
                     System.out.println(err);
                 }
-            } else if (t.paysages[0] instanceof Village && t.paysages[1] instanceof Route
-                    && t.paysages[2] instanceof Route && t.paysages[3] instanceof Route) {
+            } else if (t.getPaysages()[0] instanceof Village && t.getPaysages()[1] instanceof Route
+                    && t.getPaysages()[2] instanceof Route && t.getPaysages()[3] instanceof Route) {
                 try {
                     image = ImageIO.read(new File("resources/carte5.png"));
                 } catch (Exception err) {
                     System.out.println(err);
                 }
-            } else if (t.paysages[0] instanceof Route && t.paysages[1] instanceof Pre && t.paysages[2] instanceof Route
-                    && t.paysages[3] instanceof Pre) {
+            } else if (t.getPaysages()[0] instanceof Route && t.getPaysages()[1] instanceof Pre && t.getPaysages()[2] instanceof Route
+                    && t.getPaysages()[3] instanceof Pre) {
                 try {
                     image = ImageIO.read(new File("resources/carte6.png"));
                 } catch (Exception err) {
                     System.out.println(err);
                 }
-            } else if (t.paysages[0] instanceof Pre && t.paysages[1] instanceof Route && t.paysages[2] instanceof Route
-                    && t.paysages[3] instanceof Route) {
+            } else if (t.getPaysages()[0] instanceof Pre && t.getPaysages()[1] instanceof Route && t.getPaysages()[2] instanceof Route
+                    && t.getPaysages()[3] instanceof Route) {
                 try {
                     image = ImageIO.read(new File("resources/carte7.png"));
                 } catch (Exception err) {
                     System.out.println(err);
                 }
-            } else if (t.paysages[0] instanceof Village && t.paysages[1] instanceof Pre && t.paysages[2] instanceof Pre
-                    && t.paysages[3] instanceof Pre) {
+            } else if (t.getPaysages()[0] instanceof Village && t.getPaysages()[1] instanceof Pre && t.getPaysages()[2] instanceof Pre
+                    && t.getPaysages()[3] instanceof Pre) {
                 try {
                     image = ImageIO.read(new File("resources/carte8.png"));
                 } catch (Exception err) {
                     System.out.println(err);
                 }
-            } else if (t.paysages[0] instanceof Village && t.paysages[1] instanceof Village
-                    && t.paysages[2] instanceof Pre && t.paysages[3] instanceof Pre) {
+            } else if (t.getPaysages()[0] instanceof Village && t.getPaysages()[1] instanceof Village
+                    && t.getPaysages()[2] instanceof Pre && t.getPaysages()[3] instanceof Pre) {
                 try {
                     image = ImageIO.read(new File("resources/carte9.png"));
                 } catch (Exception err) {
                     System.out.println(err);
                 }
-            } else if (t.paysages[0] instanceof Village && t.paysages[1] instanceof Village
-                    && t.paysages[2] instanceof Pre && t.paysages[3] instanceof Village) {
+            } else if (t.getPaysages()[0] instanceof Village && t.getPaysages()[1] instanceof Village
+                    && t.getPaysages()[2] instanceof Pre && t.getPaysages()[3] instanceof Village) {
                 try {
                     image = ImageIO.read(new File("resources/carte10.png"));
                 } catch (Exception err) {
                     System.out.println(err);
                 }
-            } else if (t.paysages[0] instanceof Pre && t.paysages[1] instanceof Pre && t.paysages[2] instanceof Pre
-                    && t.paysages[3] instanceof Pre) {
+            } else if (t.getPaysages()[0] instanceof Pre && t.getPaysages()[1] instanceof Pre && t.getPaysages()[2] instanceof Pre
+                    && t.getPaysages()[3] instanceof Pre) {
                 try {
                     image = ImageIO.read(new File("resources/carte11.png"));
                 } catch (Exception err) {
                     System.out.println(err);
                 }
-            } else if (t.paysages[0] instanceof Pre && t.paysages[1] instanceof Pre && t.paysages[2] instanceof Route
-                    && t.paysages[3] instanceof Pre) {
+            } else if (t.getPaysages()[0] instanceof Pre && t.getPaysages()[1] instanceof Pre && t.getPaysages()[2] instanceof Route
+                    && t.getPaysages()[3] instanceof Pre) {
                 try {
                     image = ImageIO.read(new File("resources/carte12.png"));
                 } catch (Exception err) {
                     System.out.println(err);
                 }
-            } else if (t.paysages[0] instanceof Village && t.paysages[1] instanceof Pre && t.paysages[2] instanceof Pre
-                    && t.paysages[3] instanceof Village) {
+            } else if (t.getPaysages()[0] instanceof Village && t.getPaysages()[1] instanceof Pre && t.getPaysages()[2] instanceof Pre
+                    && t.getPaysages()[3] instanceof Village) {
                 try {
                     image = ImageIO.read(new File("resources/carte13.png"));
                 } catch (Exception err) {
                     System.out.println(err);
                 }
-            } else if (t.paysages[0] instanceof Village && t.paysages[1] instanceof Route
-                    && t.paysages[2] instanceof Pre && t.paysages[3] instanceof Route) {
+            } else if (t.getPaysages()[0] instanceof Village && t.getPaysages()[1] instanceof Route
+                    && t.getPaysages()[2] instanceof Pre && t.getPaysages()[3] instanceof Route) {
                 try {
                     image = ImageIO.read(new File("resources/carte14.png"));
                 } catch (Exception err) {
                     System.out.println(err);
                 }
-            } else if (t.paysages[0] instanceof Village && t.paysages[1] instanceof Pre
-                    && t.paysages[2] instanceof Route && t.paysages[3] instanceof Route) {
+            } else if (t.getPaysages()[0] instanceof Village && t.getPaysages()[1] instanceof Pre
+                    && t.getPaysages()[2] instanceof Route && t.getPaysages()[3] instanceof Route) {
                 try {
                     image = ImageIO.read(new File("resources/carte15.png"));
                 } catch (Exception err) {
                     System.out.println(err);
                 }
-            } else if (t.paysages[0] instanceof Pre && t.paysages[1] instanceof Village && t.paysages[2] instanceof Pre
-                    && t.paysages[3] instanceof Village) {
+            } else if (t.getPaysages()[0] instanceof Pre && t.getPaysages()[1] instanceof Village && t.getPaysages()[2] instanceof Pre
+                    && t.getPaysages()[3] instanceof Village) {
                 try {
                     image = ImageIO.read(new File("resources/carte16.png"));
                 } catch (Exception err) {
                     System.out.println(err);
                 }
-            } else if (t.paysages[0] instanceof Village && t.paysages[1] instanceof Village
-                    && t.paysages[2] instanceof Village && t.paysages[3] instanceof Village) {
+            } else if (t.getPaysages()[0] instanceof Village && t.getPaysages()[1] instanceof Village
+                    && t.getPaysages()[2] instanceof Village && t.getPaysages()[3] instanceof Village) {
                 try {
                     image = ImageIO.read(new File("resources/carte17.png"));
                 } catch (Exception err) {
                     System.out.println(err);
                 }
-            } else if (t.paysages[0] instanceof Route && t.paysages[1] instanceof Route
-                    && t.paysages[2] instanceof Route && t.paysages[3] instanceof Route) {
+            } else if (t.getPaysages()[0] instanceof Route && t.getPaysages()[1] instanceof Route
+                    && t.getPaysages()[2] instanceof Route && t.getPaysages()[3] instanceof Route) {
                 try {
                     image = ImageIO.read(new File("resources/carte18.png"));
                 } catch (Exception err) {
@@ -424,7 +424,7 @@ public class JeuCarcassonne extends JFrame {
 
     void piocher() { // fonction pour piocher
         mainAct.remove(c);
-        TuileCarcassonne tmp1 = (TuileCarcassonne) (p.getSac().piocher());
+        TuileCarcassonne tmp1 = controleurj.piocher();
         PieceCGraph tmp2 = new PieceCGraph(tmp1);
         c = tmp2;
         mainAct.add(c);
@@ -455,12 +455,7 @@ public class JeuCarcassonne extends JFrame {
         abandonner.setVisible(true);
         placerPion.setVisible(false);
         do {
-            jActuel = p.getJoueurs()[++iActuel % p.getJoueurs().length];
-            p.fullAbandon();
-            if (p.getFin()) {
-                finDePartie();
-                break;
-            }
+            jActuel = controleurj.prochainJoueur();
         } while (jActuel.getAbandon());
         nbPiece.setText("Il reste : " + p.getSac().getPiecesRestantes() + " pièces");
         tourAct.setText("C'est le tour de : " + jActuel.getName() + " vous avez " + jActuel.getPions() + " pions");
@@ -473,7 +468,6 @@ public class JeuCarcassonne extends JFrame {
             piocher();
             jActuel.setPiece(c.t);
             System.out.println(jActuel.getPiece());
-            System.out.println(c.t);
         } else {
             finDePartie();
         }

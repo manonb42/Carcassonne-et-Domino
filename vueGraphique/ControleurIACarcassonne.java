@@ -71,7 +71,7 @@ public class ControleurIACarcassonne extends ControleurCarcassonne {
         joueur.setPions(joueur.getPions() - 1);
         carcassonne.getTuileActuelle().fillzone(carcassonne.getJoueurActuel().getColor(),i);
         carcassonne.getTuileActuelle().paint(carcassonne.getTuileActuelle().getGraphics());
-        carcassonne.getTuileActuelle().t.paysages[i].setPion(true);
+        carcassonne.getTuileActuelle().t.getPaysages()[i].setPion(true);
         carcassonne.getAction().setText("Le pion a été placé en " + i);
     }
 }

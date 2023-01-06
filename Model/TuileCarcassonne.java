@@ -1,7 +1,7 @@
 package Model;
 
 public class TuileCarcassonne extends Tuile {
-    public Paysage[] paysages = new Paysage[4];
+    private Paysage[] paysages = new Paysage[4];
 
     public TuileCarcassonne(Paysage[] p) {
         paysages = p;
@@ -26,6 +26,10 @@ public class TuileCarcassonne extends Tuile {
                 paysages[3] = tmp;
             }
         }
+    }
+
+    public Paysage[] getPaysages() {
+        return paysages;
     }
 
     @Override

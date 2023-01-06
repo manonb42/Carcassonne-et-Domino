@@ -3,7 +3,11 @@ import vueGraphique.MenuPrincipal;
 public class JeuGraphique {
 
     public static void main(String[] args) {
-        new MenuPrincipal();
+        javax.swing.SwingUtilities.invokeLater(new Runnable() {
+            public void run(){
+                new MenuPrincipal();
+            }
+        });
     }
     
 }
