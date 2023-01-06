@@ -1,10 +1,21 @@
+package vueTerminal;
+
 import java.util.List;
 import java.util.Scanner;
 
+import Model.Coordonnees;
+import Model.Grille;
+import Model.Joueur;
+import Model.Partie;
+import Model.Plateau;
+import Model.SacDomino;
+import Model.Tuile;
+import Model.TuileDomino;
+
 public class Terminal {
-    Partie p;
-    ControleurJoueurTerminal controleurj;
-    ControleurIATerminal controleuria;
+    public Partie p;
+    public ControleurJoueurTerminal controleurj;
+    public ControleurIATerminal controleuria;
     ControleurTerminal controleur;
 
     public Partie getPartie(){
@@ -215,7 +226,13 @@ public class Terminal {
         Scanner nbj = new Scanner(System.in);
         System.out.println("Combien y'a t'il de joueurs ? ");
         try {
-            return nbj.nextInt();
+            int i = nbj.nextInt();
+            if(i>=2 && i<=4){
+                return i;
+            }else{
+                System.out.println("Entrez un chiffre entre 2 et 4");
+                return nbJoueurs();
+            }
         } catch (Exception e) {
             System.out.println("Mauvaise entrée. Veuillez saisir un nombre.");
             return nbJoueurs();
@@ -327,15 +344,5 @@ public class Terminal {
 
     }
 
-    public static void main(String[] args) {
-        Terminal t = new Terminal();
-        t.p = t.configurer();
 
-        ControleurJoueurTerminal controleur_Terminal = new ControleurJoueurTerminal(t);
-        t.controleurj = controleur_Terminal;
-        ControleurIATerminal controleur_IA = new ControleurIATerminal(t);
-        t.controleuria = controleur_IA;
-
-        t.jouer();
-    }
 }

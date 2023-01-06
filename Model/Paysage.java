@@ -1,3 +1,5 @@
+package Model;
+
 public abstract class Paysage {
     private String name;
     private boolean pion;
@@ -6,6 +8,10 @@ public abstract class Paysage {
 
     public String getName() {
         return name;
+    }
+
+    public boolean getPion(){
+        return pion;
     }
 
 

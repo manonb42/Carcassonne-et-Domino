@@ -1,17 +1,18 @@
-public class PartieCarcassonne {
-    protected Joueur[] joueurs;
-    protected PlateauCarcassonne plateau;
+package Model;
+
+import java.io.Serializable;
+
+public class Partie implements Serializable {
+    private Joueur[] joueurs;
+    public Plateau plateau;
     private Sac sac;
     Joueur gagnant = null;
     private boolean fin; // si true, fin de la partie
 
-    PartieCarcassonne(Joueur[] listeJoueurs, PlateauCarcassonne plateau, Sac sac) {
+    public Partie(Joueur[] listeJoueurs, Plateau plateau, Sac sac) {
         this.joueurs = listeJoueurs;
         this.plateau = plateau;
         this.sac = sac;
-        Paysage[] p = {new Route(),new Route(),new Route(),new Route()};
-        TuileCarcassonne tu = new TuileCarcassonne(p);
-        plateau.placer(tu, new Coordonnees(0, 0));
     }
 
     public Joueur[] getJoueurs() {
@@ -22,11 +23,11 @@ public class PartieCarcassonne {
         this.joueurs = listeJoueurs;
     }
 
-    public PlateauCarcassonne getPlateau() {
+    public Plateau getPlateau() {
         return this.plateau;
     }
 
-    public void setPlateau(PlateauCarcassonne plateau) {
+    public void setPlateau(Plateau plateau) {
         this.plateau = plateau;
     }
 
@@ -60,5 +61,10 @@ public class PartieCarcassonne {
             fin = true;
         }
     }
-    
+
+    public Joueur getGagnant() {
+        return gagnant;
+    }
+
+
 }

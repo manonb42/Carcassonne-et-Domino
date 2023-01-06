@@ -1,8 +1,10 @@
+package Model;
+
 public class Coordonnees {
     private int X;
     private int Y;
 
-    Coordonnees(int X, int Y) {
+    public Coordonnees(int X, int Y) {
         this.X = X;
         this.Y = Y;
     }

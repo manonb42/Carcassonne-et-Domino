@@ -1,8 +1,10 @@
+package Model;
+
 import java.awt.GridLayout;
 import javax.swing.JPanel;
 
 public class TuileDominoGraphique extends JPanel {
-    TuileDomino t;
+    public TuileDomino t;
     Carrechiffre b00;
     Carrechiffre b01;
     Carrechiffre b02;
@@ -17,7 +19,7 @@ public class TuileDominoGraphique extends JPanel {
     Carrechiffre b32;
 
 
-    TuileDominoGraphique(TuileDomino tu){
+    public TuileDominoGraphique(TuileDomino tu){
         t = tu;
         setSize(25,25);
         b00 = new Carrechiffre(t.getNumeros()[0][0]);
@@ -67,7 +69,7 @@ public class TuileDominoGraphique extends JPanel {
         }
     }
 
-    void actualiser(){
+    public void actualiser(){
         b00.setChiffre(t.getNumeros()[0][0]);
         b01.setChiffre(t.getNumeros()[0][1]);
         b02.setChiffre(t.getNumeros()[0][2]);

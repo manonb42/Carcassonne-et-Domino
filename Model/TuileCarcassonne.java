@@ -1,11 +1,14 @@
+package Model;
+
 public class TuileCarcassonne extends Tuile {
     public Paysage[] paysages = new Paysage[4];
 
-    TuileCarcassonne(Paysage[] p) {
+    public TuileCarcassonne(Paysage[] p) {
         paysages = p;
     }
 
     @Override
+    public
     void tourner(int nbTours) {
         if (nbTours > 0) {
             for (int i = 0; i < nbTours; i++) {

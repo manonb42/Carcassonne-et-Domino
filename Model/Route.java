@@ -1,6 +1,8 @@
+package Model;
+
 public class Route extends Paysage {
 
-    Route(){
+    public Route(){
         setName("Route");
     }
     

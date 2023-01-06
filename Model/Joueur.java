@@ -1,3 +1,5 @@
+package Model;
+
 public class Joueur {
     private String nom;
     private int nbPoints = 0;
@@ -6,7 +8,7 @@ public class Joueur {
     private boolean abandon; // si true, fin de la partie pour le joueur
     protected int pions = 8;
 
-    Joueur(String nom, boolean ia) {
+    public Joueur(String nom, boolean ia) {
         this.nom = nom;
         this.ia=ia;
     }

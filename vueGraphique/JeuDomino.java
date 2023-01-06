@@ -1,10 +1,18 @@
-import javax.imageio.ImageIO;
+package vueGraphique;
 import javax.swing.*;
+
+import Model.Coordonnees;
+import Model.Grille;
+import Model.Joueur;
+import Model.Partie;
+import Model.Plateau;
+import Model.SacDomino;
+import Model.TuileDomino;
+import Model.TuileDominoGraphique;
+
 import java.awt.*;
-import java.io.File;
-import java.awt.image.BufferedImage;
 import java.awt.event.*;
-import java.awt.geom.AffineTransform;
+
 
 public class JeuDomino extends JFrame{
     Partie p; //partie en cours  
@@ -69,6 +77,7 @@ public class JeuDomino extends JFrame{
         JPanel jp2 = new JPanel();
         mainAct.add(jp2);
         mainAct.add(c);
+        jActuel.setPiece(c.t);
         
 
         
@@ -108,7 +117,7 @@ public class JeuDomino extends JFrame{
         gbc.gridx = 72;
         gbc.gridy = 72;
         plateau.add(debut,gbc);
-        p.plateau.placer(debut.t, new Coordonnees(0, 0));
+        p.getPlateau().placer(debut.t, new Coordonnees(0, 0));
         plat.getViewport().setViewPosition(new Point(900,1100));
 
 
@@ -185,7 +194,11 @@ public class JeuDomino extends JFrame{
         j.setSize(400,400);
         j.setLayout(new BorderLayout());
         j.setLocationRelativeTo(null);
-        JLabel win = new JLabel("Fin de la partie, le gagnant est : "+p.gagnant);
+        JLabel win = new JLabel("Fin de la partie, il n'y a pas de gagnant");
+        if(p.getGagnant()!= null){
+            win.setText("Fin de la partie, le gagnant est : "+p.getGagnant().getName());
+        }
+       
         j.add(win,BorderLayout.CENTER);
         win.setHorizontalAlignment((int)CENTER_ALIGNMENT);
         win.setFont(new Font("Arial",Font.BOLD,20));
@@ -208,7 +221,8 @@ public class JeuDomino extends JFrame{
         tourAct.setText("C'est le tour de : "+jActuel.getName()+", vous avez "+ jActuel.getNbPoints()+" points !");
         if(p.getSac().getPiecesRestantes()!= 0){
             piocher();
-            System.out.println(c.t);
+            jActuel.setPiece(c.t);
+            System.out.println(jActuel.getPiece()+ " ici");
         }else{
             finDePartie();
         }

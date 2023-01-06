@@ -1,5 +1,20 @@
+package vueGraphique;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
+
+import Model.Coordonnees;
+import Model.Grille;
+import Model.Joueur;
+import Model.PartieCarcassonne;
+import Model.Paysage;
+import Model.PlateauCarcassonne;
+import Model.Pre;
+import Model.Route;
+import Model.SacCarcassonne;
+import Model.TuileCarcassonne;
+import Model.Village;
+
 import java.awt.*;
 import java.io.File;
 import java.awt.image.BufferedImage;
@@ -67,6 +82,7 @@ public class JeuCarcassonne extends JFrame {
         
         c = new PieceCGraph((TuileCarcassonne)(p.getSac().piocher())); //premiere pièce
         mainAct.add(c);
+        jActuel.setPiece(c.t);
         
 
         
@@ -128,7 +144,7 @@ public class JeuCarcassonne extends JFrame {
                     gbc.gridx = 72 + coord.getX();
                     gbc.gridy = 72 - coord.getY();
                     plateau.add(c,gbc);
-                    if(jActuel.pions>0){
+                    if(jActuel.getPions()>0){
                         placerPion();
                     }else{
                         prochainJoueur();
@@ -148,7 +164,7 @@ public class JeuCarcassonne extends JFrame {
             c.image = i;
             paint(getGraphics());
             c.t.tourner(1);
-            System.out.println(c.t);
+            System.out.println(jActuel.getPiece());
             
 
         });
@@ -389,7 +405,7 @@ public class JeuCarcassonne extends JFrame {
         abandonner.setVisible(true);
         placerPion.setVisible(false);
         do{
-        jActuel = p.joueurs[++iActuel%p.getJoueurs().length];
+        jActuel = p.getJoueurs()[++iActuel%p.getJoueurs().length];
         p.fullAbandon();
         if(p.getFin()){
             finDePartie();
@@ -400,7 +416,8 @@ public class JeuCarcassonne extends JFrame {
         tourAct.setText("C'est le tour de : "+jActuel.getName()+ " vous avez "+ jActuel.getPions()+ " pions");
         if(p.getSac().getPiecesRestantes()!= 0){
             piocher();
-            System.out.println(c.t);
+            jActuel.setPiece(c.t);
+            System.out.println(jActuel.getPiece()+ " ici");
         }else{
             finDePartie();
         }
