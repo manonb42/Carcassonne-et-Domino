@@ -40,9 +40,11 @@ public class ControleurIATerminal extends ControleurTerminal {
         Grille plateau = terminal.getPartie().getPlateau().getGrille();
         int[][] deltas = { { 0, 1 }, { 1, 0 }, { 0, -1 }, { -1, 0 } };
         Coordonnees bestCoordinates=new Coordonnees(0, 0);
+        Coordonnees newcoord = new Coordonnees(0, 0);
         int nbTours=0;
         boolean isPlaceable=false;
         int bestScore=0;
+        int scoreAct = 0;
         for (int i = 0; i < plateau.getListPieces().size(); i++) {
             for (int j = 0; j < plateau.getListPieces().get(i).size(); j++) {
                 if (plateau.getListPieces().get(i).get(j) != null) {
@@ -51,14 +53,14 @@ public class ControleurIATerminal extends ControleurTerminal {
                         int coordY = i + deltas[delta][1]-plateau.getDy();
                         if (plateau.getPiece(coordX, coordY)== null) {
                             for(int k=0; k<4; k++){
-                                if (terminal.getPartie().getPlateau().validPlacement(tournerPiece(joueur, k), new Coordonnees(coordX, coordY))){
+                                if (terminal.getPartie().getPlateau().validPlacement(tournerPiece(joueur, 1), new Coordonnees(coordX, coordY))){
                                     isPlaceable=true;
-                                    Coordonnees newcoord = new Coordonnees(coordX, coordY);
-                                    int score = terminal.getPartie().getPlateau().newPoints((TuileDomino)joueur.getPiece(), newcoord);
-                                    if(bestScore<score){
-                                        bestScore = score;
+                                    newcoord = new Coordonnees(coordX, coordY);
+                                    scoreAct = terminal.getPartie().getPlateau().newPoints((TuileDomino)joueur.getPiece(), newcoord);
+                                    if(bestScore<scoreAct){
+                                        bestScore = scoreAct;
                                         bestCoordinates = newcoord;
-                                        nbTours = k;
+                                        nbTours = k+1;
                                     }
                                 }   
                             }
@@ -69,6 +71,7 @@ public class ControleurIATerminal extends ControleurTerminal {
         } 
         if(isPlaceable){
             if(terminal.getPartie().getPlateau().placer(tournerPiece(joueur, nbTours), bestCoordinates)){
+                joueur.setNbPoints(joueur.getNbPoints()+bestScore);
                 return true;
             }
         } return false;

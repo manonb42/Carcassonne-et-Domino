@@ -229,7 +229,7 @@ public class JeuDomino extends JFrame {
         } else if (p.getSac().getPiecesRestantes() > 0) {
             piocher();
             jActuel.setPiece(c.t);
-            System.out.println(jActuel.getPiece());
+            //System.out.println(jActuel.getPiece());
         } else {
             finDePartie();
         }

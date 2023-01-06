@@ -336,6 +336,7 @@ public class Terminal {
                         + "C'est au tour de " + p.getJoueurs()[tourDe].getName() + " !");
 
                 System.out.println("Score du joueur : " + p.getJoueurs()[tourDe].getNbPoints() + " points");
+                System.out.println("Il reste : "+p.getSac().nbPiecesRestantes+" pièces dans le sac");
                 if(p.getJoueurs()[tourDe].getisIA()){
                     printTuile(controleuria.piocherPiece(p.getJoueurs()[tourDe]));
                     printPlateau(p.getPlateau().getGrille().getListPieces());
@@ -345,14 +346,15 @@ public class Terminal {
                     printPlateau(p.getPlateau().getGrille().getListPieces());
                     controleurj.quelleAction(p.getJoueurs()[tourDe]);
                 }
-                System.out.println(p.getSac().nbPiecesRestantes);
             }
             i++;
         }
 
         System.out.println("\nFin de la partie.");
+        System.out.println("Plateau final :\n");
+        printPlateau(p.getPlateau().getGrille().getListPieces());
         if (gagnant() != null) {
-            System.out.println("Le gagnant est " + gagnant());
+            System.out.println("Le gagnant est " + gagnant().getName());
         } else {
             System.out.println("Il n'y a pas de gagnant.");
         }
