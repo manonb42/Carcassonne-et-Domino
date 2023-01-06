@@ -50,7 +50,7 @@ public class Plateau {
         return points;
     }
 
-    private boolean validPlacement(TuileDomino p, Coordonnees coordonnee) {
+    private boolean validPlacement(Tuile p, Coordonnees coordonnee) {
         boolean cotevide = true;
         boolean plateauvide = plateauvide();
         int[][] deltas = { { 0, 1 }, { 1, 0 }, { 0, -1 }, { -1, 0 } };

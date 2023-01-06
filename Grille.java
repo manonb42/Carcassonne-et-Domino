@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Grille {
     // une grille c'est une liste de liste de pieces
-    private List<List<TuileDomino>> pieces = new ArrayList<List<TuileDomino>>();
+    private List<List<Tuile>> pieces = new ArrayList<List<Tuile>>();
 
     private int dx = 0; // vecteur pour x
     private int dy = 0; // vecteur pour y
@@ -26,17 +26,17 @@ public class Grille {
         return dy;
     }
 
-    public List<List<TuileDomino>> getListPieces() {
+    public List<List<Tuile>> getListPieces() {
         return this.pieces;
     }
 
 
-    public void setPiece(int x, int y, TuileDomino p) {
+    public void setPiece(int x, int y, Tuile p) {
         if (y + dy >= pieces.size()) {
             int ncols = pieces.get(0).size();
             int ny = y + dy - pieces.size() + 1;
             for (int i = 0; i < ny; i++) {
-                List<TuileDomino> list = new ArrayList<>(ncols);
+                List<Tuile> list = new ArrayList<>(ncols);
                 for (int j = 0; j < ncols; j++) {
                     list.add(null);
                 }
@@ -56,7 +56,7 @@ public class Grille {
         if (y + dy < 0) {
             for (int i = 0; i < -y-dy ; i++) {
                 int nbcols = pieces.get(0).size();
-                List<TuileDomino> newlist = new ArrayList<TuileDomino>(nbcols);
+                List<Tuile> newlist = new ArrayList<Tuile>(nbcols);
                 for (int j = 0; j < nbcols; j++) {
                     newlist.add(null);
                 }
@@ -76,7 +76,7 @@ public class Grille {
     }
 
     // getter d'une piece
-    public TuileDomino getPiece(int x, int y) {
+    public Tuile getPiece(int x, int y) {
         if (y + dy >= 0 && y + dy < pieces.size()) {
             if (x + dx >= 0 && x + dx < pieces.get(y + dy).size()) {
                 return pieces.get(y + dy).get(x + dx);

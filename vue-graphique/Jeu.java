@@ -8,7 +8,7 @@ import java.awt.geom.AffineTransform;
 
 
 public class Jeu extends JFrame {
-    PartieCarcassonne p; //partie en cours  
+    Partie p; //partie en cours  
     PieceCGraph c;      //pièce de la main actuelle
     JLabel texte ;
     JPanel plateau = new JPanel();
@@ -32,11 +32,11 @@ public class Jeu extends JFrame {
         setLocationRelativeTo(null);
 
         Joueur[] jou = {new Joueur("Lukas", false), new Joueur("Manon", false),new Joueur("Ilias", false)}; //initialisation de la partie
-        GrilleCarcassonne g = new GrilleCarcassonne();
-        PlateauCarcassonne pl = new PlateauCarcassonne(g);
+        Grille g = new Grille();
+        Plateau pl = new Plateau(g);
         SacCarcassonne s = new SacCarcassonne();
 
-        p = new PartieCarcassonne(jou, pl, s);
+        p = new Partie(jou, pl, s);
 
         jActuel = p.getJoueurs()[0];    //joueur actuel 
 
@@ -54,7 +54,7 @@ public class Jeu extends JFrame {
         TuileCarcassonne tu = new TuileCarcassonne(pay);*/
 
         
-        c = new PieceCGraph(p.sac.piocher()); //premiere pièce
+        c = new PieceCGraph((TuileCarcassonne)(p.getSac().piocher())); //premiere pièce
         mainAct.add(c);
         
 
@@ -64,7 +64,7 @@ public class Jeu extends JFrame {
         play.setBackground(Color.LIGHT_GRAY);
 
         
-        texte =  new JLabel("Il reste : " + p.sac.getNbPiecesRestantes() + " pièces \nC'est le tour de "+jActuel.getName());
+        texte =  new JLabel("Il reste : " + p.getSac().getPiecesRestantes() + " pièces \nC'est le tour de "+jActuel.getName());
 
         play.add(texte);
         play.add(choix);
@@ -97,7 +97,7 @@ public class Jeu extends JFrame {
 
         passer.addActionListener((ActionEvent e)->{
             prochainJoueur();
-            if(p.sac.getNbPiecesRestantes()!= 0){
+            if(p.getSac().getPiecesRestantes()!= 0){
                 piocher();
                 System.out.println(c.t);
             }else{
@@ -181,11 +181,11 @@ public class Jeu extends JFrame {
 
     void piocher(){ //fonction pour piocher
         mainAct.remove(c);
-        TuileCarcassonne tmp1 = p.sac.piocher();
+        TuileCarcassonne tmp1 = (TuileCarcassonne)(p.getSac().piocher());
         PieceCGraph tmp2 = new PieceCGraph(tmp1);
         c = tmp2;
         mainAct.add(c);
-        texte.setText("Il reste : " + p.sac.getNbPiecesRestantes() + " pièces \nC'est le tour de "+jActuel.getName());
+        texte.setText("Il reste : " + p.getSac().getPiecesRestantes() + " pièces \nC'est le tour de "+jActuel.getName());
     }
 
     void finDePartie(){ //quand la partie est finie, affiche une nouvelle fenetre
@@ -214,16 +214,14 @@ public class Jeu extends JFrame {
             break;
         }
         }while(jActuel.getAbandon());
-        texte.setText("Il reste : " + p.sac.getNbPiecesRestantes() + " pièces \nC'est le tour de "+jActuel.getName());
+        texte.setText("Il reste : " + p.getSac().getPiecesRestantes() + " pièces \nC'est le tour de "+jActuel.getName());
     }
 
 
 
 
     public static void main(String[] args) {
-        new Jeu();
-
-        
+        new Jeu(); 
     }
     
 }

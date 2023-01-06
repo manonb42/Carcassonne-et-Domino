@@ -1,15 +1,15 @@
 public class PlateauCarcassonne{
-    private GrilleCarcassonne g;
+    private Grille g;
 
-    PlateauCarcassonne(GrilleCarcassonne g) {
+    PlateauCarcassonne(Grille g) {
         this.g = g;
     }
 
-    public GrilleCarcassonne getGrille() {
+    public Grille getGrille() {
         return g;
     }
 
-    public void setGrille(GrilleCarcassonne g) {
+    public void setGrille(Grille g) {
         this.g = g;
     }
 
@@ -57,7 +57,7 @@ public class PlateauCarcassonne{
     }
 
     public static void main(String[] args) {
-        PlateauCarcassonne plateau = new PlateauCarcassonne(new GrilleCarcassonne());
+        PlateauCarcassonne plateau = new PlateauCarcassonne(new Grille());
         Paysage[] p = {new Route(),new Route(), new Route(),new Route()};   
         TuileCarcassonne t = new TuileCarcassonne(p);
         Paysage[] p2 = {new Route(),new Pre(),new Route(),new Route()};

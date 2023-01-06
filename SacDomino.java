@@ -1,5 +1,4 @@
 public class SacDomino extends Sac {
-    private int nbPiecesRestantes;
     private TuileDomino[] pieces;
 
     public SacDomino(int nbPieces) {
@@ -10,20 +9,21 @@ public class SacDomino extends Sac {
         }
     }
 
-    public int getPiecesRestantes() {
-        return this.nbPiecesRestantes;
-    }
-
     
     public TuileDomino genererPiece() {
         int tab[][] = new int[4][3];
         TuileDomino p = new TuileDomino(tab);
         for (int i = 0; i < p.getNumeros().length; i++) {
             for (int j = 0; j < p.getNumeros()[i].length; j++) {
-                p.setNumeros(i, j, (int) (Math.random() * 4));
+                p.setNumeros(i, j, (int) (Math.random() * 3));
             }
         }
         return p;
+    }
+
+    @Override
+    public int getPiecesRestantes() {
+        return this.nbPiecesRestantes;
     }
 
     @Override
