@@ -49,7 +49,7 @@ public class ControleurIATerminal extends ControleurTerminal {
                     for (int delta = 0; delta < deltas.length; delta++) {
                         int coordX = j + deltas[delta][0];
                         int coordY = i + deltas[delta][1];
-                        if (plateau.getListPieces().get(coordY).get(coordX) == null) {
+                        if (plateau.getPiece(coordX-plateau.getDx(), coordY-plateau.getDy())== null) {
                             for(int k=0; k<4; k++){
                                 if (terminal.getPartie().getPlateau().validPlacement(tournerPiece(joueur, k), new Coordonnees(coordX, coordY))){
                                     isPlaceable=true;
@@ -70,8 +70,9 @@ public class ControleurIATerminal extends ControleurTerminal {
         if(isPlaceable){
             bestCoordinates.setX(bestCoordinates.getX()-plateau.getDx());
             bestCoordinates.setY(bestCoordinates.getY()-plateau.getDy());
-            terminal.getPartie().getPlateau().placer(tournerPiece(joueur, nbTours), bestCoordinates);
-            return true;
+            if(terminal.getPartie().getPlateau().placer(tournerPiece(joueur, nbTours), bestCoordinates)){
+                return true;
+            }
         } return false;
     }
 }
