@@ -16,7 +16,7 @@ public class SacDomino extends Sac {
         TuileDomino p = new TuileDomino(tab);
         for (int i = 0; i < p.getNumeros().length; i++) {
             for (int j = 0; j < p.getNumeros()[i].length; j++) {
-                p.setNumeros(i, j, (int) (Math.random() * 2));
+                p.setNumeros(i, j, (int) (Math.random() * 2) + 1);
             }
         }
         return p;

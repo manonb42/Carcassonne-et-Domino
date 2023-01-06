@@ -124,9 +124,11 @@ public class Terminal {
 
     // Afficher le plateau de jeu
     private void printPlateau(List<List<Tuile>> plateau) {
+        System.out.println("\nVoici le plateau de jeu : \n");
         for (int i = plateau.size() -1; i >= 0; i--) {
             printLignTuiles(plateau.get(i));
         }
+        System.out.println();
     }
 
     // Vérifier si une ligne est vide 
@@ -320,6 +322,7 @@ public class Terminal {
         Grille g = new Grille();
         Plateau plateau = new Plateau(g);
         SacDomino sac = new SacDomino(20);
+        plateau.placer(sac.genererPiece(), new Coordonnees(0, 0));
         return new Partie(joueurs, plateau, sac);
     }
 
@@ -333,15 +336,15 @@ public class Terminal {
                         + "C'est au tour de " + p.getJoueurs()[tourDe].getName() + " !");
 
                 System.out.println("Score du joueur : " + p.getJoueurs()[tourDe].getNbPoints() + " points");
-
                 if(p.getJoueurs()[tourDe].getisIA()){
                     printTuile(controleuria.piocherPiece(p.getJoueurs()[tourDe]));
+                    printPlateau(p.getPlateau().getGrille().getListPieces());
                     controleuria.quelleAction(p.getJoueurs()[tourDe]);
                 } else{
                     printTuile(controleurj.piocherPiece(p.getJoueurs()[tourDe]));
+                    printPlateau(p.getPlateau().getGrille().getListPieces());
                     controleurj.quelleAction(p.getJoueurs()[tourDe]);
                 }
-                printPlateau(p.getPlateau().getGrille().getListPieces());
                 System.out.println(p.getSac().nbPiecesRestantes);
             }
             i++;
