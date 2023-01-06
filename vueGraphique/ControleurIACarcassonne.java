@@ -68,6 +68,8 @@ public class ControleurIACarcassonne extends ControleurCarcassonne {
     public void placerpartisan(Coordonnees coordonnees, Joueur joueur) {
         int i = (int) (Math.random() * (3));
         joueur.setPions(joueur.getPions() - 1);
+        carcassonne.getTuileActuelle().fillzone(carcassonne.getJoueurActuel().getColor(),i);
+        carcassonne.getTuileActuelle().paint(carcassonne.getTuileActuelle().getGraphics());
         carcassonne.getTuileActuelle().t.paysages[i].setPion(true);
         carcassonne.getAction().setText("Le pion a été placé en " + i);
     }
